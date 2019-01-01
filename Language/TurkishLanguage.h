@@ -19,9 +19,6 @@ class TurkishLanguage : public Language {
     static const string CONSONANT_DROPS;
     static const string CONSONANTS;
     static const string SERT_SESSIZ;
-    static const string LOWERCASE_LETTERS;
-    static const string UPPERCASE_LETTERS ;
-    static const string LETTERS;
 public:
     static bool isVowel(char ch);
     static bool isBackVowel(char ch);
@@ -33,6 +30,9 @@ public:
     static bool isConsonantDrop(char ch);
     static bool isConsonant(char ch);
     static bool isSertSessiz(char ch);
+    static const string LOWERCASE_LETTERS;
+    static const string UPPERCASE_LETTERS ;
+    static const string LETTERS;
 };
 
 const string TurkishLanguage::VOWELS = "aeıioöuüâî";
