@@ -6,10 +6,11 @@
 #define DICTIONARY_EXCEPTIONALWORD_H
 #include<string>
 #include "Pos.h"
+#include "Word.h"
 
 using namespace std;
 
-class ExceptionalWord {
+class ExceptionalWord : public Word{
 private:
     string root;
     Pos pos;

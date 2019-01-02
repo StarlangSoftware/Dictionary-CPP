@@ -14,6 +14,7 @@
  * @param pos  {@link Pos} type input.
  */
 ExceptionalWord::ExceptionalWord(string name, string root, Pos pos) {
+    this->name = move(name);
     this->root = move(root);
     this->pos = move(pos);
 }

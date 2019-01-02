@@ -9,7 +9,7 @@
 using namespace std;
 
 class Word {
-private:
+protected:
     string name;
 public:
     Word();
