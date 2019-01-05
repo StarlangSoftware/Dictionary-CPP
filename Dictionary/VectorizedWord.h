@@ -7,7 +7,7 @@
 
 
 #include <Vector.h>
-#include "Dictionary/Word.h"
+#include "Word.h"
 
 class VectorizedWord : public Word {
 private:

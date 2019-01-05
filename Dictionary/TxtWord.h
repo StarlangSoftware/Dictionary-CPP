@@ -75,6 +75,7 @@ public:
     bool takesSuffixIRAsAorist();
     bool takesSuffixDIRAsFactitive();
     bool showsSuRegularities();
+    string to_string();
 };
 
 

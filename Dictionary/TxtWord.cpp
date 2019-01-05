@@ -846,3 +846,12 @@ bool TxtWord::samePos(TxtWord word) {
     }
     return false;
 }
+
+string TxtWord::to_string() {
+    string result = "";
+    for (const string &flag : flags){
+        result += " ";
+        result += flag;
+    }
+    return result;
+}
