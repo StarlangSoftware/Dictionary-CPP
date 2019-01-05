@@ -7,20 +7,24 @@
 
 #include<vector>
 #include "Word.h"
-#include "Compare.h"
 
 using namespace std;
+
+enum class Comparator{
+    ENGLISH, TURKISH, TURKISH_NO_CASE
+};
 
 class Dictionary {
 protected:
     vector<Word> words;
     string filename;
     Comparator comparator;
+    void sort();
 public:
     Dictionary();
     Dictionary(Comparator comparator);
     Word getWord(string name);
-    unsigned long getWordIndex(string name);
+    int getWordIndex(string name);
     bool wordExists(string name);
     unsigned long size();
     Word getWord(unsigned long index);

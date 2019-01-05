@@ -20,8 +20,8 @@ public:
     static const string EXTENDED_LANGUAGE_CHARACTERS;
 };
 
-const string Language::DIGITS = "0123456789";
-const string Language::ARITHMETIC_CHARACTERS = "+-*/=";
-const string Language::EXTENDED_LANGUAGE_CHARACTERS = "âàáäãèéêëíîòóôûúqwxÂÈÉÊËÌÒÛQWX";
+const inline string Language::DIGITS = "0123456789";
+const inline string Language::ARITHMETIC_CHARACTERS = "+-*/=";
+const inline string Language::EXTENDED_LANGUAGE_CHARACTERS = "âàáäãèéêëíîòóôûúqwxÂÈÉÊËÌÒÛQWX";
 
 #endif //DICTIONARY_LANGUAGE_H

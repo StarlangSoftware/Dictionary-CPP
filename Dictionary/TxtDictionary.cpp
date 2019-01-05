@@ -17,8 +17,8 @@ TxtDictionary::TxtDictionary(Comparator comparator) : Dictionary(comparator) {
 }
 
 TxtDictionary::TxtDictionary() : Dictionary(Comparator::TURKISH) {
-    filename = "turkish_dictionary.txt";
-    loadFromText("turkish_dictionary.txt");
+    filename = "../turkish_dictionary.txt";
+    loadFromText("../turkish_dictionary.txt");
 }
 
 /**
@@ -231,21 +231,11 @@ void TxtDictionary::loadFromText(string filename) {
         }
     }
     inputFile.close();
-    switch (comparator){
-        case Comparator::TURKISH:
-            sort(words.begin(), words.end(), TurkishWordComparator);
-            break;
-        case Comparator::TURKISH_NO_CASE:
-            sort(words.begin(), words.end(), TurkishIgnoreCaseWordComparator);
-            break;
-        case Comparator::ENGLISH:
-            sort(words.begin(), words.end(), EnglishWordComparator);
-            break;
-    }
+    sort();
 }
 
 /**
- * The saveAsTxt method takes a filename as an input and prints out the items of words {@link java.util.ArrayList}.
+ * The saveAsTxt method takes a filename as an input and prints out the items of words {@link unordered_set}.
  *
  * @param filename String input.
  */

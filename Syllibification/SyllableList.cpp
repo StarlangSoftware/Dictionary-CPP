@@ -4,7 +4,7 @@
 
 #include "SyllableList.h"
 #include "IrregularWordException.h"
-#include "TurkishLanguage.h"
+#include "../Language/TurkishLanguage.h"
 
 /**
  * A constructor of {@link SyllableList} class which takes a String word as an input. First it creates a syllable {@link vector}
