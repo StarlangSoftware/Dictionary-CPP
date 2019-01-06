@@ -48,7 +48,7 @@ bool englishWordComparator(const Word& wordA, const Word& wordB){
  * than wordB.
  */
 bool turkishWordComparator(const Word& wordA, const Word& wordB){
-    const collate<char>& col = use_facet<collate<char>>(std::locale("tr_TR.utf8"));
+    const collate<char>& col = use_facet<collate<char>>(std::locale(/*"tr_TR.utf8"*/));
     string nameA = wordA.getName();
     string nameB = wordB.getName();
     return (col.compare(nameA.data(), nameA.data() + nameA.size(), nameB.data(), nameB.data() + nameB.size()) < 0);
@@ -66,7 +66,7 @@ bool turkishWordComparator(const Word& wordA, const Word& wordB){
  * than wordB.
  */
 bool turkishIgnoreCaseWordComparator(const Word& wordA, const Word& wordB){
-    const collate<char>& col = use_facet<collate<char>>(std::locale("tr_TR.utf8"));
+    const collate<char>& col = use_facet<collate<char>>(std::locale(/*"tr_TR.utf8"*/));
     string nameA = wordA.getName();
     string nameB = wordB.getName();
     std::transform(nameA.begin(), nameA.end(), nameA.begin(), ::tolower);
