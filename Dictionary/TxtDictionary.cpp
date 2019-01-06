@@ -4,6 +4,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <iostream>
 #include "TxtDictionary.h"
 #include "TxtWord.h"
 
@@ -17,8 +18,8 @@ TxtDictionary::TxtDictionary(Comparator comparator) : Dictionary(comparator) {
 }
 
 TxtDictionary::TxtDictionary() : Dictionary(Comparator::TURKISH) {
-    filename = "../turkish_dictionary.txt";
-    loadFromText("../turkish_dictionary.txt");
+    filename = "../dictionary.txt";
+    loadFromText("../dictionary.txt");
 }
 
 /**

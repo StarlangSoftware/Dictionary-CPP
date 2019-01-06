@@ -6,6 +6,7 @@
 #define DICTIONARY_DICTIONARY_H
 
 #include<vector>
+#include <locale>
 #include "Word.h"
 
 using namespace std;

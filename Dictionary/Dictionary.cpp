@@ -3,6 +3,7 @@
 //
 #include<clocale>
 #include <locale>
+#include <iostream>
 #include "Dictionary.h"
 
 /**
@@ -30,8 +31,24 @@ Dictionary::Dictionary(Comparator comparator) {
  * lexicographically less than wordB; and a value greater than {@code 0} if this wordA is lexicographically greater
  * than wordB.
  */
-bool wordComparator(const Word& wordA, const Word& wordB){
-    const collate<char>& col = use_facet<collate<char>>(locale());
+bool englishWordComparator(const Word& wordA, const Word& wordB){
+    const collate<char>& col = use_facet<collate<char>>(std::locale());
+    string nameA = wordA.getName();
+    string nameB = wordB.getName();
+    return (col.compare(nameA.data(), nameA.data() + nameA.size(), nameB.data(), nameB.data() + nameB.size()) < 0);
+}
+
+/**
+ * The wordComparator takes two {@link Word}s as inputs; wordA and wordB and compares their names. Returns the result of this comparison.
+ *
+ * @param wordA Word type input.
+ * @param wordB Word type input.
+ * @return the value {@code 0} if the wordA is equal to the wordB; a value less than {@code 0} if this wordA is
+ * lexicographically less than wordB; and a value greater than {@code 0} if this wordA is lexicographically greater
+ * than wordB.
+ */
+bool turkishWordComparator(const Word& wordA, const Word& wordB){
+    const collate<char>& col = use_facet<collate<char>>(std::locale("tr_TR.utf8"));
     string nameA = wordA.getName();
     string nameB = wordB.getName();
     return (col.compare(nameA.data(), nameA.data() + nameA.size(), nameB.data(), nameB.data() + nameB.size()) < 0);
@@ -48,8 +65,8 @@ bool wordComparator(const Word& wordA, const Word& wordB){
  * lexicographically less than wordB; and a value greater than {@code 0} if this wordA is lexicographically greater
  * than wordB.
  */
-bool ignoreCaseWordComparator(const Word& wordA, const Word& wordB){
-    const collate<char>& col = use_facet<collate<char>>(locale());
+bool turkishIgnoreCaseWordComparator(const Word& wordA, const Word& wordB){
+    const collate<char>& col = use_facet<collate<char>>(std::locale("tr_TR.utf8"));
     string nameA = wordA.getName();
     string nameB = wordB.getName();
     std::transform(nameA.begin(), nameA.end(), nameA.begin(), ::tolower);
@@ -69,17 +86,13 @@ Word Dictionary::getWord(string name) {
         vector<Word>::iterator middle;
         switch (comparator){
             case Comparator::ENGLISH:
-                middle = lower_bound(words.begin(), words.end(), Word(name), wordComparator);
+                middle = lower_bound(words.begin(), words.end(), Word(name), englishWordComparator);
                 break;
             case Comparator::TURKISH:
-                setlocale(LC_ALL, "tr_TR.utf8");
-                middle = lower_bound(words.begin(), words.end(), Word(name), wordComparator);
-                setlocale(LC_ALL, "en_US.UTF-8");
+                middle = lower_bound(words.begin(), words.end(), Word(name), turkishWordComparator);
                 break;
             case Comparator::TURKISH_NO_CASE:
-                setlocale(LC_ALL, "tr_TR.utf8");
-                middle = lower_bound(words.begin(), words.end(), Word(name), ignoreCaseWordComparator);
-                setlocale(LC_ALL, "en_US.UTF-8");
+                middle = lower_bound(words.begin(), words.end(), Word(name), turkishIgnoreCaseWordComparator);
                 break;
         }
         return *middle;
@@ -90,17 +103,13 @@ bool Dictionary::wordExists(string name) {
     bool result;
     switch (comparator){
         case Comparator::ENGLISH:
-            result = binary_search(words.begin(), words.end(), Word(name), wordComparator);
+            result = binary_search(words.begin(), words.end(), Word(name), englishWordComparator);
             break;
         case Comparator::TURKISH:
-            setlocale(LC_ALL, "tr_TR.utf8");
-            result = binary_search(words.begin(), words.end(), Word(name), wordComparator);
-            setlocale(LC_ALL, "en_US.UTF-8");
+            result = binary_search(words.begin(), words.end(), Word(name), turkishWordComparator);
             break;
         case Comparator::TURKISH_NO_CASE:
-            setlocale(LC_ALL, "tr_TR.utf8");
-            result = binary_search(words.begin(), words.end(), Word(name), ignoreCaseWordComparator);
-            setlocale(LC_ALL, "en_US.UTF-8");
+            result = binary_search(words.begin(), words.end(), Word(name), turkishIgnoreCaseWordComparator);
             break;
     }
     return result;
@@ -118,17 +127,13 @@ int Dictionary::getWordIndex(string name) {
         vector<Word>::iterator middle;
         switch (comparator){
             case Comparator::ENGLISH:
-                middle = lower_bound(words.begin(), words.end(), Word(name), wordComparator);
+                middle = lower_bound(words.begin(), words.end(), Word(name), englishWordComparator);
                 break;
             case Comparator::TURKISH:
-                setlocale(LC_ALL, "tr_TR.utf8");
-                middle = lower_bound(words.begin(), words.end(), Word(name), wordComparator);
-                setlocale(LC_ALL, "en_US.UTF-8");
+                middle = lower_bound(words.begin(), words.end(), Word(name), turkishWordComparator);
                 break;
             case Comparator::TURKISH_NO_CASE:
-                setlocale(LC_ALL, "tr_TR.utf8");
-                middle = lower_bound(words.begin(), words.end(), Word(name), ignoreCaseWordComparator);
-                setlocale(LC_ALL, "en_US.UTF-8");
+                middle = lower_bound(words.begin(), words.end(), Word(name), turkishIgnoreCaseWordComparator);
                 break;
         }
         return middle - words.begin();
@@ -182,17 +187,13 @@ unsigned long Dictionary::getWordStartingWith(string hash) {
     vector<Word>::iterator middle;
     switch (comparator){
         case Comparator::ENGLISH:
-            middle = lower_bound(words.begin(), words.end(), Word(hash), wordComparator);
+            middle = lower_bound(words.begin(), words.end(), Word(hash), englishWordComparator);
             break;
         case Comparator::TURKISH:
-            setlocale(LC_ALL, "tr_TR.utf8");
-            middle = lower_bound(words.begin(), words.end(), Word(hash), wordComparator);
-            setlocale(LC_ALL, "en_US.UTF-8");
+            middle = lower_bound(words.begin(), words.end(), Word(hash), turkishWordComparator);
             break;
         case Comparator::TURKISH_NO_CASE:
-            setlocale(LC_ALL, "tr_TR.utf8");
-            middle = lower_bound(words.begin(), words.end(), Word(hash), ignoreCaseWordComparator);
-            setlocale(LC_ALL, "en_US.UTF-8");
+            middle = lower_bound(words.begin(), words.end(), Word(hash), turkishIgnoreCaseWordComparator);
             break;
     }
     return middle - words.begin();
@@ -201,17 +202,13 @@ unsigned long Dictionary::getWordStartingWith(string hash) {
 void Dictionary::sort() {
     switch (comparator){
         case Comparator::ENGLISH:
-            std::stable_sort(words.begin(), words.end(), wordComparator);
+            std::stable_sort(words.begin(), words.end(), englishWordComparator);
             break;
         case Comparator::TURKISH:
-            setlocale(LC_ALL, "tr_TR.utf8");
-            std::stable_sort(words.begin(), words.end(), wordComparator);
-            setlocale(LC_ALL, "en_US.UTF-8");
+            std::stable_sort(words.begin(), words.end(), turkishWordComparator);
             break;
         case Comparator::TURKISH_NO_CASE:
-            setlocale(LC_ALL, "tr_TR.utf8");
-            std::stable_sort(words.begin(), words.end(), ignoreCaseWordComparator);
-            setlocale(LC_ALL, "en_US.UTF-8");
+            std::stable_sort(words.begin(), words.end(), turkishIgnoreCaseWordComparator);
             break;
     }
 }

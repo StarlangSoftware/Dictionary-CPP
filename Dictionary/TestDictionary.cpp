@@ -7,6 +7,6 @@
 
 int main(){
     TxtDictionary dictionary = TxtDictionary();
-    int index = dictionary.getWordIndex("yobaz");
+    int index = dictionary.getWordIndex("y");
     cout << index;
 }
