@@ -18,8 +18,8 @@ TxtDictionary::TxtDictionary(Comparator comparator) : Dictionary(comparator) {
 }
 
 TxtDictionary::TxtDictionary() : Dictionary(Comparator::TURKISH) {
-    filename = "../dictionary.txt";
-    loadFromText("../dictionary.txt");
+    filename = "../turkish_dictionary.txt";
+    loadFromText("../turkish_dictionary.txt");
 }
 
 /**
