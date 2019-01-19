@@ -13,6 +13,7 @@ protected:
     string name;
 public:
     Word();
+    virtual ~Word() = default;
     Word(string name);
     string to_string();
     int charCount();
