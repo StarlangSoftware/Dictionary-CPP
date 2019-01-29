@@ -221,8 +221,7 @@ void TxtDictionary::loadFromText(string filename) {
     inputFile.open(filename, ifstream :: in);
     while (inputFile.good()) {
         getline(inputFile, line);
-        std::istringstream stringStream(line);
-        vector<string> tokens{istream_iterator<string>{stringStream}, istream_iterator<string>{}};
+        vector<string> tokens = Word::split(line);
         if (!tokens.empty()) {
             currentWord = TxtWord(tokens[0]);
             for (i = 1; i < tokens.size(); i++) {
