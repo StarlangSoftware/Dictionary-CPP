@@ -3,6 +3,7 @@
 //
 
 #include <regex>
+#include <sstream>
 #include "Word.h"
 #include "../Language/TurkishLanguage.h"
 
@@ -210,5 +211,24 @@ vector<Word> Word::toCharacters() {
         characters.emplace_back(Word(s));
     }
     return characters;
+}
+
+vector<string> Word::split(string line, string separator) {
+    size_t current, previous = 0;
+    vector<string> tokens;
+    current = line.find_first_of(separator);
+    while (current != string::npos) {
+        tokens.push_back(line.substr(previous, current - previous));
+        previous = current + 1;
+        current = line.find_first_of(separator, previous);
+    }
+    tokens.push_back(line.substr(previous, current - previous));
+    return tokens;
+}
+
+vector<string> Word::split(string line) {
+    std::istringstream stringStream(line);
+    vector<string> tokens{istream_iterator<string>{stringStream}, istream_iterator<string>{}};
+    return tokens;
 }
 
