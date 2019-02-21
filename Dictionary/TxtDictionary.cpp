@@ -31,8 +31,8 @@ TxtDictionary::TxtDictionary() : Dictionary(Comparator::TURKISH) {
  * @param comparator {@link WordComparator} input.
  */
 TxtDictionary::TxtDictionary(string filename, Comparator comparator) : Dictionary(comparator) {
-    this->filename = move(filename);
     loadFromText(filename);
+    this->filename = move(filename);
 }
 
 /**
@@ -217,15 +217,15 @@ void TxtDictionary::loadFromText(string filename) {
     int i;
     string line;
     ifstream inputFile;
-    TxtWord currentWord("");
+    TxtWord* currentWord = new TxtWord("");
     inputFile.open(filename, ifstream :: in);
     while (inputFile.good()) {
         getline(inputFile, line);
         vector<string> tokens = Word::split(line);
         if (!tokens.empty()) {
-            currentWord = TxtWord(tokens[0]);
+            currentWord = new TxtWord(tokens[0]);
             for (i = 1; i < tokens.size(); i++) {
-                currentWord.addFlag(tokens[i]);
+                currentWord->addFlag(tokens[i]);
             }
             words.emplace_back(currentWord);
         }
@@ -244,7 +244,7 @@ void TxtDictionary::saveAsTxt(string filename) {
     int i;
     outfile.open(filename, ofstream :: out);
     for (i = 0; i < words.size(); i++) {
-        outfile << words.at(i).to_string() + "\n";
+        outfile << words.at(i)->to_string() + "\n";
     }
     outfile.close();
 }

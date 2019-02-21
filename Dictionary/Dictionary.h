@@ -17,18 +17,18 @@ enum class Comparator{
 
 class Dictionary {
 protected:
-    vector<Word> words;
+    vector<Word*> words;
     string filename;
     Comparator comparator;
     void sort();
 public:
     Dictionary();
-    Dictionary(Comparator comparator);
-    Word getWord(string name);
+    explicit Dictionary(Comparator comparator);
+    Word* getWord(string name);
     int getWordIndex(string name);
     bool wordExists(string name);
     unsigned long size();
-    Word getWord(unsigned long index);
+    Word* getWord(unsigned long index);
     unsigned long longestWordSize();
     unsigned long getWordStartingWith(string hash);
 };
