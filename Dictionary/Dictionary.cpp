@@ -103,6 +103,7 @@ Word* Dictionary::getWord(string name) {
         }
         return *middle;
     }
+    return nullptr;
 }
 
 bool Dictionary::wordExists(string name) {
