@@ -26,6 +26,7 @@ public:
     static bool isOrganization(string surfaceForm);
     static bool isMoney(string surfaceForm);
     static bool startsWith(string largeString, string smallString);
+    static bool endsWith(string largeString, string smallString);
     static vector<string> split(string line, string separator);
     static vector<string> split(string line);
     bool isPunctuation();

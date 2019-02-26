@@ -68,7 +68,7 @@ void Word::setName(string name) {
 }
 
 bool Word::startsWith(string largeString, string smallString) {
-    return largeString.compare(0, smallString.length(), smallString) == 0;
+    return largeString.rfind(smallString, 0) == 0;
 }
 
 /**
@@ -230,5 +230,9 @@ vector<string> Word::split(string line) {
     std::istringstream stringStream(line);
     vector<string> tokens{istream_iterator<string>{stringStream}, istream_iterator<string>{}};
     return tokens;
+}
+
+bool Word::endsWith(string largeString, string smallString) {
+    return largeString.find(smallString, largeString.size() - smallString.size()) == largeString.size() - smallString.size();
 }
 
