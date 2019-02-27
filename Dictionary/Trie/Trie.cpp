@@ -32,7 +32,8 @@ void Trie::addWord(string word, Word root) {
 unordered_set<Word> Trie::getWordsWithPrefix(string surfaceForm) {
     TrieNode current = rootNode;
     unordered_set<Word> words;
-    for (char ch : surfaceForm) {
+    for (int i = 0; i < Word::size(surfaceForm); i++) {
+        string ch = Word::charAt(surfaceForm, i);
         if (current.childExists(ch)) {
             current = current.getChild(ch);
             if (!current.getWords().empty()) {

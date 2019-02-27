@@ -80,7 +80,7 @@ bool Word::startsWith(string largeString, string smallString) {
  * @return true if the character at first index of surfaceForm is a capital letter, false otherwise.
  */
 bool Word::isCapital(string surfaceForm) {
-    return TurkishLanguage::UPPERCASE_LETTERS.find_first_of(surfaceForm.at(0)) != -1;
+    return TurkishLanguage::UPPERCASE_LETTERS.find_first_of(Word::charAt(surfaceForm, 0)) != -1;
 }
 
 /**
@@ -206,9 +206,9 @@ Word* Word::toWordArray(string *sourceArray, int size) {
  */
 vector<Word> Word::toCharacters() {
     vector<Word> characters;
-    for (char i : name) {
+    for (int i = 0; i < Word::size(name); i++) {
         string s;
-        s += i;
+        s += Word::charAt(name, i);
         characters.emplace_back(Word(s));
     }
     return characters;
@@ -247,5 +247,28 @@ int Word::size(string surfaceForm) {
         charPtr++;
     }
     return count;
+}
+
+string Word::charAt(string surfaceForm, int index) {
+    const char* charPtr = surfaceForm.c_str();
+    string result;
+    int current = 0;
+    while (*charPtr){
+        if ((*charPtr & 0xC0) != 0x80){
+            if (current == index){
+                result += *charPtr;
+                charPtr++;
+                while ((*charPtr & 0xC0) == 0x80){
+                    result += *charPtr;
+                    charPtr++;
+                }
+                return result;
+            } else {
+                current++;
+            }
+        }
+        charPtr++;
+    }
+    return "";
 }
 

@@ -24,15 +24,15 @@
  */
 SyllableList::SyllableList(string word) {
     string sbSyllable;
-    for (unsigned long i = 0; i < word.length(); i++) {
-        char c = word.at(i);
+    for (unsigned long i = 0; i < Word::size(word); i++) {
+        string c = Word::charAt(word, i);
         bool isVowel = TurkishLanguage::isVowel(c);
         bool isLastChar = i == Word::size(word) - 1;
         if (isVowel) {
             sbSyllable += c;
             // If it is the last vowel.
             if (i == word.length() - 2) {
-                sbSyllable += word.at(i + 1);
+                sbSyllable += Word::charAt(word, i + 1);
                 i++;
             }
             syllables.emplace_back(Syllable(sbSyllable));
@@ -42,7 +42,7 @@ SyllableList::SyllableList(string word) {
             string tempSyl = sbSyllable;
             if (Word::size(tempSyl) == 1) {
                 // The previous character was also a consonant.
-                if (!TurkishLanguage::isVowel(tempSyl.at(0))) {
+                if (!TurkishLanguage::isVowel(Word::charAt(tempSyl, 0))) {
                     if (syllables.empty())
                         throw IrregularWordException();
                     unsigned long lastPos = syllables.size() - 1;

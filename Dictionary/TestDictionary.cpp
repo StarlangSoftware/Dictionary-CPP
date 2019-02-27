@@ -10,5 +10,7 @@ int main(){
     int index = dictionary.getWordIndex("a");
     cout << index << "\n";
     string text = "abcçdefgğhıijklmnoöpqrsştuüvwxyzABCÇDEFGĞHIİJKLMNOÖPQRSŞTUÜVWXYZ";
-    cout << Word::size(text);
+    for (int i = 0; i < Word::size(text); i++){
+        cout << Word::charAt(text, i) << "\n";
+    }
 }
