@@ -4,6 +4,7 @@
 
 #include <regex>
 #include <sstream>
+#include <iostream>
 #include "Word.h"
 #include "../Language/TurkishLanguage.h"
 
@@ -37,7 +38,7 @@ string Word::to_string() {
  * @return the length of name variable.
  */
 int Word::charCount() {
-    return name.size();
+    return Word::size(name);
 }
 
 /**
@@ -234,5 +235,17 @@ vector<string> Word::split(string line) {
 
 bool Word::endsWith(string largeString, string smallString) {
     return largeString.find(smallString, largeString.size() - smallString.size()) == largeString.size() - smallString.size();
+}
+
+int Word::size(string surfaceForm) {
+    const char* charPtr = surfaceForm.c_str();
+    int count = 0;
+    while (*charPtr){
+        if ((*charPtr & 0xC0) != 0x80){
+            count++;
+        }
+        charPtr++;
+    }
+    return count;
 }
 

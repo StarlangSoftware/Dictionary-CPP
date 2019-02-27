@@ -176,8 +176,8 @@ Word* Dictionary::getWord(unsigned long index) {
 unsigned long Dictionary::longestWordSize() {
     unsigned long max = 0;
     for (Word* word : words) {
-        if (word->getName().size() > max) {
-            max = word->getName().size();
+        if (Word::size(word->getName()) > max) {
+            max = Word::size(word->getName());
         }
     }
     return max;

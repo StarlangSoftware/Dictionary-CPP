@@ -8,5 +8,7 @@
 int main(){
     TxtDictionary dictionary = TxtDictionary("../dictionary.txt", Comparator::ENGLISH);
     int index = dictionary.getWordIndex("a");
-    cout << index;
+    cout << index << "\n";
+    string text = "abcçdefgğhıijklmnoöpqrsştuüvwxyzABCÇDEFGĞHIİJKLMNOÖPQRSŞTUÜVWXYZ";
+    cout << Word::size(text);
 }

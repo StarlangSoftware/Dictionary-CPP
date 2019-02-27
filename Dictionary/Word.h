@@ -14,7 +14,7 @@ protected:
 public:
     Word();
     virtual ~Word() = default;
-    Word(string name);
+    explicit Word(string name);
     string to_string();
     int charCount();
     Word clone();
@@ -29,6 +29,7 @@ public:
     static bool endsWith(string largeString, string smallString);
     static vector<string> split(string line, string separator);
     static vector<string> split(string line);
+    static int size(string surfaceForm);
     bool isPunctuation();
     static bool isTime(string surfaceForm);
     static Word* toWordArray(string* sourceArray, int size);
