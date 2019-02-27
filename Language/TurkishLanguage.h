@@ -30,6 +30,7 @@ public:
     static bool isConsonantDrop(const string &s);
     static bool isConsonant(const string &s);
     static bool isSertSessiz(const string &s);
+    static bool isUppercase(const string &s);
     static const string LOWERCASE_LETTERS;
     static const string UPPERCASE_LETTERS ;
     static const string LETTERS;
@@ -137,6 +138,16 @@ inline bool TurkishLanguage::isConsonantDrop(const string &s) {
  */
 inline bool TurkishLanguage::isConsonant(const string &s) {
     return (CONSONANTS.find_first_of(s) != -1);
+}
+
+/**
+ * The isUppercase method takes a character as an input and returns true if given character is uppercase.
+ *
+ * @param ch {@link char} input to check.
+ * @return true if given character is uppercase.
+ */
+inline bool TurkishLanguage::isUppercase(const string &s) {
+    return (UPPERCASE_LETTERS.find_first_of(s) != -1);
 }
 
 /**
