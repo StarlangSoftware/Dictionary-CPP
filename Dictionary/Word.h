@@ -32,6 +32,7 @@ public:
     static int size(string surfaceForm);
     static string charAt(string surfaceForm, int index);
     static string substring(string surfaceForm, int index, int length);
+    static string substringExceptLastChar(string surfaceForm);
     bool isPunctuation();
     static bool isTime(string surfaceForm);
     static Word* toWordArray(string* sourceArray, int size);

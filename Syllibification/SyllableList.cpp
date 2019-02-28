@@ -31,7 +31,7 @@ SyllableList::SyllableList(string word) {
         if (isVowel) {
             sbSyllable += c;
             // If it is the last vowel.
-            if (i == word.length() - 2) {
+            if (i == Word::size(word) - 2) {
                 sbSyllable += Word::charAt(word, i + 1);
                 i++;
             }

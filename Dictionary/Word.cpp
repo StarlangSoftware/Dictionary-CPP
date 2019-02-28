@@ -296,3 +296,13 @@ string Word::substring(string surfaceForm, int index, int length){
     }
     return "";
 }
+
+string Word::substringExceptLastChar(string surfaceForm){
+    int size = surfaceForm.size();
+    const char* charPtr = surfaceForm.c_str();
+    if ((*(charPtr + size - 1) & 0xC0) != 0x80){
+        return surfaceForm.substr(0, size - 1);
+    } else {
+        return surfaceForm.substr(0, size - 2);
+    }
+}
