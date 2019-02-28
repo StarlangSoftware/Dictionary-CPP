@@ -256,12 +256,10 @@ string Word::charAt(string surfaceForm, int index) {
     while (*charPtr){
         if ((*charPtr & 0xC0) != 0x80){
             if (current == index){
-                result += *charPtr;
-                charPtr++;
-                while ((*charPtr & 0xC0) == 0x80){
+                do{
                     result += *charPtr;
                     charPtr++;
-                }
+                } while ((*charPtr & 0xC0) == 0x80);
                 return result;
             } else {
                 current++;
@@ -272,3 +270,29 @@ string Word::charAt(string surfaceForm, int index) {
     return "";
 }
 
+string Word::substring(string surfaceForm, int index, int length){
+    const char* charPtr = surfaceForm.c_str();
+    string result;
+    int current = 0, currentLength = 0;
+    if (length == 0){
+        return "";
+    }
+    while (*charPtr){
+        if ((*charPtr & 0xC0) != 0x80){
+            if (current == index){
+                do{
+                    result += *charPtr;
+                    charPtr++;
+                    if ((*charPtr & 0xC0) != 0x80){
+                        currentLength++;
+                    }
+                } while (currentLength < length && *charPtr);
+                return result;
+            } else {
+                current++;
+            }
+        }
+        charPtr++;
+    }
+    return "";
+}

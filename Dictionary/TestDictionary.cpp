@@ -9,8 +9,9 @@ int main(){
     TxtDictionary dictionary = TxtDictionary("../dictionary.txt", Comparator::ENGLISH);
     int index = dictionary.getWordIndex("a");
     cout << index << "\n";
-    string text = "abcçdefgğhıijklmnoöpqrsştuüvwxyzABCÇDEFGĞHIİJKLMNOÖPQRSŞTUÜVWXYZ";
-    for (int i = 0; i < Word::size(text); i++){
-        cout << Word::charAt(text, i) << "\n";
+    string text = "abc;çdefg;ğhı;ijklmn;oöpqr;s;ştu;üvwx;yzABC;Ç;DEFG;ĞHI;İ;JKLMNO;ÖPQ;RSŞTUÜV;WXYZ";
+    vector<string> items = Word::split(text, ";");
+    for (string item : items){
+        cout << item << "\n";
     }
 }
