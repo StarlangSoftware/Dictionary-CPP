@@ -10,6 +10,6 @@ int main(){
     int index = dictionary.getWordIndex("a");
     cout << index << "\n";
     string text = "abcçdefgğhıijklmnoöpqrsştuüvwxyzABCÇDEFGĞHIİJKLMNOÖPQRSŞTUÜVWXYZ";
-    string text2 = "çöğübı";
-    cout << Word::substringExceptLastChar(text2);
+    string text2 = "çöğüöı";
+    cout << Word::lastChar(text2);
 }

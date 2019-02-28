@@ -270,6 +270,16 @@ string Word::charAt(string surfaceForm, int index) {
     return "";
 }
 
+string Word::lastChar(string surfaceForm){
+    int size = surfaceForm.size();
+    const char* charPtr = surfaceForm.c_str();
+    if ((*(charPtr + size - 1) & 0xC0) != 0x80){
+        return string(1, *(charPtr + size - 1));
+    } else {
+        return string(charPtr + size - 2);
+    }
+}
+
 string Word::substring(string surfaceForm, int index, int length){
     const char* charPtr = surfaceForm.c_str();
     string result;
@@ -304,5 +314,23 @@ string Word::substringExceptLastChar(string surfaceForm){
         return surfaceForm.substr(0, size - 1);
     } else {
         return surfaceForm.substr(0, size - 2);
+    }
+}
+
+string Word::substringExceptLastTwoChars(string surfaceForm){
+    int size = surfaceForm.size();
+    const char* charPtr = surfaceForm.c_str();
+    if ((*(charPtr + size - 1) & 0xC0) != 0x80){
+        if (((*(charPtr + size - 2) & 0xC0) != 0x80)){
+            return surfaceForm.substr(0, size - 2);
+        } else {
+            return surfaceForm.substr(0, size - 3);
+        }
+    } else {
+        if (((*(charPtr + size - 3) & 0xC0) != 0x80)){
+            return surfaceForm.substr(0, size - 3);
+        } else {
+            return surfaceForm.substr(0, size - 4);
+        }
     }
 }
