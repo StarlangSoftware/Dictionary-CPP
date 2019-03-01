@@ -6,10 +6,7 @@
 #include "TxtDictionary.h"
 
 int main(){
-    TxtDictionary dictionary = TxtDictionary("../dictionary.txt", Comparator::ENGLISH);
-    int index = dictionary.getWordIndex("a");
+    TxtDictionary dictionary = TxtDictionary("../dictionary.txt", Comparator::TURKISH);
+    int index = dictionary.getWordIndex("çığ");
     cout << index << "\n";
-    string text = "abcçdefgğhıijklmnoöpqrsştuüvwxyzABCÇDEFGĞHIİJKLMNOÖPQRSŞTUÜVWXYZ";
-    string text2 = "çöğüöı";
-    cout << Word::lastChar(text2);
 }

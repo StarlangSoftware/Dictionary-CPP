@@ -21,25 +21,6 @@ Dictionary::Dictionary(Comparator comparator) {
     this->comparator = comparator;
 }
 
-struct englishWordComparator{
-/**
- * The wordComparator takes two {@link Word}s as inputs; wordA and wordB and compares their names. Returns the result of this comparison.
- *
- * @param wordA Word type input.
- * @param wordB Word type input.
- * @return the value {@code 0} if the wordA is equal to the wordB; a value less than {@code 0} if this wordA is
- * lexicographically less than wordB; and a value greater than {@code 0} if this wordA is lexicographically greater
- * than wordB.
- */
-    bool operator() (Word* wordA, Word* wordB){
-        const auto & col = use_facet<collate<char>>(std::locale());
-        string nameA = wordA->getName();
-        string nameB = wordB->getName();
-        return (col.compare(nameA.data(), nameA.data() + nameA.size(), nameB.data(), nameB.data() + nameB.size()) < 0);
-    }
-};
-
-
 struct turkishWordComparator{
 /**
  * The wordComparator takes two {@link Word}s as inputs; wordA and wordB and compares their names. Returns the result of this comparison.
@@ -51,10 +32,33 @@ struct turkishWordComparator{
  * than wordB.
  */
     bool operator() (Word* wordA, Word* wordB){
-        const auto & col = use_facet<collate<char>>(std::locale());
-        string nameA = wordA->getName();
-        string nameB = wordB->getName();
-        return (col.compare(nameA.data(), nameA.data() + nameA.size(), nameB.data(), nameB.data() + nameB.size()) < 0);
+        string text = "0123456789aâbcçdefgğhıiîjklmnoöpqrsştuüûvwxyzABCÇDEFGĞHIİJKLMNOÖPQRSŞTUÜVWXYZ";
+        const char* charPtr1 = wordA->getName().c_str();
+        const char* charPtr2 = wordB->getName().c_str();
+        while (*charPtr1 && *charPtr2){
+            string char1;
+            if ((*charPtr1 & 0xC0) != 0x80){
+                do{
+                    char1 += *charPtr1;
+                    charPtr1++;
+                } while ((*charPtr1 & 0xC0) == 0x80);
+            }
+            string char2;
+            if ((*charPtr2 & 0xC0) != 0x80){
+                do{
+                    char2 += *charPtr2;
+                    charPtr2++;
+                } while ((*charPtr2 & 0xC0) == 0x80);
+            }
+            if (text.find(char1) < text.find(char2)){
+                return true;
+            } else {
+                if (text.find(char1) > text.find(char2)){
+                    return false;
+                }
+            }
+        }
+        return *charPtr2;
     }
 };
 
@@ -71,12 +75,33 @@ struct turkishIgnoreCaseWordComparator{
  * than wordB.
  */
     bool operator() (Word* wordA, Word* wordB){
-        const auto & col = use_facet<collate<char>>(std::locale());
-        string nameA = wordA->getName();
-        string nameB = wordB->getName();
-        std::transform(nameA.begin(), nameA.end(), nameA.begin(), ::tolower);
-        std::transform(nameB.begin(), nameB.end(), nameB.begin(), ::tolower);
-        return (col.compare(nameA.data(), nameA.data() + nameA.size(), nameB.data(), nameB.data() + nameB.size()) < 0);
+        string text = "0123456789aâAbBcCçÇdDeEfFgGğĞhHıIiîİjJkKlLmMnNoOöÖpPqQrRsSşŞtTuUüûÜvVwWxXyYzZ";
+        const char* charPtr1 = wordA->getName().c_str();
+        const char* charPtr2 = wordB->getName().c_str();
+        while (*charPtr1 && *charPtr2){
+            string char1;
+            if ((*charPtr1 & 0xC0) != 0x80){
+                do{
+                    char1 += *charPtr1;
+                    charPtr1++;
+                } while ((*charPtr1 & 0xC0) == 0x80);
+            }
+            string char2;
+            if ((*charPtr2 & 0xC0) != 0x80){
+                do{
+                    char2 += *charPtr2;
+                    charPtr2++;
+                } while ((*charPtr2 & 0xC0) == 0x80);
+            }
+            if (text.find(char1) < text.find(char2)){
+                return true;
+            } else {
+                if (text.find(char1) > text.find(char2)){
+                    return false;
+                }
+            }
+        }
+        return *charPtr2;
     }
 };
 
@@ -92,7 +117,7 @@ Word* Dictionary::getWord(string name) {
         vector<Word*>::iterator middle;
         switch (comparator){
             case Comparator::ENGLISH:
-                middle = lower_bound(words.begin(), words.end(), new Word(name), englishWordComparator());
+                middle = lower_bound(words.begin(), words.end(), new Word(name));
                 break;
             case Comparator::TURKISH:
                 middle = lower_bound(words.begin(), words.end(), new Word(name), turkishWordComparator());
@@ -110,7 +135,7 @@ bool Dictionary::wordExists(string name) {
     bool result;
     switch (comparator){
         case Comparator::ENGLISH:
-            result = binary_search(words.begin(), words.end(), new Word(name), englishWordComparator());
+            result = binary_search(words.begin(), words.end(), new Word(name));
             break;
         case Comparator::TURKISH:
             result = binary_search(words.begin(), words.end(), new Word(name), turkishWordComparator());
@@ -134,7 +159,7 @@ int Dictionary::getWordIndex(string name) {
         vector<Word*>::iterator middle;
         switch (comparator){
             case Comparator::ENGLISH:
-                middle = lower_bound(words.begin(), words.end(), new Word(name), englishWordComparator());
+                middle = lower_bound(words.begin(), words.end(), new Word(name));
                 break;
             case Comparator::TURKISH:
                 middle = lower_bound(words.begin(), words.end(), new Word(name), turkishWordComparator());
@@ -194,7 +219,7 @@ unsigned long Dictionary::getWordStartingWith(string hash) {
     vector<Word*>::iterator middle;
     switch (comparator){
         case Comparator::ENGLISH:
-            middle = lower_bound(words.begin(), words.end(), new Word(hash), englishWordComparator());
+            middle = lower_bound(words.begin(), words.end(), new Word(hash));
             break;
         case Comparator::TURKISH:
             middle = lower_bound(words.begin(), words.end(), new Word(hash), turkishWordComparator());
@@ -209,7 +234,7 @@ unsigned long Dictionary::getWordStartingWith(string hash) {
 void Dictionary::sort() {
     switch (comparator){
         case Comparator::ENGLISH:
-            std::stable_sort(words.begin(), words.end(), englishWordComparator());
+            std::stable_sort(words.begin(), words.end());
             break;
         case Comparator::TURKISH:
             std::stable_sort(words.begin(), words.end(), turkishWordComparator());
