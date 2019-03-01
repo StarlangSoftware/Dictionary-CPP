@@ -6,6 +6,7 @@
 #define DICTIONARY_DICTIONARY_H
 
 #include<vector>
+#include<map>
 #include <locale>
 #include "Word.h"
 
@@ -16,10 +17,12 @@ enum class Comparator{
 };
 
 class Dictionary {
+private:
+    map<string, int> comparatorMap;
 protected:
     vector<Word*> words;
     string filename;
-    Comparator comparator;
+    Comparator comparator = Comparator::ENGLISH;
     void sort();
 public:
     Dictionary();

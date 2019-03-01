@@ -6,7 +6,7 @@
 #include "TxtDictionary.h"
 
 int main(){
-    TxtDictionary dictionary = TxtDictionary("../dictionary.txt", Comparator::TURKISH);
-    int index = dictionary.getWordIndex("çığ");
+    TxtDictionary dictionary = TxtDictionary("../turkish_dictionary.txt", Comparator::TURKISH);
+    int index = dictionary.getWordIndex("ab");
     cout << index << "\n";
 }

@@ -4,6 +4,7 @@
 #include<clocale>
 #include <locale>
 #include <iostream>
+#include <map>
 #include "Dictionary.h"
 
 /**
@@ -19,9 +20,73 @@ Dictionary::Dictionary() = default;
  */
 Dictionary::Dictionary(Comparator comparator) {
     this->comparator = comparator;
+    switch (comparator){
+        case Comparator::TURKISH:
+            comparatorMap.emplace("a", 0);comparatorMap.emplace("â", 0);comparatorMap.emplace("b", 1);
+            comparatorMap.emplace("c", 2);comparatorMap.emplace("ç", 3);comparatorMap.emplace("d", 4);
+            comparatorMap.emplace("e", 5);comparatorMap.emplace("f", 6);comparatorMap.emplace("g", 7);
+            comparatorMap.emplace("ğ", 8);comparatorMap.emplace("h", 9);comparatorMap.emplace("ı", 10);
+            comparatorMap.emplace("i", 11);comparatorMap.emplace("î", 11);comparatorMap.emplace("j", 12);
+            comparatorMap.emplace("k", 13);comparatorMap.emplace("l", 14);comparatorMap.emplace("m", 15);
+            comparatorMap.emplace("n", 16);comparatorMap.emplace("o", 17);comparatorMap.emplace("ö", 18);
+            comparatorMap.emplace("p", 19);comparatorMap.emplace("q", 20);comparatorMap.emplace("r", 21);
+            comparatorMap.emplace("s", 22);comparatorMap.emplace("ş", 23);comparatorMap.emplace("t", 24);
+            comparatorMap.emplace("u", 25);comparatorMap.emplace("ü", 26);comparatorMap.emplace("û", 26);
+            comparatorMap.emplace("v", 27);comparatorMap.emplace("w", 28);comparatorMap.emplace("x", 29);
+            comparatorMap.emplace("y", 30);comparatorMap.emplace("z", 31);comparatorMap.emplace("A", 32);
+            comparatorMap.emplace("B", 33);comparatorMap.emplace("C", 34);comparatorMap.emplace("Ç", 35);
+            comparatorMap.emplace("D", 36);comparatorMap.emplace("E", 37);comparatorMap.emplace("F", 38);
+            comparatorMap.emplace("G", 39);comparatorMap.emplace("Ğ", 40);comparatorMap.emplace("H", 41);
+            comparatorMap.emplace("I", 42);comparatorMap.emplace("İ", 43);comparatorMap.emplace("J", 44);
+            comparatorMap.emplace("K", 45);comparatorMap.emplace("L", 46);comparatorMap.emplace("M", 47);
+            comparatorMap.emplace("N", 48);comparatorMap.emplace("O", 49);comparatorMap.emplace("Ö", 50);
+            comparatorMap.emplace("P", 51);comparatorMap.emplace("Q", 52);comparatorMap.emplace("R", 53);
+            comparatorMap.emplace("S", 54);comparatorMap.emplace("Ş", 55);comparatorMap.emplace("T", 56);
+            comparatorMap.emplace("U", 57);comparatorMap.emplace("Ü", 58);comparatorMap.emplace("V", 59);
+            comparatorMap.emplace("W", 60);comparatorMap.emplace("X", 61);comparatorMap.emplace("Y", 62);
+            comparatorMap.emplace("Z", 63);
+            break;
+        case Comparator ::TURKISH_NO_CASE:
+            comparatorMap.emplace("a", 0);comparatorMap.emplace("â", 0);comparatorMap.emplace("A", 0);
+            comparatorMap.emplace("b", 1);comparatorMap.emplace("B", 1);
+            comparatorMap.emplace("c", 2);comparatorMap.emplace("C", 2);
+            comparatorMap.emplace("ç", 3);comparatorMap.emplace("Ç", 3);
+            comparatorMap.emplace("d", 4);comparatorMap.emplace("D", 4);
+            comparatorMap.emplace("e", 5);comparatorMap.emplace("E", 5);
+            comparatorMap.emplace("f", 6);comparatorMap.emplace("F", 6);
+            comparatorMap.emplace("g", 7);comparatorMap.emplace("G", 7);
+            comparatorMap.emplace("ğ", 8);comparatorMap.emplace("Ğ", 8);
+            comparatorMap.emplace("h", 9);comparatorMap.emplace("H", 9);
+            comparatorMap.emplace("ı", 10);comparatorMap.emplace("I", 10);
+            comparatorMap.emplace("i", 11);comparatorMap.emplace("î", 11);comparatorMap.emplace("İ", 11);
+            comparatorMap.emplace("j", 12);comparatorMap.emplace("J", 12);
+            comparatorMap.emplace("k", 13);comparatorMap.emplace("K", 13);
+            comparatorMap.emplace("l", 14);comparatorMap.emplace("L", 14);
+            comparatorMap.emplace("m", 15);comparatorMap.emplace("M", 15);
+            comparatorMap.emplace("n", 16);comparatorMap.emplace("N", 16);
+            comparatorMap.emplace("o", 17);comparatorMap.emplace("O", 17);
+            comparatorMap.emplace("ö", 18);comparatorMap.emplace("Ö", 18);
+            comparatorMap.emplace("p", 19);comparatorMap.emplace("P", 19);
+            comparatorMap.emplace("q", 20);comparatorMap.emplace("Q", 20);
+            comparatorMap.emplace("r", 21);comparatorMap.emplace("R", 21);
+            comparatorMap.emplace("s", 22);comparatorMap.emplace("S", 22);
+            comparatorMap.emplace("ş", 23);comparatorMap.emplace("Ş", 23);
+            comparatorMap.emplace("t", 24);comparatorMap.emplace("T", 24);
+            comparatorMap.emplace("u", 25);comparatorMap.emplace("U", 25);
+            comparatorMap.emplace("ü", 26);comparatorMap.emplace("û", 26);comparatorMap.emplace("Ü", 26);
+            comparatorMap.emplace("v", 27);comparatorMap.emplace("V", 27);
+            comparatorMap.emplace("w", 28);comparatorMap.emplace("W", 28);
+            comparatorMap.emplace("x", 29);comparatorMap.emplace("X", 29);
+            comparatorMap.emplace("y", 30);comparatorMap.emplace("Y", 30);
+            comparatorMap.emplace("z", 31);comparatorMap.emplace("Z", 31);
+            break;
+        case Comparator ::ENGLISH:
+            break;
+    }
 }
 
 struct turkishWordComparator{
+    map<string, int> comparatorMap;
 /**
  * The wordComparator takes two {@link Word}s as inputs; wordA and wordB and compares their names. Returns the result of this comparison.
  *
@@ -31,51 +96,11 @@ struct turkishWordComparator{
  * lexicographically less than wordB; and a value greater than {@code 0} if this wordA is lexicographically greater
  * than wordB.
  */
-    bool operator() (Word* wordA, Word* wordB){
-        string text = "0123456789aâbcçdefgğhıiîjklmnoöpqrsştuüûvwxyzABCÇDEFGĞHIİJKLMNOÖPQRSŞTUÜVWXYZ";
-        const char* charPtr1 = wordA->getName().c_str();
-        const char* charPtr2 = wordB->getName().c_str();
-        while (*charPtr1 && *charPtr2){
-            string char1;
-            if ((*charPtr1 & 0xC0) != 0x80){
-                do{
-                    char1 += *charPtr1;
-                    charPtr1++;
-                } while ((*charPtr1 & 0xC0) == 0x80);
-            }
-            string char2;
-            if ((*charPtr2 & 0xC0) != 0x80){
-                do{
-                    char2 += *charPtr2;
-                    charPtr2++;
-                } while ((*charPtr2 & 0xC0) == 0x80);
-            }
-            if (text.find(char1) < text.find(char2)){
-                return true;
-            } else {
-                if (text.find(char1) > text.find(char2)){
-                    return false;
-                }
-            }
-        }
-        return *charPtr2;
+    turkishWordComparator(map<string, int> comparatorMap){
+        this->comparatorMap = comparatorMap;
     }
-};
 
-struct turkishIgnoreCaseWordComparator{
-/**
- * The compare method takes two {@link Word}s as inputs; wordA and wordB and compares their names. First it creates
- * a {@link Locale} object which represents a specific geographical, political, or cultural region  and an instance of
- * {@link Collator} which performs locale-sensitive String comparison. Then, it returns the result of this comparison.
- *
- * @param wordA Word type input.
- * @param wordB Word type input.
- * @return the value {@code 0} if the wordA is equal to the wordB; a value less than {@code 0} if this wordA is
- * lexicographically less than wordB; and a value greater than {@code 0} if this wordA is lexicographically greater
- * than wordB.
- */
     bool operator() (Word* wordA, Word* wordB){
-        string text = "0123456789aâAbBcCçÇdDeEfFgGğĞhHıIiîİjJkKlLmMnNoOöÖpPqQrRsSşŞtTuUüûÜvVwWxXyYzZ";
         const char* charPtr1 = wordA->getName().c_str();
         const char* charPtr2 = wordB->getName().c_str();
         while (*charPtr1 && *charPtr2){
@@ -93,12 +118,17 @@ struct turkishIgnoreCaseWordComparator{
                     charPtr2++;
                 } while ((*charPtr2 & 0xC0) == 0x80);
             }
-            if (text.find(char1) < text.find(char2)){
-                return true;
-            } else {
-                if (text.find(char1) > text.find(char2)){
-                    return false;
+            if (comparatorMap.find(char1) != comparatorMap.end() && comparatorMap.find(char2) != comparatorMap.end()){
+                int index1 = comparatorMap.at(char1), index2 = comparatorMap.at(char2);
+                if (index1 < index2){
+                    return true;
+                } else {
+                    if (index1 > index2){
+                        return false;
+                    }
                 }
+            } else {
+                return true;
             }
         }
         return *charPtr2;
@@ -120,11 +150,8 @@ Word* Dictionary::getWord(string name) {
                 middle = lower_bound(words.begin(), words.end(), new Word(name));
                 break;
             case Comparator::TURKISH:
-                middle = lower_bound(words.begin(), words.end(), new Word(name), turkishWordComparator());
-                break;
             case Comparator::TURKISH_NO_CASE:
-                middle = lower_bound(words.begin(), words.end(), new Word(name), turkishIgnoreCaseWordComparator());
-                break;
+                middle = lower_bound(words.begin(), words.end(), new Word(name), turkishWordComparator(comparatorMap));
         }
         return *middle;
     }
@@ -138,10 +165,8 @@ bool Dictionary::wordExists(string name) {
             result = binary_search(words.begin(), words.end(), new Word(name));
             break;
         case Comparator::TURKISH:
-            result = binary_search(words.begin(), words.end(), new Word(name), turkishWordComparator());
-            break;
         case Comparator::TURKISH_NO_CASE:
-            result = binary_search(words.begin(), words.end(), new Word(name), turkishIgnoreCaseWordComparator());
+            result = binary_search(words.begin(), words.end(), new Word(name), turkishWordComparator(comparatorMap));
             break;
     }
     return result;
@@ -162,10 +187,8 @@ int Dictionary::getWordIndex(string name) {
                 middle = lower_bound(words.begin(), words.end(), new Word(name));
                 break;
             case Comparator::TURKISH:
-                middle = lower_bound(words.begin(), words.end(), new Word(name), turkishWordComparator());
-                break;
             case Comparator::TURKISH_NO_CASE:
-                middle = lower_bound(words.begin(), words.end(), new Word(name), turkishIgnoreCaseWordComparator());
+                middle = lower_bound(words.begin(), words.end(), new Word(name), turkishWordComparator(comparatorMap));
                 break;
         }
         return middle - words.begin();
@@ -222,10 +245,8 @@ unsigned long Dictionary::getWordStartingWith(string hash) {
             middle = lower_bound(words.begin(), words.end(), new Word(hash));
             break;
         case Comparator::TURKISH:
-            middle = lower_bound(words.begin(), words.end(), new Word(hash), turkishWordComparator());
-            break;
         case Comparator::TURKISH_NO_CASE:
-            middle = lower_bound(words.begin(), words.end(), new Word(hash), turkishIgnoreCaseWordComparator());
+            middle = lower_bound(words.begin(), words.end(), new Word(hash), turkishWordComparator(comparatorMap));
             break;
     }
     return middle - words.begin();
@@ -237,10 +258,8 @@ void Dictionary::sort() {
             std::stable_sort(words.begin(), words.end());
             break;
         case Comparator::TURKISH:
-            std::stable_sort(words.begin(), words.end(), turkishWordComparator());
-            break;
         case Comparator::TURKISH_NO_CASE:
-            std::stable_sort(words.begin(), words.end(), turkishIgnoreCaseWordComparator());
+            std::stable_sort(words.begin(), words.end(), turkishWordComparator(comparatorMap));
             break;
     }
 }
