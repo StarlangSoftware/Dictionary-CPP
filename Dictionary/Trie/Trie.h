@@ -7,14 +7,16 @@
 
 #include<string>
 #include "TrieNode.h"
+#include "../TxtWord.h"
 
 class Trie {
 private:
     TrieNode rootNode;
 public:
     Trie();
-    void addWord(string word, Word root);
-    unordered_set<Word> getWordsWithPrefix(string surfaceForm);
+    void addWord(string word, Word* root);
+    unordered_set<Word*> getWordsWithPrefix(string surfaceForm);
+    TxtWord* getCompoundWordStartingWith(string hash);
 };
 
 

@@ -7,9 +7,7 @@
 /**
  * A constructor of {@link TrieNode} class which creates a new children {@link map}.
  */
-TrieNode::TrieNode() {
-
-}
+TrieNode::TrieNode() = default;
 
 /**
  * The addWord method takes a String word, an index, and a {@link Word} root as inputs. First it creates a {@link TrieNode} child
@@ -25,7 +23,7 @@ TrieNode::TrieNode() {
  * @param index Integer index.
  * @param root  {@link Word} input to add.
  */
-void TrieNode::addWord(string word, unsigned long index, Word root) {
+void TrieNode::addWord(string word, unsigned long index, Word* root) {
     TrieNode child;
     if (index == Word::size(word)) {
         words.emplace(root);
@@ -47,8 +45,8 @@ void TrieNode::addWord(string word, unsigned long index, Word root) {
  * @param word String input.
  * @param root {@link Word} type input.
  */
-void TrieNode::addWord(string word, Word root) {
-    addWord(word, 0, root);
+void TrieNode::addWord(string word, Word* root) {
+    addWord(move(word), 0, root);
 }
 
 /**
@@ -66,7 +64,7 @@ TrieNode TrieNode::getChild(string ch) {
  *
  * @return the words {@link unordered_set}.
  */
-unordered_set<Word> TrieNode::getWords() {
+unordered_set<Word*> TrieNode::getWords() {
     return words;
 }
 

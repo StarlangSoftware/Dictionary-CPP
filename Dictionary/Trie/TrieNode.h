@@ -10,29 +10,17 @@
 
 using namespace std;
 
-namespace std
-{
-    template<>
-    struct hash<Word>
-    {
-        size_t
-        operator()(const Word & word) const
-        {
-            return hash<string>()(word.getName());
-        }
-    };
-}
 class TrieNode {
 private:
     map<string, TrieNode> children;
-    unordered_set<Word> words;
-    void addWord(string word, unsigned long index, Word root);
+    unordered_set<Word*> words;
+    void addWord(string word, unsigned long index, Word* root);
 public:
     TrieNode();
-    void addWord(string word, Word root);
+    void addWord(string word, Word* root);
     TrieNode getChild(string ch);
     bool childExists(string ch);
-    unordered_set<Word> getWords();
+    unordered_set<Word*> getWords();
 };
 
 
