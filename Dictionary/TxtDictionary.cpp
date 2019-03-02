@@ -9,20 +9,6 @@
 #include "TxtWord.h"
 
 /**
- * A constructor of {@link TxtDictionary} class which takes a {@link Comparator} as an input and calls its super
- * class {@link Dictionary} with given {@link Comparator}.
- *
- * @param comparator {@link Comparator} type input.
- */
-TxtDictionary::TxtDictionary(Comparator comparator) : Dictionary(comparator) {
-}
-
-TxtDictionary::TxtDictionary() : Dictionary(Comparator::TURKISH) {
-    filename = "../turkish_dictionary.txt";
-    loadFromText("../turkish_dictionary.txt");
-}
-
-/**
  * Another constructor of {@link TxtDictionary} class which takes a String filename and a {@link WordComparator} as inputs.
  * And calls its super class {@link Dictionary} with given {@link WordComparator}, assigns given filename input to the
  * filename variable. Then, it calls loadFromText method with given filename.

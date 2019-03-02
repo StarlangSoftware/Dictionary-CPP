@@ -10,9 +10,7 @@ class TxtDictionary : public Dictionary {
 private:
     void loadFromText(string filename);
 public:
-    TxtDictionary(Comparator comparator);
-    TxtDictionary();
-    TxtDictionary(string filename, Comparator comparator);
+    explicit TxtDictionary(string filename = "turkish_dictionary.txt", Comparator comparator = Comparator::TURKISH);
     TxtDictionary clone();
     bool addWithFlag(string name, string flag);
     void addNumber(string name);
