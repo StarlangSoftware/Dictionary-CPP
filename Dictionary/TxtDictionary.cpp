@@ -234,3 +234,134 @@ void TxtDictionary::saveAsTxt(string filename) {
     }
     outfile.close();
 }
+
+/**
+ * The addWordWhenRootSoften is used to add word to Trie whose last consonant will be soften.
+ * For instance, in the case of Dative Case Suffix, the word is 'müzik' when '-e' is added to the word, the last
+ * char is drooped and root became 'müzi' and by changing 'k' into 'ğ' the word transformed into 'müziğe' as in the
+ * example of 'Herkes müziğe doğru geldi'.
+ * <p>
+ * In the case of accusative, possessive of third person and a derivative suffix, the word is 'kanat' when '-i' is
+ * added to word, last char is dropped, root became 'kana' then 't' transformed into 'd' and added to Trie. The word is
+ * changed into 'kanadı' as in the case of 'Kuşun kırık kanadı'.
+ *
+ * @param trie the name of the Trie to add the word.
+ * @param last the last char of the word to be soften.
+ * @param root the substring of the word whose last one or two chars are omitted from the word to bo softed.
+ * @param word the original word.
+ */
+void TxtDictionary::addWordWhenRootSoften(Trie trie, string last, string root, TxtWord *word) {
+    if (last == "p"){
+        trie.addWord(root + 'b', *word);
+    } else {
+        if (last == "ç"){
+            trie.addWord(root + 'c', *word);
+        } else {
+            if (last == "t"){
+                trie.addWord(root + 'd', *word);
+            } else {
+                if (last == "k" || last == "g"){
+                    trie.addWord(root + "ğ", *word);
+                }
+            }
+        }
+    }
+}
+
+/**
+ * The prepareTrie method is used to create a Trie with the given dictionary. First, it gets the word from dictionary,
+ * then checks some exceptions like 'ben' which does not fit in the consonant softening rule and transforms into 'bana',
+ * and later on it generates a root by removing the last char from the word however if the length of the word is greater
+ * than 1, it also generates the root by removing the last two chars from the word.
+ * <p>
+ * Then, it gets the last char of the root and adds root and word to the result Trie. There are also special cases such as;
+ * lastIdropsDuringSuffixation condition, if it is true then addWordWhenRootSoften method will be used rather than addWord.
+ * Ex : metin + i = metni
+ * isPortmanteauEndingWithSI condition, if it is true then addWord method with rootWithoutLastTwo will be used.
+ * Ex : ademelması + lar = ademelmaları
+ * isPortmanteau condition, if it is true then addWord method with rootWithoutLast will be used.
+ * Ex : mısıryağı + lar = mısıryağları
+ * vowelEChangesToIDuringYSuffixation condition, if it is then addWord method with rootWithoutLast will be used
+ * depending on the last char whether it is 'e' or 'a'.
+ * Ex : ye + iniz - yiyiniz
+ * endingKChangesIntoG condition, if it is true then addWord method with rootWithoutLast will be used with added 'g'.
+ * Ex : ahenk + i = ahengi
+ *
+ * @param currentDictionary the dictionary that Trie will be created.
+ * @return the resulting Trie.
+ */
+Trie TxtDictionary::prepareTrie() {
+    Trie result = Trie();
+    string root, rootWithoutLast, rootWithoutLastTwo;
+    string last, lastBefore = " ";
+    for (int i = 0; i < size(); i++) {
+        TxtWord* word = (TxtWord*) getWord(i);
+        root = word->getName();
+        if (root == "ben") {
+            result.addWord("bana", *word);
+        }
+        rootWithoutLast = Word::substringExceptLastChar(root);
+        if (root.length() > 1) {
+            rootWithoutLastTwo = Word::substringExceptLastTwoChars(root);
+        } else {
+            rootWithoutLastTwo = "";
+        }
+        if (root.length() > 1){
+            lastBefore = Word::charAt(root, Word::size(root) - 2);
+        }
+        last = Word::lastChar(root);
+        result.addWord(root, *word);
+        if (word->lastIdropsDuringSuffixation() || word->lastIdropsDuringPassiveSuffixation()) {
+            if (word->rootSoftenDuringSuffixation()) {
+                addWordWhenRootSoften(result, last, rootWithoutLastTwo, word);
+            } else {
+                result.addWord(rootWithoutLastTwo + last, *word);
+            }
+        }
+        // NominalRootNoPossesive
+        if (word->isPortmanteauEndingWithSI()) {
+            result.addWord(rootWithoutLastTwo, *word);
+        }
+        if (word->rootSoftenDuringSuffixation()) {
+            addWordWhenRootSoften(result, last, rootWithoutLast, word);
+        }
+        if (word->isPortmanteau()) {
+            if (word->isPortmanteauFacedVowelEllipsis()){
+                result.addWord(rootWithoutLastTwo + last + lastBefore, *word);
+            } else {
+                if (word->isPortmanteauFacedSoftening()){
+                    if (lastBefore == "b"){
+                        result.addWord(rootWithoutLastTwo + "p", *word);
+                    } else {
+                        if (lastBefore == "c"){
+                            result.addWord(rootWithoutLastTwo + "ç", *word);
+                        } else {
+                            if (lastBefore == "d"){
+                                result.addWord(rootWithoutLastTwo + "t", *word);
+                            } else {
+                                if (lastBefore == "ğ"){
+                                    result.addWord(rootWithoutLastTwo + "k", *word);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    result.addWord(rootWithoutLast, *word);
+                }
+            }
+        }
+        if (word->vowelEChangesToIDuringYSuffixation() || word->vowelAChangesToIDuringYSuffixation()) {
+            if (last == "e"){
+                result.addWord(rootWithoutLast, *word);
+            } else {
+                if (last == "a"){
+                    result.addWord(rootWithoutLast, *word);
+                }
+            }
+        }
+        if (word->endingKChangesIntoG()) {
+            result.addWord(rootWithoutLast + "g", *word);
+        }
+    }
+    return result;
+}
