@@ -39,10 +39,10 @@ TxtWord::TxtWord(string name, string flag) {
  *
  * @return TxtWord type copy.
  */
-TxtWord TxtWord::clone() {
-    TxtWord copy = TxtWord(name);
+TxtWord* TxtWord::clone() {
+    TxtWord* copy = new TxtWord(name);
     for (const string &flag : flags) {
-        copy.addFlag(flag);
+        copy->addFlag(flag);
     }
     return copy;
 }
