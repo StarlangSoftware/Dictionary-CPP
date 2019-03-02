@@ -9,4 +9,6 @@ int main(){
     TxtDictionary dictionary = TxtDictionary("turkish_dictionary.txt", Comparator::TURKISH);
     int index = dictionary.getWordIndex("ab");
     cout << index << "\n";
+    string text = "ABCCÇDEFGĞHIİJKLMNOÖPQRSŞTUÜVWXYZ";
+    cout << Word::toLowerCase(text);
 }

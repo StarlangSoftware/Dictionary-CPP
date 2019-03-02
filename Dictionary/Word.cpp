@@ -249,6 +249,57 @@ int Word::size(string surfaceForm) {
     return count;
 }
 
+string Word::toLowerCase(string surfaceForm){
+    const char* charPtr = surfaceForm.c_str();
+    string result;
+    string currentChar;
+    while (*charPtr){
+        if ((*charPtr & 0xC0) != 0x80){
+            do{
+                currentChar += *charPtr;
+                charPtr++;
+            } while ((*charPtr & 0xC0) == 0x80);
+            if (currentChar == "ç" || currentChar == "ö" || currentChar == "ğ" || currentChar == "ü" || currentChar == "ş" || currentChar == "ı"){
+                result += currentChar;
+            } else {
+                if (currentChar == "Ç"){
+                    result += "ç";
+                } else {
+                    if (currentChar == "Ö"){
+                        result += "ö";
+                    } else {
+                        if (currentChar == "Ğ"){
+                            result += "ğ";
+                        } else {
+                            if (currentChar == "Ü"){
+                                result += "ü";
+                            } else {
+                                if (currentChar == "Ş"){
+                                    result += "ş";
+                                } else {
+                                    if (currentChar == "İ"){
+                                        result += "i";
+                                    } else {
+                                        if (currentChar == "I"){
+                                            result += "ı";
+                                        } else {
+                                            result += tolower(currentChar[0]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            currentChar = "";
+        } else {
+            charPtr++;
+        }
+    }
+    return result;
+}
+
 string Word::charAt(string surfaceForm, int index) {
     const char* charPtr = surfaceForm.c_str();
     string result;
