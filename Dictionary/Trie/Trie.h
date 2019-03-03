@@ -11,9 +11,10 @@
 
 class Trie {
 private:
-    TrieNode rootNode;
+    TrieNode* rootNode;
 public:
     Trie();
+    ~Trie();
     void addWord(string word, Word* root);
     unordered_set<Word*> getWordsWithPrefix(string surfaceForm);
     TxtWord* getCompoundWordStartingWith(string hash);

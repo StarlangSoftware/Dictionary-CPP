@@ -250,7 +250,7 @@ void TxtDictionary::saveAsTxt(string filename) {
  * @param root the substring of the word whose last one or two chars are omitted from the word to bo softed.
  * @param word the original word.
  */
-void TxtDictionary::addWordWhenRootSoften(Trie trie, string last, string root, TxtWord *word) {
+void TxtDictionary::addWordWhenRootSoften(Trie& trie, string last, string root, TxtWord *word) {
     if (last == "p"){
         trie.addWord(root + 'b', word);
     } else {

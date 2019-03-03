@@ -7,7 +7,9 @@
 /**
  * A constructor of {@link Trie} class which creates a new {@link TrieNode} as rootNode.
  */
-Trie::Trie() = default;
+Trie::Trie(){
+    rootNode = new TrieNode();
+}
 
 /**
  * The addWord method which takes a String word and a {@link Word} root as inputs and adds given word and root to the rootNode.
@@ -16,7 +18,7 @@ Trie::Trie() = default;
  * @param root {@link Word} input.
  */
 void Trie::addWord(string word, Word* root) {
-    rootNode.addWord(move(word), root);
+    rootNode->addWord(move(word), root);
 }
 
 /**
@@ -29,14 +31,14 @@ void Trie::addWord(string word, Word* root) {
  * @return words {@link unordered_set}.
  */
 unordered_set<Word*> Trie::getWordsWithPrefix(string surfaceForm) {
-    TrieNode current = rootNode;
+    TrieNode* current = rootNode;
     unordered_set<Word*> words;
     for (int i = 0; i < Word::size(surfaceForm); i++) {
         string ch = Word::charAt(surfaceForm, i);
-        if (current.childExists(ch)) {
-            current = current.getChild(ch);
-            if (!current.getWords().empty()) {
-                unordered_set<Word*> wordsToBeAdded = current.getWords();
+        if (current->childExists(ch)) {
+            current = current->getChild(ch);
+            if (!current->getWords().empty()) {
+                unordered_set<Word*> wordsToBeAdded = current->getWords();
                 words.insert(wordsToBeAdded.begin(), wordsToBeAdded.end());
             }
         } else {
@@ -58,20 +60,25 @@ unordered_set<Word*> Trie::getWordsWithPrefix(string surfaceForm) {
  * @return null if {@link TrieNode} is null, otherwise portmanteau word.
  */
 TxtWord *Trie::getCompoundWordStartingWith(string hash) {
-    TrieNode current = rootNode;
+    TrieNode* current = rootNode;
     for (int i = 0; i < Word::size(hash); i++) {
-        if (current.childExists(Word::charAt(hash, i))){
-            current = current.getChild(Word::charAt(hash, i));
+        if (current->childExists(Word::charAt(hash, i))){
+            current = current->getChild(Word::charAt(hash, i));
         } else {
             return nullptr;
         }
     }
-    if (!current.getWords().empty()) {
-        for (Word* word : current.getWords()) {
+    if (!current->getWords().empty()) {
+        for (Word* word : current->getWords()) {
             if (((TxtWord*) word)->isPortmanteau()) {
                 return (TxtWord*) word;
             }
         }
     }
     return nullptr;
+}
+
+Trie::~Trie() {
+    TrieNode* current = rootNode;
+    delete current;
 }
