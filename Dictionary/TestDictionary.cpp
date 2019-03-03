@@ -7,6 +7,15 @@
 
 int main(){
     TxtDictionary dictionary = TxtDictionary("turkish_dictionary.txt", Comparator::TURKISH);
-    Trie trie = dictionary.prepareTrie();
-    unordered_set<Word*> words = trie.getWordsWithPrefix("ab");
+    Trie* trie = dictionary.prepareTrie();
+    string input = "a";
+    while (input.length() < 10){
+        cout << "->";
+        cin >> input;
+        unordered_set<Word*> words = trie->getWordsWithPrefix(input);
+        for (auto word : words){
+            cout << word->getName() << "\n";
+        }
+    }
+    delete trie;
 }

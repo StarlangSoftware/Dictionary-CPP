@@ -250,18 +250,18 @@ void TxtDictionary::saveAsTxt(string filename) {
  * @param root the substring of the word whose last one or two chars are omitted from the word to bo softed.
  * @param word the original word.
  */
-void TxtDictionary::addWordWhenRootSoften(Trie& trie, string last, string root, TxtWord *word) {
+void TxtDictionary::addWordWhenRootSoften(Trie* trie, string last, string root, TxtWord *word) {
     if (last == "p"){
-        trie.addWord(root + 'b', word);
+        trie->addWord(root + 'b', word);
     } else {
         if (last == "ç"){
-            trie.addWord(root + 'c', word);
+            trie->addWord(root + 'c', word);
         } else {
             if (last == "t"){
-                trie.addWord(root + 'd', word);
+                trie->addWord(root + 'd', word);
             } else {
                 if (last == "k" || last == "g"){
-                    trie.addWord(root + "ğ", word);
+                    trie->addWord(root + "ğ", word);
                 }
             }
         }
@@ -290,15 +290,15 @@ void TxtDictionary::addWordWhenRootSoften(Trie& trie, string last, string root, 
  * @param currentDictionary the dictionary that Trie will be created.
  * @return the resulting Trie.
  */
-Trie TxtDictionary::prepareTrie() {
-    Trie result = Trie();
+Trie* TxtDictionary::prepareTrie() {
+    Trie* result = new Trie();
     string root, rootWithoutLast, rootWithoutLastTwo;
     string last, lastBefore = " ";
     for (int i = 0; i < size(); i++) {
         TxtWord* word = (TxtWord*) getWord(i);
         root = word->getName();
         if (root == "ben") {
-            result.addWord("bana", word);
+            result->addWord("bana", word);
         }
         rootWithoutLast = Word::substringExceptLastChar(root);
         if (root.length() > 1) {
@@ -310,57 +310,57 @@ Trie TxtDictionary::prepareTrie() {
             lastBefore = Word::charAt(root, Word::size(root) - 2);
         }
         last = Word::lastChar(root);
-        result.addWord(root, word);
+        result->addWord(root, word);
         if (word->lastIdropsDuringSuffixation() || word->lastIdropsDuringPassiveSuffixation()) {
             if (word->rootSoftenDuringSuffixation()) {
                 addWordWhenRootSoften(result, last, rootWithoutLastTwo, word);
             } else {
-                result.addWord(rootWithoutLastTwo + last, word);
+                result->addWord(rootWithoutLastTwo + last, word);
             }
         }
         // NominalRootNoPossesive
         if (word->isPortmanteauEndingWithSI()) {
-            result.addWord(rootWithoutLastTwo, word);
+            result->addWord(rootWithoutLastTwo, word);
         }
         if (word->rootSoftenDuringSuffixation()) {
             addWordWhenRootSoften(result, last, rootWithoutLast, word);
         }
         if (word->isPortmanteau()) {
             if (word->isPortmanteauFacedVowelEllipsis()){
-                result.addWord(rootWithoutLastTwo + last + lastBefore, word);
+                result->addWord(rootWithoutLastTwo + last + lastBefore, word);
             } else {
                 if (word->isPortmanteauFacedSoftening()){
                     if (lastBefore == "b"){
-                        result.addWord(rootWithoutLastTwo + "p", word);
+                        result->addWord(rootWithoutLastTwo + "p", word);
                     } else {
                         if (lastBefore == "c"){
-                            result.addWord(rootWithoutLastTwo + "ç", word);
+                            result->addWord(rootWithoutLastTwo + "ç", word);
                         } else {
                             if (lastBefore == "d"){
-                                result.addWord(rootWithoutLastTwo + "t", word);
+                                result->addWord(rootWithoutLastTwo + "t", word);
                             } else {
                                 if (lastBefore == "ğ"){
-                                    result.addWord(rootWithoutLastTwo + "k", word);
+                                    result->addWord(rootWithoutLastTwo + "k", word);
                                 }
                             }
                         }
                     }
                 } else {
-                    result.addWord(rootWithoutLast, word);
+                    result->addWord(rootWithoutLast, word);
                 }
             }
         }
         if (word->vowelEChangesToIDuringYSuffixation() || word->vowelAChangesToIDuringYSuffixation()) {
             if (last == "e"){
-                result.addWord(rootWithoutLast, word);
+                result->addWord(rootWithoutLast, word);
             } else {
                 if (last == "a"){
-                    result.addWord(rootWithoutLast, word);
+                    result->addWord(rootWithoutLast, word);
                 }
             }
         }
         if (word->endingKChangesIntoG()) {
-            result.addWord(rootWithoutLast + "g", word);
+            result->addWord(rootWithoutLast + "g", word);
         }
     }
     return result;
