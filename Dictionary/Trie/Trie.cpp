@@ -77,8 +77,3 @@ TxtWord *Trie::getCompoundWordStartingWith(string hash) {
     }
     return nullptr;
 }
-
-Trie::~Trie() {
-    TrieNode* current = rootNode;
-    delete current;
-}

@@ -17,7 +17,11 @@ private:
     void addWord(string word, unsigned long index, Word* root);
 public:
     TrieNode();
-    ~TrieNode();
+    ~TrieNode(){
+        for (auto& child : children){
+            delete child.second;
+        }
+    }
     void addWord(string word, Word* root);
     TrieNode* getChild(string ch);
     bool childExists(string ch);

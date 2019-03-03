@@ -14,7 +14,10 @@ private:
     TrieNode* rootNode;
 public:
     Trie();
-    ~Trie();
+    ~Trie(){
+        TrieNode* current = rootNode;
+        delete current;
+    }
     void addWord(string word, Word* root);
     unordered_set<Word*> getWordsWithPrefix(string surfaceForm);
     TxtWord* getCompoundWordStartingWith(string hash);

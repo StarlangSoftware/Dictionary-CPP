@@ -71,9 +71,3 @@ unordered_set<Word*> TrieNode::getWords() {
 bool TrieNode::childExists(string ch) {
     return children.find(ch) != children.end();
 }
-
-TrieNode::~TrieNode() {
-    for (auto& child : children){
-        delete child.second;
-    }
-}
