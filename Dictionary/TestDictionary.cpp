@@ -4,18 +4,12 @@
 
 #include <iostream>
 #include "TxtDictionary.h"
+#include "../Language/TurkishLanguage.h"
 
 int main(){
-    TxtDictionary dictionary = TxtDictionary("turkish_dictionary.txt", Comparator::TURKISH);
-    Trie* trie = dictionary.prepareTrie();
-    string input = "a";
-    while (input.length() < 10){
-        cout << "->";
-        cin >> input;
-        unordered_set<Word*> words = trie->getWordsWithPrefix(input);
-        for (auto word : words){
-            cout << word->getName() << "\n";
-        }
+    //TxtDictionary dictionary = TxtDictionary("turkish_dictionary.txt", Comparator::TURKISH);
+    string text = "abcçdefgğhıijklmnoöprsştuüvyzABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
+    for (int i = 0; i < Word::size(text); i++){
+        cout << Word::charAt(text, i) << " " << TurkishLanguage::isVowel(Word::charAt(text, i)) << "\n";
     }
-    delete trie;
 }
