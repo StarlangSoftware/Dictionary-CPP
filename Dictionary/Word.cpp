@@ -234,6 +234,9 @@ vector<string> Word::split(string line) {
 }
 
 bool Word::endsWith(string largeString, string smallString) {
+    if (largeString.size() < smallString.size()){
+        return false;
+    }
     return largeString.find(smallString, largeString.size() - smallString.size()) == largeString.size() - smallString.size();
 }
 
