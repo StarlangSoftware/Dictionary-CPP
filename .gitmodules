@@ -1,0 +1,3 @@
+[submodule "library/Math-CPP"]
+	path = library/Math-CPP
+	url = https://github.com/olcaytaner/Math-CPP.git
