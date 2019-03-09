@@ -1,10 +1,11 @@
 //
 // Created by Olcay Taner Yıldız on 2.01.2019.
 //
-#include<clocale>
+#include <clocale>
 #include <locale>
 #include <iostream>
 #include <map>
+#include <algorithm>
 #include "Dictionary.h"
 
 /**
