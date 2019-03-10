@@ -6,6 +6,8 @@
 #define DICTIONARY_WORD_H
 
 #include <string>
+#include <vector>
+
 using namespace std;
 
 class Word {

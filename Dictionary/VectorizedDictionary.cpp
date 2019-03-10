@@ -4,6 +4,7 @@
 
 #include <cfloat>
 #include <cmath>
+#include <algorithm>
 #include "VectorSizeMismatch.h"
 #include "VectorizedDictionary.h"
 
