@@ -303,6 +303,21 @@ string Word::toLowerCase(string surfaceForm){
     return result;
 }
 
+vector<string> Word::allCharacters(string surfaceForm){
+    vector<string> result;
+    string ch;
+    const char* charPtr = surfaceForm.c_str();
+    do{
+        ch += *charPtr;
+        charPtr++;
+        if ((*charPtr & 0xC0) != 0x80){
+            result.emplace_back(ch);
+            ch = "";
+        }
+    } while (*charPtr);
+    return result;
+}
+
 string Word::charAt(string surfaceForm, int index) {
     const char* charPtr = surfaceForm.c_str();
     string result;

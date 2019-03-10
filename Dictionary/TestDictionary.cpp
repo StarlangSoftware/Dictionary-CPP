@@ -8,8 +8,9 @@
 
 int main(){
     //TxtDictionary dictionary = TxtDictionary("turkish_dictionary.txt", Comparator::TURKISH);
-    string text = "abcçdefgğhıijklmnoöprsştuüvyzABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
-    for (int i = 0; i < Word::size(text); i++){
-        cout << Word::charAt(text, i) << " " << TurkishLanguage::isVowel(Word::charAt(text, i)) << "\n";
+    string text = "çöğüşıabcçdefgğhıijklmnoöprsştuüvyzABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
+    vector<string> allChar = Word::allCharacters(text);
+    for (string s : allChar){
+        cout << s << "\n";
     }
 }
