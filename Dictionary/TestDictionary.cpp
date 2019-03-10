@@ -9,8 +9,8 @@
 int main(){
     //TxtDictionary dictionary = TxtDictionary("turkish_dictionary.txt", Comparator::TURKISH);
     string text = "çöğüşıabcçdefgğhıijklmnoöprsştuüvyzABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
-    vector<string> allChar = Word::allCharacters(text);
-    for (string s : allChar){
-        cout << s << "\n";
+    string* allChar = Word::allCharacters(text);
+    for (int i = 0; i < Word::size(text); i++){
+        cout << allChar[i] << "\n";
     }
 }
