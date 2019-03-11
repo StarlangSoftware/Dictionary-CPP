@@ -355,7 +355,7 @@ string Word::substring(string surfaceForm, int index, int length){
     const char* charPtr = surfaceForm.c_str();
     string result;
     int current = 0, currentLength = 0;
-    if (length == 0 || index < 0){
+    if (length <= 0 || index < 0){
         return "";
     }
     while (*charPtr){
