@@ -355,7 +355,7 @@ string Word::substring(string surfaceForm, int index, int length){
     const char* charPtr = surfaceForm.c_str();
     string result;
     int current = 0, currentLength = 0;
-    if (length == 0){
+    if (length == 0 || index < 0){
         return "";
     }
     while (*charPtr){
@@ -368,6 +368,27 @@ string Word::substring(string surfaceForm, int index, int length){
                         currentLength++;
                     }
                 } while (currentLength < length && *charPtr);
+                return result;
+            } else {
+                current++;
+            }
+        }
+        charPtr++;
+    }
+    return "";
+}
+
+string Word::substring(string surfaceForm, int index){
+    const char* charPtr = surfaceForm.c_str();
+    string result;
+    int current = 0;
+    while (*charPtr){
+        if ((*charPtr & 0xC0) != 0x80){
+            if (current == index){
+                do{
+                    result += *charPtr;
+                    charPtr++;
+                } while (*charPtr);
                 return result;
             } else {
                 current++;
