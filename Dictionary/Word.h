@@ -29,6 +29,7 @@ public:
     static bool endsWith(string largeString, string smallString);
     static vector<string> split(string line, string separator);
     static vector<string> split(string line);
+    static string replaceAll(string str, string from, string to);
     static int size(string surfaceForm);
     static string toLowerCase(string surfaceForm);
     static string lastChar(string surfaceForm);
