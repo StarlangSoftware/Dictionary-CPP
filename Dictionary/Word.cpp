@@ -435,3 +435,21 @@ string Word::replaceAll(string str, string from, string to) {
     }
     return str;
 }
+
+string Word::trim(string str) {
+    string result;
+    int start = -1, end = -1;
+    for (int i = 0; i < str.size(); i++){
+        if (str[i] != ' '){
+            start = i;
+            break;
+        }
+    }
+    for (int i = str.size() - 1; i >= 0; i--){
+        if (str[i] != ' '){
+            end = i;
+            break;
+        }
+    }
+    return str.substr(start, end - start + 1);
+}
