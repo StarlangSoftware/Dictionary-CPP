@@ -181,6 +181,12 @@ void TxtDictionary::mergeDictionary(string secondFilename, string mergedFilename
             }
         }
     }
+    if (firstfile.good() && !secondfile.good()) {
+        while (firstfile.good()) {
+            getline(firstfile, st1);
+            outfile << st1 + "\n";
+        }
+    }
     if (!firstfile.good() && secondfile.good()) {
         while (secondfile.good()) {
             getline(secondfile, st2);
