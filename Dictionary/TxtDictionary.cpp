@@ -22,6 +22,22 @@ TxtDictionary::TxtDictionary(string filename, Comparator comparator) : Dictionar
 }
 
 /**
+ * Another constructor of {@link TxtDictionary} class which takes a String filename, a {@link WordComparator} and
+ * a misspelled word dictionary file as inputs. And calls its super class {@link Dictionary} with given
+ * {@link WordComparator}, assigns given filename input to the filename variable. Then, it calls loadFromText
+ * method with given filename. It also loads the misspelling file.
+ *
+ * @param fileName   String input.
+ * @param comparator {@link WordComparator} input.
+ * @param misspelledFileName String input.
+ */
+TxtDictionary::TxtDictionary(string filename, Comparator comparator, string misspelledFileName) {
+    loadFromText(filename);
+    this->filename = move(filename);
+    loadMisspelledWords(misspelledFileName);
+}
+
+/**
  * The clone method which creates new {@link TxtDictionary} object with filename and comparator variables.
  *
  * @return new {@link TxtDictionary} object.
@@ -370,4 +386,37 @@ Trie* TxtDictionary::prepareTrie() {
         }
     }
     return result;
+}
+
+/**
+ * The loadMisspellWords method takes a String filename as an input. It reads given file line by line and splits
+ * according to space and assigns each word with its misspelled form to the the misspelledWords hashMap.
+ *
+ * @param filename File name input.
+ */
+void TxtDictionary::loadMisspelledWords(const string& filename) {
+    int i;
+    string line;
+    ifstream inputFile;
+    inputFile.open(filename, ifstream :: in);
+    while (inputFile.good()) {
+        getline(inputFile, line);
+        vector<string> tokens = Word::split(line);
+        if (tokens.size() == 2) {
+            misspelledWords.emplace(tokens[0], tokens[1]);
+        }
+    }
+    inputFile.close();
+}
+
+/**
+ * The getCorrectForm returns the correct form of a misspelled word.
+ * @param misspelledWord Misspelled form.
+ * @return Correct form.
+ */
+string TxtDictionary::getCorrectForm(const string& misspelledWord) {
+    if (misspelledWords.find(misspelledWord) != misspelledWords.end()){
+        return misspelledWords.find(misspelledWord)->second;
+    }
+    return "";
 }
