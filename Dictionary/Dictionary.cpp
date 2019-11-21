@@ -158,6 +158,26 @@ Word* Dictionary::getWord(string name) {
     return nullptr;
 }
 
+/**
+ * RemoveWord removes a word with the given name
+ * @param name Name of the word to be removed.
+ */
+void Dictionary::removeWord(string name) {
+    if (wordExists(name)){
+        vector<Word*>::iterator middle;
+        switch (comparator){
+            case Comparator::ENGLISH:
+                middle = lower_bound(words.begin(), words.end(), new Word(name));
+                words.erase(middle);
+                break;
+            case Comparator::TURKISH:
+            case Comparator::TURKISH_NO_CASE:
+                middle = lower_bound(words.begin(), words.end(), new Word(name), turkishWordComparator(comparatorMap));
+                words.erase(middle);
+        }
+    }
+}
+
 bool Dictionary::wordExists(string name) {
     bool result;
     switch (comparator){
