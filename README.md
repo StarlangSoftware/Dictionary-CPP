@@ -1,4 +1,6 @@
-# Dictionary-CPP
+# Dictionary
+
+This resource is a dictionary of Modern Turkish, comprised of the definitions of over 50.000 individual entries. Each entry is matched with its corresponding synset (set of synonymous words and expressions) in the Turkish WordNet, KeNet.
 
 For Developers
 ============
