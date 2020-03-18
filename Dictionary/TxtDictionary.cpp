@@ -31,7 +31,7 @@ TxtDictionary::TxtDictionary(string filename, Comparator comparator) : Dictionar
  * @param comparator {@link WordComparator} input.
  * @param misspelledFileName String input.
  */
-TxtDictionary::TxtDictionary(string filename, Comparator comparator, string misspelledFileName) {
+TxtDictionary::TxtDictionary(string filename, Comparator comparator, const string misspelledFileName) {
     loadFromText(filename);
     this->filename = move(filename);
     loadMisspelledWords(misspelledFileName);
