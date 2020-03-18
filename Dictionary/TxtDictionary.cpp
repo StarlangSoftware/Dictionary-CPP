@@ -43,7 +43,7 @@ TxtDictionary::TxtDictionary(string filename, Comparator comparator, string miss
  * @return new {@link TxtDictionary} object.
  */
 TxtDictionary TxtDictionary::clone() {
-    return TxtDictionary(filename, comparator);
+    return TxtDictionary(filename, comparator, "turkish_misspellings.txt");
 }
 
 /**
