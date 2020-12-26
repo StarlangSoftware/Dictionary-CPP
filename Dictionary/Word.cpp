@@ -80,7 +80,8 @@ bool Word::startsWith(string largeString, string smallString) {
  * @return true if the character at first index of surfaceForm is a capital letter, false otherwise.
  */
 bool Word::isCapital(string surfaceForm) {
-    return TurkishLanguage::UPPERCASE_LETTERS.find_first_of(Word::charAt(surfaceForm, 0)) != -1;
+    string ch = Word::charAt(surfaceForm, 0);
+    return TurkishLanguage::UPPERCASE_LETTERS.find(ch) != -1;
 }
 
 /**
@@ -160,7 +161,7 @@ bool Word::isPunctuation() {
  */
 bool Word::isTime(string surfaceForm) {
     string lowercase = move(surfaceForm);
-    std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
+    lowercase = Word::toLowerCase(lowercase);
     if (std::regex_search(lowercase, std::regex("(\\d\\d|\\d):(\\d\\d|\\d):(\\d\\d|\\d)")) || std::regex_search(lowercase, std::regex("(\\d\\d|\\d):(\\d\\d|\\d)"))) {
         return true;
     }
