@@ -263,7 +263,7 @@ string Word::toLowerCase(string surfaceForm){
                 currentChar += *charPtr;
                 charPtr++;
             } while ((*charPtr & 0xC0) == 0x80);
-            if (currentChar == "ç" || currentChar == "ö" || currentChar == "ğ" || currentChar == "ü" || currentChar == "ş" || currentChar == "ı"){
+            if (currentChar == "ç" || currentChar == "ö" || currentChar == "ğ" || currentChar == "ü" || currentChar == "ş" || currentChar == "ı" || currentChar == "â" || currentChar == "û" || currentChar == "î"){
                 result += currentChar;
             } else {
                 if (currentChar == "Ç"){
@@ -287,7 +287,82 @@ string Word::toLowerCase(string surfaceForm){
                                         if (currentChar == "I"){
                                             result += "ı";
                                         } else {
-                                            result += tolower(currentChar[0]);
+                                            if (currentChar == "Â"){
+                                                result += "â";
+                                            } else {
+                                                if (currentChar == "Î"){
+                                                    result += "î";
+                                                } else {
+                                                    if (currentChar == "Û"){
+                                                        result += "û";
+                                                    } else {
+                                                        result += tolower(currentChar[0]);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            currentChar = "";
+        } else {
+            charPtr++;
+        }
+    }
+    return result;
+}
+
+string Word::toUpperCase(string surfaceForm){
+    const char* charPtr = surfaceForm.c_str();
+    string result;
+    string currentChar;
+    while (*charPtr){
+        if ((*charPtr & 0xC0) != 0x80){
+            do{
+                currentChar += *charPtr;
+                charPtr++;
+            } while ((*charPtr & 0xC0) == 0x80);
+            if (currentChar == "Ç" || currentChar == "Ö" || currentChar == "Ğ" || currentChar == "Ü" || currentChar == "Ş" || currentChar == "I" || currentChar == "İ"){
+                result += currentChar;
+            } else {
+                if (currentChar == "ç"){
+                    result += "Ç";
+                } else {
+                    if (currentChar == "ö"){
+                        result += "Ö";
+                    } else {
+                        if (currentChar == "ğ"){
+                            result += "Ğ";
+                        } else {
+                            if (currentChar == "ü"){
+                                result += "Ü";
+                            } else {
+                                if (currentChar == "ş"){
+                                    result += "Ş";
+                                } else {
+                                    if (currentChar == "i"){
+                                        result += "İ";
+                                    } else {
+                                        if (currentChar == "ı"){
+                                            result += "I";
+                                        } else {
+                                            if (currentChar == "â"){
+                                                result += "Â";
+                                            } else {
+                                                if (currentChar == "î"){
+                                                    result += "Î";
+                                                } else {
+                                                    if (currentChar == "û"){
+                                                        result += "Û";
+                                                    } else {
+                                                        result += toupper(currentChar[0]);
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }

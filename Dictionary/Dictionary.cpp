@@ -47,7 +47,7 @@ Dictionary::Dictionary(Comparator comparator) {
             comparatorMap.emplace("Z", 63);
             break;
         case Comparator ::TURKISH_NO_CASE:
-            comparatorMap.emplace("a", 0);comparatorMap.emplace("â", 0);comparatorMap.emplace("A", 0);
+            comparatorMap.emplace("a", 0);comparatorMap.emplace("â", 0);comparatorMap.emplace("A", 0);comparatorMap.emplace("Â", 0);
             comparatorMap.emplace("b", 1);comparatorMap.emplace("B", 1);
             comparatorMap.emplace("c", 2);comparatorMap.emplace("C", 2);
             comparatorMap.emplace("ç", 3);comparatorMap.emplace("Ç", 3);
@@ -58,7 +58,7 @@ Dictionary::Dictionary(Comparator comparator) {
             comparatorMap.emplace("ğ", 8);comparatorMap.emplace("Ğ", 8);
             comparatorMap.emplace("h", 9);comparatorMap.emplace("H", 9);
             comparatorMap.emplace("ı", 10);comparatorMap.emplace("I", 10);
-            comparatorMap.emplace("i", 11);comparatorMap.emplace("î", 11);comparatorMap.emplace("İ", 11);
+            comparatorMap.emplace("i", 11);comparatorMap.emplace("î", 11);comparatorMap.emplace("İ", 11);comparatorMap.emplace("Î", 11);
             comparatorMap.emplace("j", 12);comparatorMap.emplace("J", 12);
             comparatorMap.emplace("k", 13);comparatorMap.emplace("K", 13);
             comparatorMap.emplace("l", 14);comparatorMap.emplace("L", 14);
@@ -73,7 +73,7 @@ Dictionary::Dictionary(Comparator comparator) {
             comparatorMap.emplace("ş", 23);comparatorMap.emplace("Ş", 23);
             comparatorMap.emplace("t", 24);comparatorMap.emplace("T", 24);
             comparatorMap.emplace("u", 25);comparatorMap.emplace("U", 25);
-            comparatorMap.emplace("ü", 26);comparatorMap.emplace("û", 26);comparatorMap.emplace("Ü", 26);
+            comparatorMap.emplace("ü", 26);comparatorMap.emplace("û", 26);comparatorMap.emplace("Ü", 26);comparatorMap.emplace("Û", 26);
             comparatorMap.emplace("v", 27);comparatorMap.emplace("V", 27);
             comparatorMap.emplace("w", 28);comparatorMap.emplace("W", 28);
             comparatorMap.emplace("x", 29);comparatorMap.emplace("X", 29);

@@ -87,6 +87,14 @@ TEST_CASE("WordTest-testIsOrganization") {
     REQUIRE_FALSE(!Word::isOrganization("Co."));
 }
 
+TEST_CASE("WordTest-testToLowerCase") {
+    REQUIRE(Word::toLowerCase("ABCDEFGHJKLMNOPQRSTUVWXYZÇÖĞÜŞIİ") == "abcdefghjklmnopqrstuvwxyzçöğüşıi");
+}
+
+TEST_CASE("WordTest-testToUpperCase") {
+    REQUIRE(Word::toUpperCase("abcdefghjklmnopqrstuvwxyzçöğüşıi") == "ABCDEFGHJKLMNOPQRSTUVWXYZÇÖĞÜŞIİ");
+}
+
 TEST_CASE("WordTest-testIsMoney") {
     REQUIRE_FALSE(!Word::isMoney("dolar"));
     REQUIRE_FALSE(!Word::isMoney("sterlin"));
