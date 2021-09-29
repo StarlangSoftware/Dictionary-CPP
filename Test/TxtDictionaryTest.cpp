@@ -2,6 +2,7 @@
 // Created by Olcay Taner YILDIZ on 26.12.2020.
 //
 
+#include <iostream>
 #include "catch.hpp"
 #include "../Dictionary/TxtDictionary.h"
 
@@ -36,4 +37,11 @@ TEST_CASE("DictionaryTest-testPrepareTrie") {
     REQUIRE_FALSE(notContains(trie->getWordsWithPrefix("dışlıyor"), new Word("dışla")));
     REQUIRE_FALSE(notContains(trie->getWordsWithPrefix("fiyongu"), new Word("fiyonk")));
     REQUIRE_FALSE(notContains(trie->getWordsWithPrefix("gongu"), new Word("gonk")));
+}
+
+TEST_CASE("DictionaryTest-testDictionary") {
+    TxtDictionary dictionary = TxtDictionary();
+    for (int i = 0; i < dictionary.size(); i++){
+        REQUIRE_FALSE(dictionary.getWord(dictionary.getWord(i)->getName()) == nullptr);
+    }
 }
