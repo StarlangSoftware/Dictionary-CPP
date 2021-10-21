@@ -14,6 +14,7 @@ TEST_CASE("DictionaryTest-testPrepareTrie") {
     TxtDictionary dictionary = TxtDictionary();
     Trie* trie = dictionary.prepareTrie();
     REQUIRE_FALSE(notContains(trie->getWordsWithPrefix("bana"), new Word("ben")));
+    REQUIRE_FALSE(notContains(trie->getWordsWithPrefix("sana"), new Word("sen")));
     REQUIRE_FALSE(notContains(trie->getWordsWithPrefix("metni"), new Word("metin")));
     REQUIRE_FALSE(notContains(trie->getWordsWithPrefix("ağzı"), new Word("ağız")));
     REQUIRE_FALSE(notContains(trie->getWordsWithPrefix("ayrıldı"), new Word("ayır")));

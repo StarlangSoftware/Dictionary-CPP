@@ -50,7 +50,7 @@ TEST_CASE("TxtWordTest-testIsNominal") {
             count++;
         }
     }
-    REQUIRE(30601 == count);
+    REQUIRE(30603 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsPassive") {
@@ -86,7 +86,7 @@ TEST_CASE("TxtWordTest-testIsInterjection") {
             count++;
         }
     }
-    REQUIRE(104 == count);
+    REQUIRE(106 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsDuplicate") {
@@ -110,7 +110,7 @@ TEST_CASE("TxtWordTest-testIsAdjective") {
             count++;
         }
     }
-    REQUIRE(9679 == count);
+    REQUIRE(9687 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsPronoun") {
@@ -146,7 +146,7 @@ TEST_CASE("TxtWordTest-testIsVerb") {
             count++;
         }
     }
-    REQUIRE(5042 == count);
+    REQUIRE(5043 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsPortmanteau") {
@@ -182,7 +182,7 @@ TEST_CASE("TxtWordTest-testIsConjunction") {
             count++;
         }
     }
-    REQUIRE(51 == count);
+    REQUIRE(52 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsAdverb") {
@@ -266,7 +266,7 @@ TEST_CASE("TxtWordTest-testIsProperNoun") {
             count++;
         }
     }
-    REQUIRE(19012 == count);
+    REQUIRE(19014 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsPlural") {
@@ -326,7 +326,7 @@ TEST_CASE("TxtWordTest-testRootSoftenDuringSuffixation") {
             count++;
         }
     }
-    REQUIRE(5529 == count);
+    REQUIRE(5530 == count);
 }
 
 TEST_CASE("TxtWordTest-testRootSoftenAndNotSoftenDuringSuffixation") {
@@ -362,7 +362,7 @@ TEST_CASE("TxtWordTest-testNounSoftenDuringSuffixation") {
             count++;
         }
     }
-    REQUIRE(5443 == count);
+    REQUIRE(5444 == count);
 }
 
 TEST_CASE("TxtWordTest-testEndingKChangesIntoG") {
@@ -482,7 +482,7 @@ TEST_CASE("TxtWordTest-testVowelAChangesToIDuringYSuffixation") {
             count++;
         }
     }
-    REQUIRE(1300 == count);
+    REQUIRE(1301 == count);
 }
 
 TEST_CASE("TxtWordTest-testVowelEChangesToIDuringYSuffixation") {

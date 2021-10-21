@@ -33,7 +33,7 @@ TEST_CASE("DictionaryTest-testSize") {
     TxtDictionary dictionary = TxtDictionary();
     REQUIRE(29 == lowerCaseDictionary.size());
     REQUIRE(58 == mixedCaseDictionary.size());
-    REQUIRE(62116 == dictionary.size());
+    REQUIRE(62120 == dictionary.size());
 }
 
 TEST_CASE("DictionaryTest-testGetWord") {

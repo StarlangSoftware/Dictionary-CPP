@@ -322,6 +322,9 @@ Trie* TxtDictionary::prepareTrie() {
         if (root == "ben") {
             result->addWord("bana", word);
         }
+        if (root == "sen") {
+            result->addWord("sana", word);
+        }
         rootWithoutLast = Word::substringExceptLastChar(root);
         if (root.length() > 1) {
             rootWithoutLastTwo = Word::substringExceptLastTwoChars(root);
