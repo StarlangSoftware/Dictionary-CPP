@@ -73,6 +73,78 @@ bool Word::startsWith(string largeString, string smallString) {
 }
 
 /**
+ * The beforeLastVowel method takes a {@link String} stem as an input. It loops through the given stem and returns
+ * the second last vowel.
+ *
+ * @param stem String input.
+ * @return the last vowel.
+ */
+string Word::beforeLastVowel(string stem) {
+    int before = 1;
+    string ch, last = "0";
+    string* stemChars = Word::allCharacters(stem);
+    for (int i = Word::size(stem) - 1; i >= 0; i--) {
+        ch = stemChars[i];
+        if (TurkishLanguage::isVowel(ch)) {
+            if (before == 1) {
+                last = ch;
+                before--;
+                continue;
+            }
+            delete[] stemChars;
+            return ch;
+        }
+    }
+    delete[] stemChars;
+    return last;
+}
+
+/**
+ * The lastVowel method takes a {@link String} stem as an input. It loops through the given stem and returns
+ * the last vowel.
+ *
+ * @param stem String input.
+ * @return the last vowel.
+ */
+string Word::lastVowel(string stem) {
+    string ch;
+    string* stemChars = Word::allCharacters(stem);
+    for (int i = Word::size(stem) - 1; i >= 0; i--) {
+        ch = stemChars[i];
+        if (TurkishLanguage::isVowel(ch)) {
+            delete[] stemChars;
+            return ch;
+        }
+    }
+    for (int i = Word::size(stem) - 1; i >= 0; i--) {
+        ch = stemChars[i];
+        if (ch >= "0" && ch <= "9") {
+            delete[] stemChars;
+            return ch;
+        }
+    }
+    delete[] stemChars;
+    return "0";
+}
+
+/**
+ * The lastPhoneme method takes a {@link String} stem as an input. It then returns the last phoneme of the given stem.
+ *
+ * @param stem String input.
+ * @return the last phoneme.
+ */
+string Word::lastPhoneme(string stem) {
+    if (stem.empty()) {
+        return " ";
+    }
+    if (Word::lastChar(stem) != "'") {
+        return Word::lastChar(stem);
+    } else {
+        return Word::charAt(stem, Word::size(stem) - 2);
+    }
+}
+
+/**
  * The isCapital method takes a String surfaceForm as an input and returns true if the character at first index of surfaceForm
  * is a capital letter, false otherwise.
  *
