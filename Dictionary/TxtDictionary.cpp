@@ -418,7 +418,7 @@ void TxtDictionary::loadMisspelledWords(const string& filename) {
  * @return Correct form.
  */
 string TxtDictionary::getCorrectForm(const string& misspelledWord) {
-    if (misspelledWords.find(misspelledWord) != misspelledWords.end()){
+    if (misspelledWords.contains(misspelledWord)){
         return misspelledWords.find(misspelledWord)->second;
     }
     return "";

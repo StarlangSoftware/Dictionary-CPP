@@ -62,7 +62,7 @@ void TxtWord::removeFlag(string flag) {
  * @return true if flags {@link unordered_set} contains flag.
  */
 bool TxtWord::containsFlag(string flag) {
-    return flags.find(flag) != flags.end();
+    return flags.contains(flag);
 }
 
 /**

@@ -128,7 +128,7 @@ struct turkishWordComparator{
                     charPtr2++;
                 } while ((*charPtr2 & 0xC0) == 0x80);
             }
-            if (comparatorMap.find(char1) != comparatorMap.end() && comparatorMap.find(char2) != comparatorMap.end()){
+            if (comparatorMap.contains(char1) && comparatorMap.contains(char2)){
                 int index1 = comparatorMap.at(char1), index2 = comparatorMap.at(char2);
                 if (index1 < index2){
                     return true;

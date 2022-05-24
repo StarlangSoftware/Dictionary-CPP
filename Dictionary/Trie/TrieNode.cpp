@@ -30,7 +30,7 @@ void TrieNode::addWord(string word, unsigned long index, Word* root) {
         return;
     }
     string ch = Word::charAt(word, index);
-    if (children.find(ch) != children.end()) {
+    if (children.contains(ch)) {
         child = children.find(ch)->second;
     } else {
         child = new TrieNode();
@@ -69,5 +69,5 @@ unordered_set<Word*> TrieNode::getWords() {
 }
 
 bool TrieNode::childExists(string ch) {
-    return children.find(ch) != children.end();
+    return children.contains(ch);
 }

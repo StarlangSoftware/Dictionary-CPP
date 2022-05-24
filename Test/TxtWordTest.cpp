@@ -11,7 +11,7 @@ TEST_CASE("TxtWordTest-testVerbType") {
     for (int i = 0; i < dictionary.size(); i++){
         auto* word = (TxtWord*) dictionary.getWord(i);
         string verbType = word->verbType();
-        if (verbs.find(verbType) != verbs.end()){
+        if (verbs.contains(verbType)){
             verbs[verbType] = verbs[verbType] + 1;
         } else {
             verbs[verbType] = 1;
@@ -346,7 +346,7 @@ TEST_CASE("TxtWordTest-testVerbSoftenDuringSuffixation") {
     int count = 0;
     for (int i = 0; i < dictionary.size(); i++){
         auto* word = (TxtWord*) dictionary.getWord(i);
-        if (word->rootSoftenAndNotSoftenDuringSuffixation()){
+        if (word->verbSoftenDuringSuffixation()){
             count++;
         }
     }
