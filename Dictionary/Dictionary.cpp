@@ -245,6 +245,15 @@ struct turkishWordComparator{
     bool operator() (Word* wordA, Word* wordB){
         const char* charPtr1 = wordA->getName().c_str();
         const char* charPtr2 = wordB->getName().c_str();
+        if (wordA->getName() == wordB->getName()){
+            return false;
+        }
+        if (wordB->getName().starts_with(wordA->getName())){
+            return true;
+        }
+        if (wordA->getName().starts_with(wordB->getName())){
+            return false;
+        }
         while (*charPtr1 && *charPtr2){
             string char1;
             if ((*charPtr1 & 0xC0) != 0x80){
@@ -273,7 +282,6 @@ struct turkishWordComparator{
                 return true;
             }
         }
-        return *charPtr2;
     }
 };
 
