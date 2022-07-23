@@ -30,7 +30,7 @@ TEST_CASE("DictionaryTest") {
     SECTION("testSize"){
         REQUIRE(29 == lowerCaseDictionary.size());
         REQUIRE(58 == mixedCaseDictionary.size());
-        REQUIRE(62120 == dictionary.size());
+        REQUIRE(62113 == dictionary.size());
     }
     SECTION("testGetWord"){
         REQUIRE("a" == lowerCaseDictionary.getWord(0)->getName());
