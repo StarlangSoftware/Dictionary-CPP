@@ -50,7 +50,7 @@ TEST_CASE("TxtWordTest-testIsNominal") {
             count++;
         }
     }
-    REQUIRE(30603 == count);
+    REQUIRE(30598 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsPassive") {
@@ -110,7 +110,7 @@ TEST_CASE("TxtWordTest-testIsAdjective") {
             count++;
         }
     }
-    REQUIRE(9687 == count);
+    REQUIRE(9686 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsPronoun") {
@@ -158,7 +158,7 @@ TEST_CASE("TxtWordTest-testIsPortmanteau") {
             count++;
         }
     }
-    REQUIRE(1294 == count);
+    REQUIRE(1292 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsDeterminer") {
@@ -218,7 +218,7 @@ TEST_CASE("TxtWordTest-testIsPortmanteauEndingWithSI") {
             count++;
         }
     }
-    REQUIRE(178 == count);
+    REQUIRE(177 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsPortmanteauFacedVowelEllipsis") {
@@ -242,7 +242,7 @@ TEST_CASE("TxtWordTest-testIsPortmanteauFacedSoftening") {
             count++;
         }
     }
-    REQUIRE(348 == count);
+    REQUIRE(347 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsSuffix") {
@@ -266,7 +266,7 @@ TEST_CASE("TxtWordTest-testIsProperNoun") {
             count++;
         }
     }
-    REQUIRE(19014 == count);
+    REQUIRE(19013 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsPlural") {
