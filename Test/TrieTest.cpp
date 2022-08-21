@@ -4,8 +4,8 @@
 
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
-#include "../Dictionary/Trie/Trie.h"
-#include "../Dictionary/TxtDictionary.h"
+#include "../src/Dictionary/Trie/Trie.h"
+#include "../src/Dictionary/TxtDictionary.h"
 #include <unordered_set>
 using namespace std;
 

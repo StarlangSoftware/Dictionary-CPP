@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "catch.hpp"
-#include "../Dictionary/TxtDictionary.h"
+#include "../src/Dictionary/TxtDictionary.h"
 
 bool notContains(unordered_set<Word*> set, Word* word){
     return set.find(word) != set.end();

@@ -3,7 +3,7 @@
 //
 
 #include "catch.hpp"
-#include "../Dictionary/TxtDictionary.h"
+#include "../src/Dictionary/TxtDictionary.h"
 
 TEST_CASE("TxtWordTest-testVerbType") {
     TxtDictionary dictionary = TxtDictionary();

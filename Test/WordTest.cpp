@@ -3,7 +3,7 @@
 //
 
 #include "catch.hpp"
-#include "../Dictionary/Word.h"
+#include "../src/Dictionary/Word.h"
 
 TEST_CASE("WordTest-testCharCount") {
     Word word = Word("ali");
