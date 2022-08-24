@@ -15,12 +15,15 @@ using namespace std;
 class TxtWord : public Word {
 private:
     unordered_set<string> flags;
+    string morphology;
 public:
     TxtWord(string name);
     TxtWord(string name, string flag);
     void addFlag(string flag);
     TxtWord* clone();
     void removeFlag(string flag);
+    void setMorphology(string morphology);
+    string getMorphology();
     string verbType();
     bool containsFlag(string flag);
     bool samePos(TxtWord word);

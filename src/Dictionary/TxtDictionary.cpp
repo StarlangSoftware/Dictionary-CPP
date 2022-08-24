@@ -31,10 +31,11 @@ TxtDictionary::TxtDictionary(string filename, Comparator comparator) : Dictionar
  * @param comparator {@link WordComparator} input.
  * @param misspelledFileName String input.
  */
-TxtDictionary::TxtDictionary(string filename, Comparator comparator, const string misspelledFileName) : Dictionary(comparator){
+TxtDictionary::TxtDictionary(string filename, Comparator comparator, const string misspelledFileName, const string morphologicalLexicon) : Dictionary(comparator){
     loadFromText(filename);
     this->filename = move(filename);
     loadMisspelledWords(misspelledFileName);
+    loadMorphologicalLexicon(morphologicalLexicon);
 }
 
 /**
@@ -407,6 +408,23 @@ void TxtDictionary::loadMisspelledWords(const string& filename) {
         vector<string> tokens = Word::split(line);
         if (tokens.size() == 2) {
             misspelledWords.emplace(tokens[0], tokens[1]);
+        }
+    }
+    inputFile.close();
+}
+
+void TxtDictionary::loadMorphologicalLexicon(const string& filename) {
+    string line;
+    ifstream inputFile;
+    inputFile.open(filename, ifstream :: in);
+    while (inputFile.good()) {
+        getline(inputFile, line);
+        vector<string> tokens = Word::split(line);
+        if (tokens.size() == 2) {
+            TxtWord* word = (TxtWord*) getWord(tokens[0]);
+            if (word != nullptr){
+                word->setMorphology(tokens[1]);
+            }
         }
     }
     inputFile.close();

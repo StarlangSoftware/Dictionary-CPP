@@ -10,6 +10,17 @@ bool notContains(unordered_set<Word*> set, Word* word){
     return set.find(word) != set.end();
 }
 
+TEST_CASE("DictionaryTest-testMorphology") {
+    TxtDictionary dictionary = TxtDictionary();
+    TxtWord* word;
+    word = (TxtWord*) dictionary.getWord("ab");
+    REQUIRE("ab" == word->getMorphology());
+    word = (TxtWord*) dictionary.getWord("çarpıcılık");
+    REQUIRE("çarp+HcH+lHk" == word->getMorphology());
+    word = (TxtWord*) dictionary.getWord("akışkanlaştırıcı");
+    REQUIRE("ak+Hş+GAn+lAş+DHr+HcH"== word->getMorphology());
+}
+
 TEST_CASE("DictionaryTest-testPrepareTrie") {
     TxtDictionary dictionary = TxtDictionary();
     Trie* trie = dictionary.prepareTrie();

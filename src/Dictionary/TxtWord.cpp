@@ -65,6 +65,14 @@ bool TxtWord::containsFlag(string flag) {
     return flags.contains(flag);
 }
 
+void TxtWord::setMorphology(string morphology){
+    this->morphology = morphology;
+}
+
+string TxtWord::getMorphology(){
+    return this->morphology;
+}
+
 /**
  * The verbType method checks flags {@link unordered_set} and returns the corresponding cases.
  *
