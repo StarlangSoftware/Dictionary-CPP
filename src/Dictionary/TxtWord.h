@@ -32,6 +32,8 @@ public:
     bool isAbbreviation();
     bool isInterjection();
     bool isDuplicate();
+    bool isCode();
+    bool isMetric();
     bool isHeader();
     bool isAdjective();
     bool isPureAdjective();

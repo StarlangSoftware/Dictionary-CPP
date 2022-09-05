@@ -68,7 +68,7 @@ VectorizedWord* VectorizedDictionary::mostSimilarWord(string name) {
  * @return ArrayList result which holds the k-means clustered words.
  */
 vector<Word*>*VectorizedDictionary::kMeansClustering(int iteration, int k) {
-    vector<Word*>* result = new vector<Word*>[k];
+    auto* result = new vector<Word*>[k];
     vector<Vector> means;
     int vectorSize = ((VectorizedWord*) words.at(0))->getVector().getSize();
     for (int i = 0; i < k; i++) {
@@ -90,7 +90,7 @@ vector<Word*>*VectorizedDictionary::kMeansClustering(int iteration, int k) {
             result[j].clear();
         }
         for (Word* word : words) {
-            VectorizedWord* vectorizedWord = (VectorizedWord*) word;
+            auto* vectorizedWord = (VectorizedWord*) word;
             double maxClusterDistance = 0;
             try {
                 maxClusterDistance = means[0].dotProduct(vectorizedWord->getVector());

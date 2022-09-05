@@ -39,7 +39,7 @@ unordered_set<Word*> Trie::getWordsWithPrefix(string surfaceForm) {
             current = current->getChild(ch);
             if (!current->getWords().empty()) {
                 unordered_set<Word*> wordsToBeAdded = current->getWords();
-                words.insert(wordsToBeAdded.begin(), wordsToBeAdded.end());
+                words.merge(wordsToBeAdded);
             }
         } else {
             break;

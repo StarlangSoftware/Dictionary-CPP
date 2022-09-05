@@ -300,6 +300,24 @@ bool TxtWord::isDuplicate() {
 }
 
 /**
+ * The isCode method returns true if flags {@link unordered_set} contains IS_CODE.
+ *
+ * @return true if flags {@link unordered_set} contains IS_CODE.
+ */
+bool TxtWord::isCode() {
+    return containsFlag("IS_CODE");
+}
+
+/**
+ * The isCode method returns true if flags {@link unordered_set} contains IS_METRIC.
+ *
+ * @return true if flags {@link unordered_set} contains IS_METRIC.
+ */
+bool TxtWord::isMetric() {
+    return containsFlag("IS_METRIC");
+}
+
+/**
  * The isHeader method returns true if flags {@link unordered_set} contains IS_HEADER.
  *
  * @return true if flags {@link unordered_set} contains IS_HEADER.
