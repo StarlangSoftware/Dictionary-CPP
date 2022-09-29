@@ -1,11 +1,14 @@
 //
 // Created by Olcay Taner Yıldız on 2.01.2019.
 //
-#include<clocale>
 #include <locale>
-#include <iostream>
 #include <map>
 #include "Dictionary.h"
+
+bool compareWord(Word* wordA, Word* wordB)
+{
+    return wordA->getName() < wordB->getName();
+}
 
 /**
  * An empty constructor of {@link Dictionary} class.
@@ -30,6 +33,7 @@ Dictionary::Dictionary(Comparator comparator) {
         case Comparator ::ENGLISH:
             break;
     }
+    turkishComparator = turkishWordComparator(comparatorMap);
 }
 
 
@@ -45,11 +49,11 @@ Word* Dictionary::getWord(string name) {
         vector<Word*>::iterator middle;
         switch (comparator){
             case Comparator::ENGLISH:
-                middle = lower_bound(words.begin(), words.end(), new Word(name));
+                middle = lower_bound(words.begin(), words.end(), new Word(name), compareWord);
                 break;
             case Comparator::TURKISH:
             case Comparator::TURKISH_NO_CASE:
-                middle = lower_bound(words.begin(), words.end(), new Word(name), turkishWordComparator(comparatorMap));
+                middle = lower_bound(words.begin(), words.end(), new Word(name), turkishComparator);
         }
         return *middle;
     }
@@ -65,7 +69,7 @@ void Dictionary::removeWord(string name) {
         vector<Word*>::iterator middle;
         switch (comparator){
             case Comparator::ENGLISH:
-                middle = lower_bound(words.begin(), words.end(), new Word(name));
+                middle = lower_bound(words.begin(), words.end(), new Word(name), compareWord);
                 words.erase(middle);
                 break;
             case Comparator::TURKISH:
@@ -80,7 +84,7 @@ bool Dictionary::wordExists(string name) {
     bool result;
     switch (comparator){
         case Comparator::ENGLISH:
-            result = binary_search(words.begin(), words.end(), new Word(name));
+            result = binary_search(words.begin(), words.end(), new Word(name), compareWord);
             break;
         case Comparator::TURKISH:
         case Comparator::TURKISH_NO_CASE:
@@ -102,11 +106,11 @@ int Dictionary::getWordIndex(string name) {
         vector<Word*>::iterator middle;
         switch (comparator){
             case Comparator::ENGLISH:
-                middle = lower_bound(words.begin(), words.end(), new Word(name));
+                middle = lower_bound(words.begin(), words.end(), new Word(name), compareWord);
                 break;
             case Comparator::TURKISH:
             case Comparator::TURKISH_NO_CASE:
-                middle = lower_bound(words.begin(), words.end(), new Word(name), turkishWordComparator(comparatorMap));
+                middle = lower_bound(words.begin(), words.end(), new Word(name), turkishComparator);
                 break;
         }
         return middle - words.begin();
@@ -160,11 +164,11 @@ unsigned long Dictionary::getWordStartingWith(string hash) {
     vector<Word*>::iterator middle;
     switch (comparator){
         case Comparator::ENGLISH:
-            middle = lower_bound(words.begin(), words.end(), new Word(hash));
+            middle = lower_bound(words.begin(), words.end(), new Word(hash), compareWord);
             break;
         case Comparator::TURKISH:
         case Comparator::TURKISH_NO_CASE:
-            middle = lower_bound(words.begin(), words.end(), new Word(hash), turkishWordComparator(comparatorMap));
+            middle = lower_bound(words.begin(), words.end(), new Word(hash), turkishComparator);
             break;
     }
     return middle - words.begin();
@@ -173,7 +177,7 @@ unsigned long Dictionary::getWordStartingWith(string hash) {
 void Dictionary::sort() {
     switch (comparator){
         case Comparator::ENGLISH:
-            std::sort(words.begin(), words.end());
+            std::sort(words.begin(), words.end(), compareWord);
             break;
         case Comparator::TURKISH:
         case Comparator::TURKISH_NO_CASE:

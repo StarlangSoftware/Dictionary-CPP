@@ -5,6 +5,7 @@
 #ifndef DICTIONARY_DICTIONARY_H
 #define DICTIONARY_DICTIONARY_H
 
+#include <utility>
 #include<vector>
 #include<map>
 #include <locale>
@@ -17,6 +18,65 @@ enum class Comparator{
     ENGLISH, TURKISH, TURKISH_NO_CASE
 };
 
+struct turkishWordComparator{
+    map<string, int> comparatorMap;
+/**
+ * The wordComparator takes two {@link Word}s as inputs; wordA and wordB and compares their names. Returns the result of this comparison.
+ *
+ * @param wordA Word type input.
+ * @param wordB Word type input.
+ * @return the value {@code 0} if the wordA is equal to the wordB; a value less than {@code 0} if this wordA is
+ * lexicographically less than wordB; and a value greater than {@code 0} if this wordA is lexicographically greater
+ * than wordB.
+ */
+    explicit turkishWordComparator(map<string, int> comparatorMap){
+        this->comparatorMap = std::move(comparatorMap);
+    }
+
+    bool operator() (Word* wordA, Word* wordB){
+        string nameA = wordA->getName();
+        const char* charPtr1 = nameA.c_str();
+        string nameB = wordB->getName();
+        const char* charPtr2 = nameB.c_str();
+        if (wordA->getName() == wordB->getName()){
+            return false;
+        }
+        if (wordB->getName().starts_with(wordA->getName())){
+            return true;
+        }
+        if (wordA->getName().starts_with(wordB->getName())){
+            return false;
+        }
+        while (*charPtr1 && *charPtr2){
+            string char1;
+            if ((*charPtr1 & 0xC0) != 0x80){
+                do{
+                    char1 += *charPtr1;
+                    charPtr1++;
+                } while ((*charPtr1 & 0xC0) == 0x80);
+            }
+            string char2;
+            if ((*charPtr2 & 0xC0) != 0x80){
+                do{
+                    char2 += *charPtr2;
+                    charPtr2++;
+                } while ((*charPtr2 & 0xC0) == 0x80);
+            }
+            int index1 = comparatorMap.at(char1), index2 = comparatorMap.at(char2);
+            if (index1 < index2){
+                return true;
+            } else {
+                if (index1 > index2){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+};
+
+typedef struct turkishWordComparator TurkishWordComparator;
+
 class Dictionary {
 private:
     map<string, int> comparatorMap;
@@ -24,6 +84,7 @@ protected:
     vector<Word*> words;
     string filename;
     Comparator comparator = Comparator::ENGLISH;
+    TurkishWordComparator turkishComparator = turkishWordComparator(turkishComparatorMap);
     void sort();
 public:
     static const map<string, int> turkishComparatorMap;
@@ -79,62 +140,5 @@ const inline map<string, int> Dictionary::turkishIgnoreCaseComparatorMap =
          {"3", 90}, {"4", 91}, {"5", 92}, {"6", 93}, {"7", 94}, {"8", 95},
          {"9", 96}, {"<", 97}, {">", 98}, {"/", 99}, {":", 100}, {";", 101},
          {"$", 102}, {" ", 103}};
-
-struct turkishWordComparator{
-    map<string, int> comparatorMap;
-/**
- * The wordComparator takes two {@link Word}s as inputs; wordA and wordB and compares their names. Returns the result of this comparison.
- *
- * @param wordA Word type input.
- * @param wordB Word type input.
- * @return the value {@code 0} if the wordA is equal to the wordB; a value less than {@code 0} if this wordA is
- * lexicographically less than wordB; and a value greater than {@code 0} if this wordA is lexicographically greater
- * than wordB.
- */
-    turkishWordComparator(map<string, int> comparatorMap){
-        this->comparatorMap = comparatorMap;
-    }
-
-    bool operator() (Word* wordA, Word* wordB){
-        string nameA = wordA->getName();
-        const char* charPtr1 = nameA.c_str();
-        string nameB = wordB->getName();
-        const char* charPtr2 = nameB.c_str();
-        if (wordA->getName() == wordB->getName()){
-            return false;
-        }
-        if (wordB->getName().starts_with(wordA->getName())){
-            return true;
-        }
-        if (wordA->getName().starts_with(wordB->getName())){
-            return false;
-        }
-        while (*charPtr1 && *charPtr2){
-            string char1;
-            if ((*charPtr1 & 0xC0) != 0x80){
-                do{
-                    char1 += *charPtr1;
-                    charPtr1++;
-                } while ((*charPtr1 & 0xC0) == 0x80);
-            }
-            string char2;
-            if ((*charPtr2 & 0xC0) != 0x80){
-                do{
-                    char2 += *charPtr2;
-                    charPtr2++;
-                } while ((*charPtr2 & 0xC0) == 0x80);
-            }
-            int index1 = comparatorMap.at(char1), index2 = comparatorMap.at(char2);
-            if (index1 < index2){
-                return true;
-            } else {
-                if (index1 > index2){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-};
 
 #endif //DICTIONARY_DICTIONARY_H
