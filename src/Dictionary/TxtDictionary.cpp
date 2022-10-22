@@ -16,9 +16,9 @@
  * @param filename   String input.
  * @param comparator {@link WordComparator} input.
  */
-TxtDictionary::TxtDictionary(string filename, Comparator comparator) : Dictionary(comparator) {
+TxtDictionary::TxtDictionary(const string& filename, Comparator comparator) : Dictionary(comparator) {
     loadFromText(filename);
-    this->filename = move(filename);
+    this->filename = filename;
 }
 
 /**
@@ -31,9 +31,9 @@ TxtDictionary::TxtDictionary(string filename, Comparator comparator) : Dictionar
  * @param comparator {@link WordComparator} input.
  * @param misspelledFileName String input.
  */
-TxtDictionary::TxtDictionary(string filename, Comparator comparator, const string misspelledFileName, const string morphologicalLexicon) : Dictionary(comparator){
+TxtDictionary::TxtDictionary(const string& filename, Comparator comparator, const string& misspelledFileName, const string& morphologicalLexicon) : Dictionary(comparator){
     loadFromText(filename);
-    this->filename = move(filename);
+    this->filename = filename;
     loadMisspelledWords(misspelledFileName);
     loadMorphologicalLexicon(morphologicalLexicon);
 }
@@ -52,8 +52,8 @@ TxtDictionary TxtDictionary::clone() {
  *
  * @param name String input.
  */
-void TxtDictionary::addNumber(string name) {
-    addWithFlag(move(name), "IS_SAYI");
+void TxtDictionary::addNumber(const string& name) {
+    addWithFlag(name, "IS_SAYI");
 }
 
 /**
@@ -67,7 +67,7 @@ void TxtDictionary::addNumber(string name) {
  * @param flag String flag.
  * @return true if given name is in words {@link java.util.ArrayList}, false otherwise.
  */
-bool TxtDictionary::addWithFlag(string name, string flag) {
+bool TxtDictionary::addWithFlag(const string& name, const string& flag) {
     return false;
 }
 
@@ -76,8 +76,8 @@ bool TxtDictionary::addWithFlag(string name, string flag) {
  *
  * @param name String input.
  */
-void TxtDictionary::addRealNumber(string name) {
-    addWithFlag(move(name), "IS_REELSAYI");
+void TxtDictionary::addRealNumber(const string& name) {
+    addWithFlag(name, "IS_REELSAYI");
 }
 
 /**
@@ -85,8 +85,8 @@ void TxtDictionary::addRealNumber(string name) {
  *
  * @param name String input.
  */
-void TxtDictionary::addFraction(string name) {
-    addWithFlag(move(name), "IS_KESIR");
+void TxtDictionary::addFraction(const string& name) {
+    addWithFlag(name, "IS_KESIR");
 }
 
 /**
@@ -94,8 +94,8 @@ void TxtDictionary::addFraction(string name) {
 *
 * @param name String input.
 */
-void TxtDictionary::addTime(string name) {
-    addWithFlag(move(name), "IS_ZAMAN");
+void TxtDictionary::addTime(const string& name) {
+    addWithFlag(name, "IS_ZAMAN");
 }
 
 /**
@@ -104,8 +104,8 @@ void TxtDictionary::addTime(string name) {
  * @param name String input.
  * @return true if given name is in words {@link unordered_set}, false otherwise.
  */
-bool TxtDictionary::addProperNoun(string name) {
-    return addWithFlag(move(name), "IS_OA");
+bool TxtDictionary::addProperNoun(const string& name) {
+    return addWithFlag(name, "IS_OA");
 }
 
 /**
@@ -114,8 +114,8 @@ bool TxtDictionary::addProperNoun(string name) {
  * @param name String input.
  * @return true if given name is in words {@link unordered_set}, false otherwise.
  */
-bool TxtDictionary::addNoun(string name) {
-    return addWithFlag(move(name), "CL_ISIM");
+bool TxtDictionary::addNoun(const string& name) {
+    return addWithFlag(name, "CL_ISIM");
 }
 
 /**
@@ -124,8 +124,8 @@ bool TxtDictionary::addNoun(string name) {
  * @param name String input.
  * @return true if given name is in words {@link unordered_set}, false otherwise.
  */
-bool TxtDictionary::addVerb(string name) {
-    return addWithFlag(move(name), "CL_FIIL");
+bool TxtDictionary::addVerb(const string& name) {
+    return addWithFlag(name, "CL_FIIL");
 }
 
 /**
@@ -134,8 +134,8 @@ bool TxtDictionary::addVerb(string name) {
  * @param name String input.
  * @return true if given name is in words {@link unordered_set}, false otherwise.
  */
-bool TxtDictionary::addAdjective(string name) {
-    return addWithFlag(move(name), "IS_ADJ");
+bool TxtDictionary::addAdjective(const string& name) {
+    return addWithFlag(name, "IS_ADJ");
 }
 
 /**
@@ -144,8 +144,8 @@ bool TxtDictionary::addAdjective(string name) {
  * @param name String input.
  * @return true if given name is in words {@link unordered_set}, false otherwise.
  */
-bool TxtDictionary::addAdverb(string name) {
-    return addWithFlag(move(name), "IS_ADVERB");
+bool TxtDictionary::addAdverb(const string& name) {
+    return addWithFlag(name, "IS_ADVERB");
 }
 
 /**
@@ -154,8 +154,8 @@ bool TxtDictionary::addAdverb(string name) {
  * @param name String input.
  * @return true if given name is in words {@link unordered_set}, false otherwise.
  */
-bool TxtDictionary::addPronoun(string name) {
-    return addWithFlag(move(name), "IS_ZM");
+bool TxtDictionary::addPronoun(const string& name) {
+    return addWithFlag(name, "IS_ZM");
 }
 
 /**
@@ -166,7 +166,7 @@ bool TxtDictionary::addPronoun(string name) {
  * @param secondFilename String input.
  * @param mergedFilename String input.
  */
-void TxtDictionary::mergeDictionary(string secondFilename, string mergedFilename) {
+void TxtDictionary::mergeDictionary(const string& secondFilename, const string& mergedFilename) {
     ifstream firstfile, secondfile;
     ofstream outfile;
     string st1, st2;
@@ -222,11 +222,11 @@ void TxtDictionary::mergeDictionary(string secondFilename, string mergedFilename
  *
  * @param filename File input.
  */
-void TxtDictionary::loadFromText(string filename) {
+void TxtDictionary::loadFromText(const string& filename) {
     int i;
     string line;
     ifstream inputFile;
-    TxtWord* currentWord = new TxtWord("");
+    auto* currentWord = new TxtWord("");
     inputFile.open(filename, ifstream :: in);
     while (inputFile.good()) {
         getline(inputFile, line);
@@ -248,7 +248,7 @@ void TxtDictionary::loadFromText(string filename) {
  *
  * @param filename String input.
  */
-void TxtDictionary::saveAsTxt(string filename) {
+void TxtDictionary::saveAsTxt(const string& filename) {
     ofstream outfile;
     int i;
     outfile.open(filename, ofstream :: out);
@@ -273,7 +273,7 @@ void TxtDictionary::saveAsTxt(string filename) {
  * @param root the substring of the word whose last one or two chars are omitted from the word to bo softed.
  * @param word the original word.
  */
-void TxtDictionary::addWordWhenRootSoften(Trie* trie, string last, string root, TxtWord *word) {
+void TxtDictionary::addWordWhenRootSoften(Trie* trie, const string& last, const string& root, TxtWord *word) {
     if (last == "p"){
         trie->addWord(root + 'b', word);
     } else {
@@ -318,7 +318,7 @@ Trie* TxtDictionary::prepareTrie() {
     string root, rootWithoutLast, rootWithoutLastTwo;
     string last, lastBefore = " ";
     for (int i = 0; i < size(); i++) {
-        TxtWord* word = (TxtWord*) getWord(i);
+        auto* word = (TxtWord*) getWord(i);
         root = word->getName();
         if (root == "ben") {
             result->addWord("bana", word);
@@ -421,7 +421,7 @@ void TxtDictionary::loadMorphologicalLexicon(const string& filename) {
         getline(inputFile, line);
         vector<string> tokens = Word::split(line);
         if (tokens.size() == 2) {
-            TxtWord* word = (TxtWord*) getWord(tokens[0]);
+            auto* word = (TxtWord*) getWord(tokens[0]);
             if (word != nullptr){
                 word->setMorphology(tokens[1]);
             }

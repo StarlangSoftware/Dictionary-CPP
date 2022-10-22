@@ -13,7 +13,7 @@ class VectorizedWord : public Word {
 private:
     Vector vector = Vector(0, 0.0);
 public:
-    VectorizedWord(string name, Vector vector);
+    VectorizedWord(const string& name, const Vector& vector);
     Vector getVector();
 };
 

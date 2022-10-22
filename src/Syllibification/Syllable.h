@@ -11,7 +11,7 @@ class Syllable {
 private:
     string syllable;
 public:
-    Syllable(string syllable);
+    explicit Syllable(const string& _syllable);
     string getText();
 };
 

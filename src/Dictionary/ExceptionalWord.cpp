@@ -13,9 +13,9 @@
  * @param root String input.
  * @param pos  {@link Pos} type input.
  */
-ExceptionalWord::ExceptionalWord(string name, string root, Pos pos) : Word(move(name)) {
-    this->root = move(root);
-    this->pos = move(pos);
+ExceptionalWord::ExceptionalWord(const string& name, const string& root, Pos pos) : Word(name) {
+    this->root = root;
+    this->pos = pos;
 }
 
 /**

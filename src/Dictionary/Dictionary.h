@@ -91,14 +91,14 @@ public:
     static const map<string, int> turkishIgnoreCaseComparatorMap;
     Dictionary();
     explicit Dictionary(Comparator comparator);
-    Word* getWord(string name);
-    void removeWord(string name);
-    int getWordIndex(string name);
-    bool wordExists(string name);
+    Word* getWord(const string& name);
+    void removeWord(const string& name);
+    int getWordIndex(const string& name);
+    bool wordExists(const string& name);
     unsigned long size();
     Word* getWord(unsigned long index);
     unsigned long longestWordSize();
-    unsigned long getWordStartingWith(string hash);
+    unsigned long getWordStartingWith(const string& hash);
 };
 
 const inline map<string, int> Dictionary::turkishComparatorMap =

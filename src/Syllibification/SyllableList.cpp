@@ -22,7 +22,7 @@
  * @param word String input.
  * @throws IrregularWordException if it is not a regular Turkish word.
  */
-SyllableList::SyllableList(string word) {
+SyllableList::SyllableList(const string& word) {
     string sbSyllable;
     for (unsigned long i = 0; i < Word::size(word); i++) {
         string c = Word::charAt(word, i);
@@ -70,7 +70,7 @@ SyllableList::SyllableList(string word) {
  */
 vector<string> SyllableList::getSyllables() {
     vector<string> syllables;
-    for (Syllable syllable : syllables) {
+    for (Syllable syllable : this->syllables) {
         syllables.emplace_back(syllable.getText());
     }
     return syllables;

@@ -11,8 +11,8 @@
  * @param name   Strin input.
  * @param vector {@link Vector} type input.
  */
-VectorizedWord::VectorizedWord(string name, Vector vector) : Word(move(name)) {
-    this->vector = move(vector);
+VectorizedWord::VectorizedWord(const string& name, const Vector& vector) : Word(name) {
+    this->vector = vector;
 }
 
 /**

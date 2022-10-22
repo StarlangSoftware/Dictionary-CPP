@@ -11,27 +11,27 @@
 class TxtDictionary : public Dictionary {
 private:
     map<string, string> misspelledWords;
-    void loadFromText(string filename);
+    void loadFromText(const string& filename);
     void loadMisspelledWords(const string& filename);
     void loadMorphologicalLexicon(const string& filename);
-    void addWordWhenRootSoften(Trie* trie, string last, string root, TxtWord* word);
+    void addWordWhenRootSoften(Trie* trie, const string& last, const string& root, TxtWord* word);
 public:
-    explicit TxtDictionary(string filename, Comparator comparator);
-    explicit TxtDictionary(string filename = "turkish_dictionary.txt", Comparator comparator = Comparator::ENGLISH, string misspelledFileName = "turkish_misspellings.txt", string morphologicalLexicon = "turkish_morphological_lexicon.txt");
+    explicit TxtDictionary(const string& filename, Comparator comparator);
+    explicit TxtDictionary(const string& filename = "turkish_dictionary.txt", Comparator comparator = Comparator::ENGLISH, const string& misspelledFileName = "turkish_misspellings.txt", const string& morphologicalLexicon = "turkish_morphological_lexicon.txt");
     TxtDictionary clone();
-    bool addWithFlag(string name, string flag);
-    void addNumber(string name);
-    void addRealNumber(string name);
-    void addFraction(string name);
-    void addTime(string name);
-    bool addProperNoun(string name);
-    bool addNoun(string name);
-    bool addVerb(string name);
-    bool addAdjective(string name);
-    bool addAdverb(string name);
-    bool addPronoun(string name);
-    void mergeDictionary(string secondFilename, string mergedFilename);
-    void saveAsTxt(string filename);
+    bool addWithFlag(const string& name, const string& flag);
+    void addNumber(const string& name);
+    void addRealNumber(const string& name);
+    void addFraction(const string& name);
+    void addTime(const string& name);
+    bool addProperNoun(const string& name);
+    bool addNoun(const string& name);
+    bool addVerb(const string& name);
+    bool addAdjective(const string& name);
+    bool addAdverb(const string& name);
+    bool addPronoun(const string& name);
+    void mergeDictionary(const string& secondFilename, const string& mergedFilename);
+    void saveAsTxt(const string& filename);
     string getCorrectForm(const string& misspelledWord);
     Trie* prepareTrie();
 };

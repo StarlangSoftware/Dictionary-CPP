@@ -14,7 +14,7 @@ class TrieNode {
 private:
     map<string, TrieNode*> children;
     unordered_set<Word*> words;
-    void addWord(string word, unsigned long index, Word* root);
+    void addWord(const string& word, unsigned long index, Word* root);
 public:
     TrieNode();
     ~TrieNode(){
@@ -22,9 +22,9 @@ public:
             delete child.second;
         }
     }
-    void addWord(string word, Word* root);
-    TrieNode* getChild(string ch);
-    bool childExists(string ch);
+    void addWord(const string& word, Word* root);
+    TrieNode* getChild(const string& ch);
+    bool childExists(const string& ch);
     unordered_set<Word*> getWords();
 };
 

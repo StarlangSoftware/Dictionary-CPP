@@ -23,7 +23,7 @@ TrieNode::TrieNode() = default;
  * @param index Integer index.
  * @param root  {@link Word} input to add.
  */
-void TrieNode::addWord(string word, unsigned long index, Word* root) {
+void TrieNode::addWord(const string& word, unsigned long index, Word* root) {
     TrieNode* child;
     if (index == Word::size(word)) {
         words.emplace(root);
@@ -45,8 +45,8 @@ void TrieNode::addWord(string word, unsigned long index, Word* root) {
  * @param word String input.
  * @param root {@link Word} type input.
  */
-void TrieNode::addWord(string word, Word* root) {
-    addWord(move(word), 0, root);
+void TrieNode::addWord(const string& word, Word* root) {
+    addWord(word, 0, root);
 }
 
 /**
@@ -55,7 +55,7 @@ void TrieNode::addWord(string word, Word* root) {
  * @param ch {@link Character} input.
  * @return the value from children {@link HashMap}.
  */
-TrieNode* TrieNode::getChild(string ch) {
+TrieNode* TrieNode::getChild(const string& ch) {
     return children.find(ch)->second;
 }
 
@@ -68,6 +68,6 @@ unordered_set<Word*> TrieNode::getWords() {
     return words;
 }
 
-bool TrieNode::childExists(string ch) {
+bool TrieNode::childExists(const string& ch) {
     return children.contains(ch);
 }

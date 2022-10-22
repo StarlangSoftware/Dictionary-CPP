@@ -15,7 +15,7 @@ private:
     string root;
     Pos pos;
 public:
-    ExceptionalWord(string name, string root, Pos pos);
+    ExceptionalWord(const string& name, const string& root, Pos pos);
     string getRoot();
     Pos getPos();
 };

@@ -12,7 +12,7 @@ class SyllableList {
 private:
     vector<Syllable> syllables;
 public:
-    SyllableList(string word);
+    explicit SyllableList(const string& word);
     vector<string> getSyllables();
 };
 

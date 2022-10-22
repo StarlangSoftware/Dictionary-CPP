@@ -44,7 +44,7 @@ Dictionary::Dictionary(Comparator comparator) {
  * @param name String input.
  * @return the item at found index of words {@link vector}, null if cannot be found.
  */
-Word* Dictionary::getWord(string name) {
+Word* Dictionary::getWord(const string& name) {
     if (wordExists(name)){
         vector<Word*>::iterator middle;
         switch (comparator){
@@ -64,7 +64,7 @@ Word* Dictionary::getWord(string name) {
  * RemoveWord removes a word with the given name
  * @param name Name of the word to be removed.
  */
-void Dictionary::removeWord(string name) {
+void Dictionary::removeWord(const string& name) {
     if (wordExists(name)){
         vector<Word*>::iterator middle;
         switch (comparator){
@@ -80,7 +80,7 @@ void Dictionary::removeWord(string name) {
     }
 }
 
-bool Dictionary::wordExists(string name) {
+bool Dictionary::wordExists(const string& name) {
     bool result;
     switch (comparator){
         case Comparator::ENGLISH:
@@ -101,7 +101,7 @@ bool Dictionary::wordExists(string name) {
  * @param name String input.
  * @return found index of words {@link vector}, -1 if cannot be found.
  */
-int Dictionary::getWordIndex(string name) {
+int Dictionary::getWordIndex(const string& name) {
     if (wordExists(name)){
         vector<Word*>::iterator middle;
         switch (comparator){
@@ -160,7 +160,7 @@ unsigned long Dictionary::longestWordSize() {
  * @param hash String input.
  * @return found index of words {@link vector}, -middle-1 if cannot be found.
  */
-unsigned long Dictionary::getWordStartingWith(string hash) {
+unsigned long Dictionary::getWordStartingWith(const string& hash) {
     vector<Word*>::iterator middle;
     switch (comparator){
         case Comparator::ENGLISH:

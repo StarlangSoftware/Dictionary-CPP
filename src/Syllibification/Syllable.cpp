@@ -5,12 +5,12 @@
 #include "Syllable.h"
 
 /**
- * A constructor of {@link Syllable} class which takes a String as an input and initializes syllable variable with given input.
+ * A constructor of {@link Syllable} class which takes a String as an input and initializes _syllable variable with given input.
  *
- * @param syllable String input.
+ * @param _syllable String input.
  */
-Syllable::Syllable(string syllable) {
-    this->syllable = move(syllable);
+Syllable::Syllable(const string& _syllable) {
+    this->syllable = _syllable;
 }
 
 /**

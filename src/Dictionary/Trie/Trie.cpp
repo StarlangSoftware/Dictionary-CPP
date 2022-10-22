@@ -17,8 +17,8 @@ Trie::Trie(){
  * @param word String input.
  * @param root {@link Word} input.
  */
-void Trie::addWord(string word, Word* root) {
-    rootNode->addWord(move(word), root);
+void Trie::addWord(const string& word, Word* root) {
+    rootNode->addWord(word, root);
 }
 
 /**
@@ -30,7 +30,7 @@ void Trie::addWord(string word, Word* root) {
  * @param surfaceForm String input.
  * @return words {@link unordered_set}.
  */
-unordered_set<Word*> Trie::getWordsWithPrefix(string surfaceForm) {
+unordered_set<Word*> Trie::getWordsWithPrefix(const string& surfaceForm) {
     TrieNode* current = rootNode;
     unordered_set<Word*> words;
     for (int i = 0; i < Word::size(surfaceForm); i++) {
@@ -59,7 +59,7 @@ unordered_set<Word*> Trie::getWordsWithPrefix(string surfaceForm) {
  * @param hash String input.
  * @return null if {@link TrieNode} is null, otherwise portmanteau word.
  */
-TxtWord *Trie::getCompoundWordStartingWith(string hash) {
+TxtWord *Trie::getCompoundWordStartingWith(const string& hash) {
     TrieNode* current = rootNode;
     for (int i = 0; i < Word::size(hash); i++) {
         if (current->childExists(Word::charAt(hash, i))){
