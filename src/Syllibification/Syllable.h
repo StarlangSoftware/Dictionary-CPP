@@ -12,7 +12,7 @@ private:
     string syllable;
 public:
     explicit Syllable(const string& _syllable);
-    string getText();
+    string getText() const;
 };
 
 

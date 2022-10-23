@@ -214,7 +214,7 @@ bool Word::isMoney(const string& surfaceForm) {
  *
  * @return true if name is a punctuation.
  */
-bool Word::isPunctuation() {
+bool Word::isPunctuation() const{
     return name == "," || name == "." || name == "!" || name == "?" || name == ":"
            || name == ";" || name == "\"" || name == "''" || name == "'" || name == "`"
            || name == "``" || name == "..." || name == "-" || name == "--";
@@ -275,7 +275,7 @@ Word* Word::toWordArray(string *sourceArray, int size) {
  *
  * @return Word type {@link vector}.
  */
-vector<Word> Word::toCharacters() {
+vector<Word> Word::toCharacters() const{
     vector<Word> characters;
     for (int i = 0; i < Word::size(name); i++) {
         string s;

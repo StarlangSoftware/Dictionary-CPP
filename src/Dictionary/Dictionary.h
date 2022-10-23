@@ -94,10 +94,10 @@ public:
     Word* getWord(const string& name);
     void removeWord(const string& name);
     int getWordIndex(const string& name);
-    bool wordExists(const string& name);
-    unsigned long size();
+    bool wordExists(const string& name) const;
+    unsigned long size() const;
     Word* getWord(unsigned long index);
-    unsigned long longestWordSize();
+    unsigned long longestWordSize() const;
     unsigned long getWordStartingWith(const string& hash);
 };
 

@@ -23,7 +23,7 @@ public:
     TxtWord* clone();
     void removeFlag(const string& flag);
     void setMorphology(const string& _morphology);
-    string getMorphology();
+    string getMorphology() const;
     string verbType() const;
     bool containsFlag(const string& flag) const;
     bool samePos(const TxtWord& word) const;
@@ -80,7 +80,7 @@ public:
     bool takesSuffixIRAsAorist() const;
     bool takesSuffixDIRAsFactitive() const;
     bool showsSuRegularities() const;
-    string to_string();
+    string to_string() const;
 };
 
 

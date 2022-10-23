@@ -68,10 +68,10 @@ SyllableList::SyllableList(const string& word) {
  *
  * @return vector syllables.
  */
-vector<string> SyllableList::getSyllables() {
-    vector<string> syllables;
-    for (Syllable syllable : this->syllables) {
-        syllables.emplace_back(syllable.getText());
+vector<string> SyllableList::getSyllables() const{
+    vector<string> _syllables;
+    for (const Syllable& syllable : this->syllables) {
+        _syllables.emplace_back(syllable.getText());
     }
-    return syllables;
+    return _syllables;
 }

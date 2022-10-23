@@ -18,6 +18,6 @@ Syllable::Syllable(const string& _syllable) {
  *
  * @return the syllable variable.
  */
-string Syllable::getText() {
+string Syllable::getText() const{
     return syllable;
 }

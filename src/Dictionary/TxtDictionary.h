@@ -32,7 +32,7 @@ public:
     bool addPronoun(const string& name);
     void mergeDictionary(const string& secondFilename, const string& mergedFilename);
     void saveAsTxt(const string& filename);
-    string getCorrectForm(const string& misspelledWord);
+    string getCorrectForm(const string& misspelledWord) const;
     Trie* prepareTrie();
 };
 

@@ -69,7 +69,7 @@ void TxtWord::setMorphology(const string& _morphology){
     this->morphology = _morphology;
 }
 
-string TxtWord::getMorphology(){
+string TxtWord::getMorphology() const{
     return this->morphology;
 }
 
@@ -873,7 +873,7 @@ bool TxtWord::samePos(const TxtWord& word) const {
     return false;
 }
 
-string TxtWord::to_string() {
+string TxtWord::to_string() const{
     string result;
     for (const string &flag : flags){
         result += " ";

@@ -55,7 +55,7 @@ void TrieNode::addWord(const string& word, Word* root) {
  * @param ch {@link Character} input.
  * @return the value from children {@link HashMap}.
  */
-TrieNode* TrieNode::getChild(const string& ch) {
+TrieNode* TrieNode::getChild(const string& ch) const{
     return children.find(ch)->second;
 }
 
@@ -64,10 +64,10 @@ TrieNode* TrieNode::getChild(const string& ch) {
  *
  * @return the words {@link unordered_set}.
  */
-unordered_set<Word*> TrieNode::getWords() {
+unordered_set<Word*> TrieNode::getWords() const{
     return words;
 }
 
-bool TrieNode::childExists(const string& ch) {
+bool TrieNode::childExists(const string& ch) const{
     return children.contains(ch);
 }

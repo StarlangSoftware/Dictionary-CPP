@@ -23,7 +23,7 @@ ExceptionalWord::ExceptionalWord(const string& name, const string& root, Pos pos
  *
  * @return root variable.
  */
-string ExceptionalWord::getRoot() {
+string ExceptionalWord::getRoot() const{
     return root;
 }
 
@@ -32,6 +32,6 @@ string ExceptionalWord::getRoot() {
  *
  * @return pos variable.
  */
-Pos ExceptionalWord::getPos() {
+Pos ExceptionalWord::getPos() const{
     return pos;
 }

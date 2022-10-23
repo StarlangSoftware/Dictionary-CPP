@@ -44,10 +44,10 @@ public:
     static string substring(const string& surfaceForm, int index);
     static string substringExceptLastChar(const string& surfaceForm);
     static string substringExceptLastTwoChars(const string& surfaceForm);
-    bool isPunctuation();
+    bool isPunctuation() const;
     static bool isTime(const string& surfaceForm);
     static Word* toWordArray(string* sourceArray, int size);
-    vector<Word> toCharacters();
+    vector<Word> toCharacters() const;
     friend istream& operator>> (istream& is, Word& word){
         is >> word.name;
         return is;

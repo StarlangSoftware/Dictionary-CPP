@@ -313,7 +313,7 @@ void TxtDictionary::addWordWhenRootSoften(Trie* trie, const string& last, const 
  * @param currentDictionary the dictionary that Trie will be created.
  * @return the resulting Trie.
  */
-Trie* TxtDictionary::prepareTrie() {
+Trie* TxtDictionary::prepareTrie(){
     Trie* result = new Trie();
     string root, rootWithoutLast, rootWithoutLastTwo;
     string last, lastBefore = " ";
@@ -435,7 +435,7 @@ void TxtDictionary::loadMorphologicalLexicon(const string& filename) {
  * @param misspelledWord Misspelled form.
  * @return Correct form.
  */
-string TxtDictionary::getCorrectForm(const string& misspelledWord) {
+string TxtDictionary::getCorrectForm(const string& misspelledWord) const{
     if (misspelledWords.contains(misspelledWord)){
         return misspelledWords.find(misspelledWord)->second;
     }

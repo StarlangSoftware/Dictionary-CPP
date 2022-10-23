@@ -35,7 +35,7 @@ void VectorizedDictionary::addWord(VectorizedWord *word) {
  * @param name String input.
  * @return VectorizedWord type result which holds the most similar word to the given word.
  */
-VectorizedWord* VectorizedDictionary::mostSimilarWord(const string& name) {
+VectorizedWord* VectorizedDictionary::mostSimilarWord(const string& name){
     double maxDistance = -DBL_MAX;
     VectorizedWord* result = nullptr;
     auto* word = (VectorizedWord*) getWord(name);
@@ -67,7 +67,7 @@ VectorizedWord* VectorizedDictionary::mostSimilarWord(const string& name) {
  * @param k         Integer input.
  * @return ArrayList result which holds the k-means clustered words.
  */
-vector<Word*>*VectorizedDictionary::kMeansClustering(int iteration, int k) {
+vector<Word*>*VectorizedDictionary::kMeansClustering(int iteration, int k) const{
     auto* result = new vector<Word*>[k];
     vector<Vector> means;
     int vectorSize = ((VectorizedWord*) words.at(0))->getVector().getSize();
@@ -166,7 +166,7 @@ struct vectorizedWordComparator{
  * @param k Integer input.
  * @return ArrayList result.
  */
-vector<VectorizedWord *> VectorizedDictionary::mostSimilarKWords(const string& name, int k) {
+vector<VectorizedWord *> VectorizedDictionary::mostSimilarKWords(const string& name, int k){
     vector<VectorizedWord*> resultWords;
     auto* word = (VectorizedWord*) getWord(name);
     if (word == nullptr) {

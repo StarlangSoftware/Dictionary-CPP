@@ -44,7 +44,7 @@ Dictionary::Dictionary(Comparator comparator) {
  * @param name String input.
  * @return the item at found index of words {@link vector}, null if cannot be found.
  */
-Word* Dictionary::getWord(const string& name) {
+Word* Dictionary::getWord(const string& name){
     if (wordExists(name)){
         vector<Word*>::iterator middle;
         switch (comparator){
@@ -80,7 +80,7 @@ void Dictionary::removeWord(const string& name) {
     }
 }
 
-bool Dictionary::wordExists(const string& name) {
+bool Dictionary::wordExists(const string& name) const{
     bool result;
     switch (comparator){
         case Comparator::ENGLISH:
@@ -101,7 +101,7 @@ bool Dictionary::wordExists(const string& name) {
  * @param name String input.
  * @return found index of words {@link vector}, -1 if cannot be found.
  */
-int Dictionary::getWordIndex(const string& name) {
+int Dictionary::getWordIndex(const string& name){
     if (wordExists(name)){
         vector<Word*>::iterator middle;
         switch (comparator){
@@ -124,7 +124,7 @@ int Dictionary::getWordIndex(const string& name) {
  *
  * @return the size of the words {@link vector}.
  */
-unsigned long Dictionary::size() {
+unsigned long Dictionary::size() const{
     return words.size();
 }
 
@@ -134,7 +134,7 @@ unsigned long Dictionary::size() {
  * @param index to get the value.
  * @return the value at given index of words {@link vector}.
  */
-Word* Dictionary::getWord(unsigned long index) {
+Word* Dictionary::getWord(unsigned long index){
     return words.at(index);
 }
 
@@ -143,7 +143,7 @@ Word* Dictionary::getWord(unsigned long index) {
  *
  * @return the item with the maximum word length.
  */
-unsigned long Dictionary::longestWordSize() {
+unsigned long Dictionary::longestWordSize() const{
     unsigned long max = 0;
     for (Word* word : words) {
         if (Word::size(word->getName()) > max) {
@@ -160,7 +160,7 @@ unsigned long Dictionary::longestWordSize() {
  * @param hash String input.
  * @return found index of words {@link vector}, -middle-1 if cannot be found.
  */
-unsigned long Dictionary::getWordStartingWith(const string& hash) {
+unsigned long Dictionary::getWordStartingWith(const string& hash){
     vector<Word*>::iterator middle;
     switch (comparator){
         case Comparator::ENGLISH:

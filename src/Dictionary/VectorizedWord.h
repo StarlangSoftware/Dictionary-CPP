@@ -14,7 +14,7 @@ private:
     Vector vector = Vector(0, 0.0);
 public:
     VectorizedWord(const string& name, const Vector& vector);
-    Vector getVector();
+    Vector getVector() const;
 };
 
 

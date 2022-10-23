@@ -20,6 +20,6 @@ VectorizedWord::VectorizedWord(const string& name, const Vector& vector) : Word(
  *
  * @return the vector variable.
  */
-Vector VectorizedWord::getVector() {
+Vector VectorizedWord::getVector() const{
     return vector;
 }
