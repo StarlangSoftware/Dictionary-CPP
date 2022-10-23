@@ -35,7 +35,7 @@ string Word::to_string() {
  *
  * @return the length of name variable.
  */
-int Word::charCount() {
+int Word::charCount() const{
     return Word::size(name);
 }
 

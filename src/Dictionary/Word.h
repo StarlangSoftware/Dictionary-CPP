@@ -16,7 +16,7 @@ public:
     virtual ~Word() = default;
     explicit Word(const string& name);
     string to_string();
-    int charCount();
+    int charCount() const;
     Word clone();
     string getName() const;
     void setName(const string& name);
