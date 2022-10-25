@@ -5,6 +5,10 @@
 #include "catch.hpp"
 #include "../src/Dictionary/Word.h"
 
+TEST_CASE("WordTest-testLastChar") {
+    REQUIRE("4" == Word::lastChar("4"));
+}
+
 TEST_CASE("WordTest-testCharCount") {
     Word word = Word("ali");
     REQUIRE(3 == word.charCount());

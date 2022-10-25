@@ -491,9 +491,9 @@ string Word::lastChar(const string& surfaceForm){
     int size = surfaceForm.size();
     const char* charPtr = surfaceForm.c_str();
     if ((*(charPtr + size - 1) & 0xC0) != 0x80){
-        return {1, *(charPtr + size - 1)};
+        return string(1, *(charPtr + size - 1));
     } else {
-        return {charPtr + size - 2};
+        return string(charPtr + size - 2);
     }
 }
 
