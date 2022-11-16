@@ -48,14 +48,14 @@ Word* Dictionary::getWord(const string& name){
     if (wordExists(name)){
         vector<Word*>::iterator middle;
         switch (comparator){
-            case Comparator::ENGLISH:
-                middle = lower_bound(words.begin(), words.end(), new Word(name), compareWord);
-                break;
             case Comparator::TURKISH:
             case Comparator::TURKISH_NO_CASE:
                 middle = lower_bound(words.begin(), words.end(), new Word(name), turkishComparator);
+                return *middle;
+            case Comparator::ENGLISH:
+                int index = binarySearch(new Word(name));
+                return words[index];
         }
-        return *middle;
     }
     return nullptr;
 }
@@ -68,30 +68,28 @@ void Dictionary::removeWord(const string& name) {
     if (wordExists(name)){
         vector<Word*>::iterator middle;
         switch (comparator){
-            case Comparator::ENGLISH:
-                middle = lower_bound(words.begin(), words.end(), new Word(name), compareWord);
-                words.erase(middle);
-                break;
             case Comparator::TURKISH:
             case Comparator::TURKISH_NO_CASE:
                 middle = lower_bound(words.begin(), words.end(), new Word(name), turkishWordComparator(comparatorMap));
                 words.erase(middle);
+                break;
+            case Comparator::ENGLISH:
+                int index = binarySearch(new Word(name));
+                words.erase(words.begin() + index);
+                break;
         }
     }
 }
 
 bool Dictionary::wordExists(const string& name) const{
-    bool result;
     switch (comparator){
-        case Comparator::ENGLISH:
-            result = binary_search(words.begin(), words.end(), new Word(name), compareWord);
-            break;
         case Comparator::TURKISH:
         case Comparator::TURKISH_NO_CASE:
-            result = binary_search(words.begin(), words.end(), new Word(name), turkishWordComparator(comparatorMap));
-            break;
+            return binary_search(words.begin(), words.end(), new Word(name), turkishWordComparator(comparatorMap));
+        case Comparator::ENGLISH:
+            int index = binarySearch(new Word(name));
+            return index >= 0;
     }
-    return result;
 }
 
 /**
@@ -106,14 +104,12 @@ int Dictionary::getWordIndex(const string& name){
         vector<Word*>::iterator middle;
         switch (comparator){
             case Comparator::ENGLISH:
-                middle = lower_bound(words.begin(), words.end(), new Word(name), compareWord);
-                break;
+                return binarySearch(new Word(name));
             case Comparator::TURKISH:
             case Comparator::TURKISH_NO_CASE:
                 middle = lower_bound(words.begin(), words.end(), new Word(name), turkishComparator);
-                break;
+                return middle - words.begin();
         }
-        return middle - words.begin();
     } else {
         return -1;
     }
@@ -164,14 +160,12 @@ unsigned long Dictionary::getWordStartingWith(const string& hash){
     vector<Word*>::iterator middle;
     switch (comparator){
         case Comparator::ENGLISH:
-            middle = lower_bound(words.begin(), words.end(), new Word(hash), compareWord);
-            break;
+            return binarySearch(new Word(hash));
         case Comparator::TURKISH:
         case Comparator::TURKISH_NO_CASE:
             middle = lower_bound(words.begin(), words.end(), new Word(hash), turkishComparator);
-            break;
+            return middle - words.begin();
     }
-    return middle - words.begin();
 }
 
 void Dictionary::sort() {
@@ -184,4 +178,21 @@ void Dictionary::sort() {
             std::sort(words.begin(), words.end(), turkishWordComparator(comparatorMap));
             break;
     }
+}
+
+int Dictionary::binarySearch(Word *word) const {
+    int lo = 0;
+    int hi = words.size() - 1;
+    while (lo <= hi){
+        int mid = (lo + hi) / 2;
+        if (words[mid]->getName() == word->getName()){
+            return mid;
+        }
+        if (compareWord(words[mid], word)) {
+            lo = mid + 1;
+        } else {
+            hi = mid - 1;
+        }
+    }
+    return -(lo + 1);
 }

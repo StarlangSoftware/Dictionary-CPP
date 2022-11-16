@@ -93,6 +93,7 @@ public:
     explicit Dictionary(Comparator comparator);
     Word* getWord(const string& name);
     void removeWord(const string& name);
+    int binarySearch(Word* word) const;
     int getWordIndex(const string& name);
     bool wordExists(const string& name) const;
     unsigned long size() const;
