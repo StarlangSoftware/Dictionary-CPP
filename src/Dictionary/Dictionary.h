@@ -85,7 +85,6 @@ protected:
     string filename;
     Comparator comparator = Comparator::ENGLISH;
     TurkishWordComparator turkishComparator = turkishWordComparator(turkishComparatorMap);
-    void sort();
 public:
     static const map<string, int> turkishComparatorMap;
     static const map<string, int> turkishIgnoreCaseComparatorMap;
@@ -100,6 +99,7 @@ public:
     Word* getWord(unsigned long index);
     unsigned long longestWordSize() const;
     unsigned long getWordStartingWith(const string& hash);
+    void sort();
 };
 
 const inline map<string, int> Dictionary::turkishComparatorMap =
