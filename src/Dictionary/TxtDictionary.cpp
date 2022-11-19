@@ -4,7 +4,6 @@
 
 #include <fstream>
 #include <sstream>
-#include <iostream>
 #include "TxtDictionary.h"
 #include "TxtWord.h"
 

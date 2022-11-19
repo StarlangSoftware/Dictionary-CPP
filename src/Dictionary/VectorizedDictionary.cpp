@@ -4,6 +4,7 @@
 
 #include <cfloat>
 #include <cmath>
+#include <fstream>
 #include "VectorSizeMismatch.h"
 #include "VectorizedDictionary.h"
 
@@ -14,6 +15,26 @@
  * @param comparator {@link WordComparator} type input.
  */
 VectorizedDictionary::VectorizedDictionary(Comparator comparator) : Dictionary(comparator) {
+}
+
+VectorizedDictionary::VectorizedDictionary(const string &fileName, Comparator comparator) : Dictionary(comparator) {
+    ifstream inputFile;
+    string line;
+    inputFile.open(fileName, ifstream :: in);
+    while (inputFile.good()) {
+        getline(inputFile, line);
+        vector<string> tokens = Word::split(line);
+        if (!tokens.empty()) {
+            VectorizedWord* currentWord;
+            Vector vector = Vector((long) 0, 0);
+            for (int i = 1; i < tokens.size(); i++){
+                vector.add(stof(tokens[i]));
+            }
+            currentWord = new VectorizedWord(tokens[0], vector);
+            words.emplace_back(currentWord);
+        }
+    }
+    inputFile.close();
 }
 
 /**
