@@ -35,6 +35,7 @@ VectorizedDictionary::VectorizedDictionary(const string &fileName, Comparator co
         }
     }
     inputFile.close();
+    sort();
 }
 
 /**
