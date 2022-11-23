@@ -99,6 +99,13 @@ TEST_CASE("WordTest-testToUpperCase") {
     REQUIRE(Word::toUpperCase("abcdefghjklmnopqrstuvwxyzçöğüşıi") == "ABCDEFGHJKLMNOPQRSTUVWXYZÇÖĞÜŞIİ");
 }
 
+TEST_CASE("WordTest-testToCapital") {
+    REQUIRE(Word::toCapital("ali") == "Ali");
+    REQUIRE(Word::toCapital("ilginç") == "İlginç");
+    REQUIRE(Word::toCapital("çemizgezek") == "Çemizgezek");
+    REQUIRE(Word::toCapital("ö") == "Ö");
+}
+
 TEST_CASE("WordTest-testIsMoney") {
     REQUIRE_FALSE(!Word::isMoney("dolar"));
     REQUIRE_FALSE(!Word::isMoney("sterlin"));

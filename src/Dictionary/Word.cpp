@@ -449,6 +449,10 @@ string Word::toUpperCase(const string& surfaceForm){
     return result;
 }
 
+string Word::toCapital(const string& surfaceForm){
+    return Word::toUpperCase(Word::substring(surfaceForm, 0, 1)) + Word::substring(surfaceForm, 1);
+}
+
 string* Word::allCharacters(const string& surfaceForm){
     auto* result = new string[size(surfaceForm)];
     string ch;

@@ -37,6 +37,7 @@ public:
     static int size(const string& surfaceForm);
     static string toLowerCase(const string& surfaceForm);
     static string toUpperCase(const string& surfaceForm);
+    static string toCapital(const string& surfaceForm);
     static string lastChar(const string& surfaceForm);
     static string charAt(const string& surfaceForm, int index);
     static string* allCharacters(const string& surfaceForm);
