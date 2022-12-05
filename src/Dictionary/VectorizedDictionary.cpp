@@ -14,10 +14,10 @@
  *
  * @param comparator {@link WordComparator} type input.
  */
-VectorizedDictionary::VectorizedDictionary(Comparator comparator) : Dictionary(comparator) {
+VectorizedDictionary::VectorizedDictionary() : Dictionary() {
 }
 
-VectorizedDictionary::VectorizedDictionary(const string &fileName, Comparator comparator) : Dictionary(comparator) {
+VectorizedDictionary::VectorizedDictionary(const string &fileName) : Dictionary() {
     ifstream inputFile;
     string line;
     inputFile.open(fileName, ifstream :: in);

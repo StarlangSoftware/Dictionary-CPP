@@ -15,7 +15,7 @@
  * @param filename   String input.
  * @param comparator {@link WordComparator} input.
  */
-TxtDictionary::TxtDictionary(const string& filename, Comparator comparator) : Dictionary(comparator) {
+TxtDictionary::TxtDictionary(const string& filename) : Dictionary() {
     loadFromText(filename);
     this->filename = filename;
 }
@@ -30,7 +30,7 @@ TxtDictionary::TxtDictionary(const string& filename, Comparator comparator) : Di
  * @param comparator {@link WordComparator} input.
  * @param misspelledFileName String input.
  */
-TxtDictionary::TxtDictionary(const string& filename, Comparator comparator, const string& misspelledFileName, const string& morphologicalLexicon) : Dictionary(comparator){
+TxtDictionary::TxtDictionary(const string& filename, const string& misspelledFileName, const string& morphologicalLexicon) : Dictionary(){
     loadFromText(filename);
     this->filename = filename;
     loadMisspelledWords(misspelledFileName);
@@ -43,7 +43,7 @@ TxtDictionary::TxtDictionary(const string& filename, Comparator comparator, cons
  * @return new {@link TxtDictionary} object.
  */
 TxtDictionary TxtDictionary::clone() {
-    return TxtDictionary(filename, comparator, "turkish_misspellings.txt");
+    return TxtDictionary(filename, "turkish_misspellings.txt");
 }
 
 /**

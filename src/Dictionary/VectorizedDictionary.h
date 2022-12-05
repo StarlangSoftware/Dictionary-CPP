@@ -11,8 +11,8 @@
 
 class VectorizedDictionary : public Dictionary {
 public:
-    explicit VectorizedDictionary(Comparator comparator);
-    VectorizedDictionary(const string& fileName, Comparator comparator);
+    explicit VectorizedDictionary();
+    VectorizedDictionary(const string& fileName);
     void addWord(VectorizedWord* word);
     VectorizedWord* mostSimilarWord(const string& name);
     vector<Word*>* kMeansClustering(int iteration, int k) const;

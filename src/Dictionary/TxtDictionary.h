@@ -16,8 +16,8 @@ private:
     void loadMorphologicalLexicon(const string& filename);
     void addWordWhenRootSoften(Trie* trie, const string& last, const string& root, TxtWord* word);
 public:
-    explicit TxtDictionary(const string& filename, Comparator comparator);
-    explicit TxtDictionary(const string& filename = "turkish_dictionary.txt", Comparator comparator = Comparator::ENGLISH, const string& misspelledFileName = "turkish_misspellings.txt", const string& morphologicalLexicon = "turkish_morphological_lexicon.txt");
+    explicit TxtDictionary(const string& filename);
+    explicit TxtDictionary(const string& filename = "turkish_dictionary.txt", const string& misspelledFileName = "turkish_misspellings.txt", const string& morphologicalLexicon = "turkish_morphological_lexicon.txt");
     TxtDictionary clone();
     bool addWithFlag(const string& name, const string& flag);
     void addNumber(const string& name);
