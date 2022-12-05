@@ -18,7 +18,6 @@ using namespace std;
 class Dictionary {
 private:
     unordered_map<string, int> wordMap;
-    void updateWordMap();
 protected:
     vector<Word*> words;
     string filename;
@@ -36,6 +35,7 @@ public:
     unsigned long longestWordSize() const;
     unsigned long getWordStartingWith(const string& hash) const;
     void sort();
+    void updateWordMap();
 };
 
 #endif //DICTIONARY_DICTIONARY_H
