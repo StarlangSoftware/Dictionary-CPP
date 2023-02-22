@@ -43,8 +43,10 @@ SyllableList::SyllableList(const string& word) {
             if (Word::size(tempSyl) == 1) {
                 // The previous character was also a consonant.
                 if (!TurkishLanguage::isVowel(Word::charAt(tempSyl, 0))) {
-                    if (syllables.empty())
-                        throw IrregularWordException();
+                    if (syllables.empty()){
+                        sbSyllable += c;
+                        continue;
+                    }
                     unsigned long lastPos = syllables.size() - 1;
                     string str = syllables.at(lastPos).getText();
                     str += tempSyl;
@@ -54,7 +56,7 @@ SyllableList::SyllableList(const string& word) {
                     }
                     // Update previous syllable.
                     syllables[lastPos] = Syllable(str);
-                    sbSyllable = c;
+                    sbSyllable = "";
                 }
             }
             sbSyllable += c;
