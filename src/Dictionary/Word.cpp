@@ -17,7 +17,7 @@ Word::Word() = default;
  *
  * @param _name String input.
  */
-Word::Word(const string& _name) {
+Word::Word(const string &_name) {
     this->name = _name;
 }
 
@@ -35,7 +35,7 @@ string Word::to_string() {
  *
  * @return the length of name variable.
  */
-int Word::charCount() const{
+int Word::charCount() const {
     return Word::size(name);
 }
 
@@ -53,7 +53,7 @@ Word Word::clone() {
  *
  * @return name variable.
  */
-string Word::getName() const{
+string Word::getName() const {
     return name;
 }
 
@@ -62,11 +62,11 @@ string Word::getName() const{
  *
  * @param _name String input.
  */
-void Word::setName(const string& _name) {
+void Word::setName(const string &_name) {
     this->name = _name;
 }
 
-bool Word::startsWith(const string& largeString, const string& smallString) {
+bool Word::startsWith(const string &largeString, const string &smallString) {
     return largeString.rfind(smallString, 0) == 0;
 }
 
@@ -77,10 +77,10 @@ bool Word::startsWith(const string& largeString, const string& smallString) {
  * @param stem String input.
  * @return the last vowel.
  */
-string Word::beforeLastVowel(const string& stem) {
+string Word::beforeLastVowel(const string &stem) {
     int before = 1;
     string ch, last = "0";
-    string* stemChars = Word::allCharacters(stem);
+    string *stemChars = Word::allCharacters(stem);
     for (int i = Word::size(stem) - 1; i >= 0; i--) {
         ch = stemChars[i];
         if (TurkishLanguage::isVowel(ch)) {
@@ -104,9 +104,9 @@ string Word::beforeLastVowel(const string& stem) {
  * @param stem String input.
  * @return the last vowel.
  */
-string Word::lastVowel(const string& stem) {
+string Word::lastVowel(const string &stem) {
     string ch;
-    string* stemChars = Word::allCharacters(stem);
+    string *stemChars = Word::allCharacters(stem);
     for (int i = Word::size(stem) - 1; i >= 0; i--) {
         ch = stemChars[i];
         if (TurkishLanguage::isVowel(ch)) {
@@ -131,7 +131,7 @@ string Word::lastVowel(const string& stem) {
  * @param stem String input.
  * @return the last phoneme.
  */
-string Word::lastPhoneme(const string& stem) {
+string Word::lastPhoneme(const string &stem) {
     if (stem.empty()) {
         return " ";
     }
@@ -149,7 +149,7 @@ string Word::lastPhoneme(const string& stem) {
  * @param surfaceForm String input to check the first character.
  * @return true if the character at first index of surfaceForm is a capital letter, false otherwise.
  */
-bool Word::isCapital(const string& surfaceForm) {
+bool Word::isCapital(const string &surfaceForm) {
     string ch = Word::charAt(surfaceForm, 0);
     return TurkishLanguage::UPPERCASE_LETTERS.find(ch) != -1;
 }
@@ -165,8 +165,16 @@ bool Word::isCapital(const string& surfaceForm) {
  * @param surfaceForm String input to check.
  * @return true if it is a punctuation, false otherwise.
  */
-bool Word::isPunctuation(const string& surfaceForm) {
-    return (surfaceForm == "." || surfaceForm == "..." || surfaceForm == "[" || surfaceForm == "]" || surfaceForm == "\u2026" || surfaceForm == "%" || surfaceForm == "&" || surfaceForm == "=" || surfaceForm == "\u0060\u0060" || surfaceForm == "\u0060" || surfaceForm == "''" || surfaceForm == "$" || surfaceForm == "!" || surfaceForm == "?" || surfaceForm == "," || surfaceForm == ":" || surfaceForm == "--" || surfaceForm == ";" || surfaceForm == "(" || surfaceForm == ")" || surfaceForm == "'" || surfaceForm == "\"" || surfaceForm == "\u201C" || surfaceForm == "\u2018" || surfaceForm == "\u201D" || surfaceForm == "…" || surfaceForm == "\u25CF" || surfaceForm == "/" || surfaceForm == "-" || surfaceForm == "+" || surfaceForm == "-LRB-" || surfaceForm == "-RRB-" || surfaceForm == "-LCB-" || surfaceForm == "-RCB-" || surfaceForm == "-LSB-" || surfaceForm == "-RSB-");
+bool Word::isPunctuation(const string &surfaceForm) {
+    return (surfaceForm == "." || surfaceForm == "..." || surfaceForm == "[" || surfaceForm == "]" ||
+            surfaceForm == "\u2026" || surfaceForm == "%" || surfaceForm == "&" || surfaceForm == "=" ||
+            surfaceForm == "\u0060\u0060" || surfaceForm == "\u0060" || surfaceForm == "''" || surfaceForm == "$" ||
+            surfaceForm == "!" || surfaceForm == "?" || surfaceForm == "," || surfaceForm == ":" ||
+            surfaceForm == "--" || surfaceForm == ";" || surfaceForm == "(" || surfaceForm == ")" ||
+            surfaceForm == "'" || surfaceForm == "\"" || surfaceForm == "\u201C" || surfaceForm == "\u2018" ||
+            surfaceForm == "\u201D" || surfaceForm == "…" || surfaceForm == "\u25CF" || surfaceForm == "/" ||
+            surfaceForm == "-" || surfaceForm == "+" || surfaceForm == "-LRB-" || surfaceForm == "-RRB-" ||
+            surfaceForm == "-LCB-" || surfaceForm == "-RCB-" || surfaceForm == "-LSB-" || surfaceForm == "-RSB-");
 }
 
 /**
@@ -176,7 +184,7 @@ bool Word::isPunctuation(const string& surfaceForm) {
  * @param surfaceForm String input to check.
  * @return true if it equals to "bay" or "bayan", false otherwise.
  */
-bool Word::isHonorific(const string& surfaceForm) {
+bool Word::isHonorific(const string &surfaceForm) {
     string lowercase = surfaceForm;
     std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
     return lowercase == "bay" || lowercase == "bayan";
@@ -189,7 +197,7 @@ bool Word::isHonorific(const string& surfaceForm) {
  * @param surfaceForm String input to check.
  * @return true if it equals to "şirket", "corp", "inc.", or "co.", and false otherwise.
  */
-bool Word::isOrganization(const string& surfaceForm) {
+bool Word::isOrganization(const string &surfaceForm) {
     string lowercase = surfaceForm;
     std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
     return lowercase == "corp" || lowercase == "inc." || lowercase == "co.";
@@ -202,10 +210,13 @@ bool Word::isOrganization(const string& surfaceForm) {
  * @param surfaceForm String input to check.
  * @return true if it equals to one of the dolar, sterlin, paunt, ons, ruble, mark, frank, yan, sent, yen' or $, and false otherwise.
  */
-bool Word::isMoney(const string& surfaceForm) {
+bool Word::isMoney(const string &surfaceForm) {
     string lowercase = surfaceForm;
     std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
-    return startsWith(lowercase, "dolar") || startsWith(lowercase, "sterlin") || startsWith(lowercase, "paunt") || startsWith(lowercase, "ons") || startsWith(lowercase, "ruble") || startsWith(lowercase, "mark") || startsWith(lowercase, "frank") || lowercase == "yen" || startsWith(lowercase, "sent") || startsWith(lowercase, "cent") || startsWith(lowercase, "yen'") || lowercase.find_first_of('$') != -1;
+    return startsWith(lowercase, "dolar") || startsWith(lowercase, "sterlin") || startsWith(lowercase, "paunt") ||
+           startsWith(lowercase, "ons") || startsWith(lowercase, "ruble") || startsWith(lowercase, "mark") ||
+           startsWith(lowercase, "frank") || lowercase == "yen" || startsWith(lowercase, "sent") ||
+           startsWith(lowercase, "cent") || startsWith(lowercase, "yen'") || lowercase.find_first_of('$') != -1;
 }
 
 /**
@@ -214,7 +225,7 @@ bool Word::isMoney(const string& surfaceForm) {
  *
  * @return true if name is a punctuation.
  */
-bool Word::isPunctuation() const{
+bool Word::isPunctuation() const {
     return name == "," || name == "." || name == "!" || name == "?" || name == ":"
            || name == ";" || name == "\"" || name == "''" || name == "'" || name == "`"
            || name == "``" || name == "..." || name == "-" || name == "--";
@@ -229,16 +240,22 @@ bool Word::isPunctuation() const{
  * @param surfaceForm String input to check.
  * @return true if it presents time, and false otherwise.
  */
-bool Word::isTime(const string& surfaceForm) {
+bool Word::isTime(const string &surfaceForm) {
     string lowercase = surfaceForm;
     lowercase = Word::toLowerCase(lowercase);
-    if (std::regex_search(lowercase, std::regex("(\\d\\d|\\d):(\\d\\d|\\d):(\\d\\d|\\d)")) || std::regex_search(lowercase, std::regex("(\\d\\d|\\d):(\\d\\d|\\d)"))) {
+    if (std::regex_search(lowercase, std::regex("(\\d\\d|\\d):(\\d\\d|\\d):(\\d\\d|\\d)")) ||
+        std::regex_search(lowercase, std::regex("(\\d\\d|\\d):(\\d\\d|\\d)"))) {
         return true;
     }
-    if (startsWith(lowercase, "ocak") || startsWith(lowercase, "şubat") || startsWith(lowercase, "mart") || startsWith(lowercase, "nisan") || startsWith(lowercase, "mayıs") || startsWith(lowercase, "haziran") || startsWith(lowercase, "temmuz") || startsWith(lowercase, "ağustos") || startsWith(lowercase, "eylül") || startsWith(lowercase, "ekim") || startsWith(lowercase, "kasım") || lowercase == "aralık") {
+    if (startsWith(lowercase, "ocak") || startsWith(lowercase, "şubat") || startsWith(lowercase, "mart") ||
+        startsWith(lowercase, "nisan") || startsWith(lowercase, "mayıs") || startsWith(lowercase, "haziran") ||
+        startsWith(lowercase, "temmuz") || startsWith(lowercase, "ağustos") || startsWith(lowercase, "eylül") ||
+        startsWith(lowercase, "ekim") || startsWith(lowercase, "kasım") || lowercase == "aralık") {
         return true;
     }
-    if (lowercase == "pazar" || lowercase == "salı" || startsWith(lowercase, "çarşamba") || startsWith(lowercase, "perşembe") || lowercase == "cuma" || startsWith(lowercase, "cumartesi") || startsWith(lowercase, "pazartesi")) {
+    if (lowercase == "pazar" || lowercase == "salı" || startsWith(lowercase, "çarşamba") ||
+        startsWith(lowercase, "perşembe") || lowercase == "cuma" || startsWith(lowercase, "cumartesi") ||
+        startsWith(lowercase, "pazartesi")) {
         return true;
     }
     if (lowercase.find_first_of('\'') != -1) {
@@ -249,7 +266,7 @@ bool Word::isTime(const string& surfaceForm) {
         if (time > 1900 && time < 2200) {
             return true;
         }
-    } catch (invalid_argument& e) {
+    } catch (invalid_argument &e) {
     }
     return false;
 }
@@ -261,8 +278,8 @@ bool Word::isTime(const string& surfaceForm) {
  * @param sourceArray String {@link array}.
  * @return Word type {@link array}.
  */
-Word* Word::toWordArray(string *sourceArray, int size) {
-    Word* result = new Word[size];
+Word *Word::toWordArray(string *sourceArray, int size) {
+    Word *result = new Word[size];
     for (int i = 0; i < size; i++) {
         result[i] = Word(sourceArray[i]);
     }
@@ -275,7 +292,7 @@ Word* Word::toWordArray(string *sourceArray, int size) {
  *
  * @return Word type {@link vector}.
  */
-vector<Word> Word::toCharacters() const{
+vector<Word> Word::toCharacters() const {
     vector<Word> characters;
     for (int i = 0; i < Word::size(name); i++) {
         string s;
@@ -285,7 +302,7 @@ vector<Word> Word::toCharacters() const{
     return characters;
 }
 
-vector<string> Word::split(const string& line, const string& separator) {
+vector<string> Word::split(const string &line, const string &separator) {
     size_t current, previous = 0;
     vector<string> tokens;
     current = line.find_first_of(separator);
@@ -298,24 +315,25 @@ vector<string> Word::split(const string& line, const string& separator) {
     return tokens;
 }
 
-vector<string> Word::split(const string& line) {
+vector<string> Word::split(const string &line) {
     std::istringstream stringStream(line);
     vector<string> tokens{istream_iterator<string>{stringStream}, istream_iterator<string>{}};
     return tokens;
 }
 
-bool Word::endsWith(const string& largeString, const string& smallString) {
-    if (largeString.size() < smallString.size()){
+bool Word::endsWith(const string &largeString, const string &smallString) {
+    if (largeString.size() < smallString.size()) {
         return false;
     }
-    return largeString.find(smallString, largeString.size() - smallString.size()) == largeString.size() - smallString.size();
+    return largeString.find(smallString, largeString.size() - smallString.size()) ==
+           largeString.size() - smallString.size();
 }
 
-int Word::size(const string& surfaceForm) {
-    const char* charPtr = surfaceForm.c_str();
+int Word::size(const string &surfaceForm) {
+    const char *charPtr = surfaceForm.c_str();
     int count = 0;
-    while (*charPtr){
-        if ((*charPtr & 0xC0) != 0x80){
+    while (*charPtr) {
+        if ((*charPtr & 0xC0) != 0x80) {
             count++;
         }
         charPtr++;
@@ -323,47 +341,49 @@ int Word::size(const string& surfaceForm) {
     return count;
 }
 
-string Word::toLowerCase(const string& surfaceForm){
-    const char* charPtr = surfaceForm.c_str();
+string Word::toLowerCase(const string &surfaceForm) {
+    const char *charPtr = surfaceForm.c_str();
     string result;
     string currentChar;
-    while (*charPtr){
-        if ((*charPtr & 0xC0) != 0x80){
-            do{
+    while (*charPtr) {
+        if ((*charPtr & 0xC0) != 0x80) {
+            do {
                 currentChar += *charPtr;
                 charPtr++;
             } while ((*charPtr & 0xC0) == 0x80);
-            if (currentChar == "ç" || currentChar == "ö" || currentChar == "ğ" || currentChar == "ü" || currentChar == "ş" || currentChar == "ı" || currentChar == "â" || currentChar == "û" || currentChar == "î"){
+            if (currentChar == "ç" || currentChar == "ö" || currentChar == "ğ" || currentChar == "ü" ||
+                currentChar == "ş" || currentChar == "ı" || currentChar == "â" || currentChar == "û" ||
+                currentChar == "î") {
                 result += currentChar;
             } else {
-                if (currentChar == "Ç"){
+                if (currentChar == "Ç") {
                     result += "ç";
                 } else {
-                    if (currentChar == "Ö"){
+                    if (currentChar == "Ö") {
                         result += "ö";
                     } else {
-                        if (currentChar == "Ğ"){
+                        if (currentChar == "Ğ") {
                             result += "ğ";
                         } else {
-                            if (currentChar == "Ü"){
+                            if (currentChar == "Ü") {
                                 result += "ü";
                             } else {
-                                if (currentChar == "Ş"){
+                                if (currentChar == "Ş") {
                                     result += "ş";
                                 } else {
-                                    if (currentChar == "İ"){
+                                    if (currentChar == "İ") {
                                         result += "i";
                                     } else {
-                                        if (currentChar == "I"){
+                                        if (currentChar == "I") {
                                             result += "ı";
                                         } else {
-                                            if (currentChar == "Â"){
+                                            if (currentChar == "Â") {
                                                 result += "â";
                                             } else {
-                                                if (currentChar == "Î"){
+                                                if (currentChar == "Î") {
                                                     result += "î";
                                                 } else {
-                                                    if (currentChar == "Û"){
+                                                    if (currentChar == "Û") {
                                                         result += "û";
                                                     } else {
                                                         result += tolower(currentChar[0]);
@@ -386,47 +406,49 @@ string Word::toLowerCase(const string& surfaceForm){
     return result;
 }
 
-string Word::toUpperCase(const string& surfaceForm){
-    const char* charPtr = surfaceForm.c_str();
+string Word::toUpperCase(const string &surfaceForm) {
+    const char *charPtr = surfaceForm.c_str();
     string result;
     string currentChar;
-    while (*charPtr){
-        if ((*charPtr & 0xC0) != 0x80){
-            do{
+    while (*charPtr) {
+        if ((*charPtr & 0xC0) != 0x80) {
+            do {
                 currentChar += *charPtr;
                 charPtr++;
             } while ((*charPtr & 0xC0) == 0x80);
-            if (currentChar == "Ç" || currentChar == "Ö" || currentChar == "Ğ" || currentChar == "Ü" || currentChar == "Ş" || currentChar == "I" || currentChar == "İ"){
+            if (currentChar == "Ç" || currentChar == "Ö" || currentChar == "Ğ" || currentChar == "Ü" ||
+                currentChar == "Ş" || currentChar == "I" || currentChar == "İ" || currentChar == "Â" ||
+                currentChar == "Î" || currentChar == "Û") {
                 result += currentChar;
             } else {
-                if (currentChar == "ç"){
+                if (currentChar == "ç") {
                     result += "Ç";
                 } else {
-                    if (currentChar == "ö"){
+                    if (currentChar == "ö") {
                         result += "Ö";
                     } else {
-                        if (currentChar == "ğ"){
+                        if (currentChar == "ğ") {
                             result += "Ğ";
                         } else {
-                            if (currentChar == "ü"){
+                            if (currentChar == "ü") {
                                 result += "Ü";
                             } else {
-                                if (currentChar == "ş"){
+                                if (currentChar == "ş") {
                                     result += "Ş";
                                 } else {
-                                    if (currentChar == "i"){
+                                    if (currentChar == "i") {
                                         result += "İ";
                                     } else {
-                                        if (currentChar == "ı"){
+                                        if (currentChar == "ı") {
                                             result += "I";
                                         } else {
-                                            if (currentChar == "â"){
+                                            if (currentChar == "â") {
                                                 result += "Â";
                                             } else {
-                                                if (currentChar == "î"){
+                                                if (currentChar == "î") {
                                                     result += "Î";
                                                 } else {
-                                                    if (currentChar == "û"){
+                                                    if (currentChar == "û") {
                                                         result += "Û";
                                                     } else {
                                                         result += toupper(currentChar[0]);
@@ -449,19 +471,19 @@ string Word::toUpperCase(const string& surfaceForm){
     return result;
 }
 
-string Word::toCapital(const string& surfaceForm){
+string Word::toCapital(const string &surfaceForm) {
     return Word::toUpperCase(Word::substring(surfaceForm, 0, 1)) + Word::substring(surfaceForm, 1);
 }
 
-string* Word::allCharacters(const string& surfaceForm){
-    auto* result = new string[size(surfaceForm)];
+string *Word::allCharacters(const string &surfaceForm) {
+    auto *result = new string[size(surfaceForm)];
     string ch;
-    string* index = result;
-    const char* charPtr = surfaceForm.c_str();
-    do{
+    string *index = result;
+    const char *charPtr = surfaceForm.c_str();
+    do {
         ch += *charPtr;
         charPtr++;
-        if ((*charPtr & 0xC0) != 0x80){
+        if ((*charPtr & 0xC0) != 0x80) {
             *index = ch;
             index++;
             ch = "";
@@ -470,14 +492,14 @@ string* Word::allCharacters(const string& surfaceForm){
     return result;
 }
 
-string Word::charAt(const string& surfaceForm, int index) {
-    const char* charPtr = surfaceForm.c_str();
+string Word::charAt(const string &surfaceForm, int index) {
+    const char *charPtr = surfaceForm.c_str();
     string result;
     int current = 0;
-    while (*charPtr){
-        if ((*charPtr & 0xC0) != 0x80){
-            if (current == index){
-                do{
+    while (*charPtr) {
+        if ((*charPtr & 0xC0) != 0x80) {
+            if (current == index) {
+                do {
                     result += *charPtr;
                     charPtr++;
                 } while ((*charPtr & 0xC0) == 0x80);
@@ -491,30 +513,30 @@ string Word::charAt(const string& surfaceForm, int index) {
     return "";
 }
 
-string Word::lastChar(const string& surfaceForm){
+string Word::lastChar(const string &surfaceForm) {
     int size = surfaceForm.size();
-    const char* charPtr = surfaceForm.c_str();
-    if ((*(charPtr + size - 1) & 0xC0) != 0x80){
+    const char *charPtr = surfaceForm.c_str();
+    if ((*(charPtr + size - 1) & 0xC0) != 0x80) {
         return string(1, *(charPtr + size - 1));
     } else {
         return string(charPtr + size - 2);
     }
 }
 
-string Word::substring(const string& surfaceForm, int index, int length){
-    const char* charPtr = surfaceForm.c_str();
+string Word::substring(const string &surfaceForm, int index, int length) {
+    const char *charPtr = surfaceForm.c_str();
     string result;
     int current = 0, currentLength = 0;
-    if (length <= 0 || index < 0){
+    if (length <= 0 || index < 0) {
         return "";
     }
-    while (*charPtr){
-        if ((*charPtr & 0xC0) != 0x80){
-            if (current == index){
-                do{
+    while (*charPtr) {
+        if ((*charPtr & 0xC0) != 0x80) {
+            if (current == index) {
+                do {
                     result += *charPtr;
                     charPtr++;
-                    if ((*charPtr & 0xC0) != 0x80){
+                    if ((*charPtr & 0xC0) != 0x80) {
                         currentLength++;
                     }
                 } while (currentLength < length && *charPtr);
@@ -528,14 +550,14 @@ string Word::substring(const string& surfaceForm, int index, int length){
     return "";
 }
 
-string Word::substring(const string& surfaceForm, int index){
-    const char* charPtr = surfaceForm.c_str();
+string Word::substring(const string &surfaceForm, int index) {
+    const char *charPtr = surfaceForm.c_str();
     string result;
     int current = 0;
-    while (*charPtr){
-        if ((*charPtr & 0xC0) != 0x80){
-            if (current == index){
-                do{
+    while (*charPtr) {
+        if ((*charPtr & 0xC0) != 0x80) {
+            if (current == index) {
+                do {
                     result += *charPtr;
                     charPtr++;
                 } while (*charPtr);
@@ -549,27 +571,27 @@ string Word::substring(const string& surfaceForm, int index){
     return "";
 }
 
-string Word::substringExceptLastChar(const string& surfaceForm){
+string Word::substringExceptLastChar(const string &surfaceForm) {
     int size = surfaceForm.size();
-    const char* charPtr = surfaceForm.c_str();
-    if ((*(charPtr + size - 1) & 0xC0) != 0x80){
+    const char *charPtr = surfaceForm.c_str();
+    if ((*(charPtr + size - 1) & 0xC0) != 0x80) {
         return surfaceForm.substr(0, size - 1);
     } else {
         return surfaceForm.substr(0, size - 2);
     }
 }
 
-string Word::substringExceptLastTwoChars(const string& surfaceForm){
+string Word::substringExceptLastTwoChars(const string &surfaceForm) {
     int size = surfaceForm.size();
-    const char* charPtr = surfaceForm.c_str();
-    if ((*(charPtr + size - 1) & 0xC0) != 0x80){
-        if (((*(charPtr + size - 2) & 0xC0) != 0x80)){
+    const char *charPtr = surfaceForm.c_str();
+    if ((*(charPtr + size - 1) & 0xC0) != 0x80) {
+        if (((*(charPtr + size - 2) & 0xC0) != 0x80)) {
             return surfaceForm.substr(0, size - 2);
         } else {
             return surfaceForm.substr(0, size - 3);
         }
     } else {
-        if (((*(charPtr + size - 3) & 0xC0) != 0x80)){
+        if (((*(charPtr + size - 3) & 0xC0) != 0x80)) {
             return surfaceForm.substr(0, size - 3);
         } else {
             return surfaceForm.substr(0, size - 4);
@@ -577,7 +599,7 @@ string Word::substringExceptLastTwoChars(const string& surfaceForm){
     }
 }
 
-string Word::replaceAll(string str, const string& from, const string& to) {
+string Word::replaceAll(string str, const string &from, const string &to) {
     size_t start_pos = 0;
     while ((start_pos = str.find(from, start_pos)) != std::string::npos) {
         str.replace(start_pos, from.length(), to);
@@ -586,17 +608,17 @@ string Word::replaceAll(string str, const string& from, const string& to) {
     return str;
 }
 
-string Word::trim(const string& str) {
+string Word::trim(const string &str) {
     string result;
     int start = -1, end = -1;
-    for (int i = 0; i < str.size(); i++){
-        if (str[i] != ' '){
+    for (int i = 0; i < str.size(); i++) {
+        if (str[i] != ' ') {
             start = i;
             break;
         }
     }
-    for (int i = str.size() - 1; i >= 0; i--){
-        if (str[i] != ' '){
+    for (int i = str.size() - 1; i >= 0; i--) {
+        if (str[i] != ' ') {
             end = i;
             break;
         }
