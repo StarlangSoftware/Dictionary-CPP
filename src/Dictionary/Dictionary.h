@@ -22,8 +22,6 @@ protected:
     vector<Word*> words;
     string filename;
 public:
-    static const map<string, int> turkishComparatorMap;
-    static const map<string, int> turkishIgnoreCaseComparatorMap;
     Dictionary();
     Word* getWord(const string& name);
     void removeWord(const string& name);

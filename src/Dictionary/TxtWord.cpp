@@ -309,7 +309,7 @@ bool TxtWord::isCode() const {
 }
 
 /**
- * The isCode method returns true if flags {@link unordered_set} contains IS_METRIC.
+ * The isMetric method returns true if flags {@link unordered_set} contains IS_METRIC.
  *
  * @return true if flags {@link unordered_set} contains IS_METRIC.
  */

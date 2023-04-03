@@ -13,7 +13,6 @@
  * filename variable. Then, it calls loadFromText method with given filename.
  *
  * @param filename   String input.
- * @param comparator {@link WordComparator} input.
  */
 TxtDictionary::TxtDictionary(const string& filename) : Dictionary() {
     loadFromText(filename);
@@ -27,7 +26,6 @@ TxtDictionary::TxtDictionary(const string& filename) : Dictionary() {
  * method with given filename. It also loads the misspelling file.
  *
  * @param fileName   String input.
- * @param comparator {@link WordComparator} input.
  * @param misspelledFileName String input.
  */
 TxtDictionary::TxtDictionary(const string& filename, const string& misspelledFileName, const string& morphologicalLexicon) : Dictionary(){

@@ -609,7 +609,6 @@ string Word::replaceAll(string str, const string &from, const string &to) {
 }
 
 string Word::trim(const string &str) {
-    string result;
     int start = -1, end = -1;
     for (int i = 0; i < str.size(); i++) {
         if (str[i] != ' ') {
