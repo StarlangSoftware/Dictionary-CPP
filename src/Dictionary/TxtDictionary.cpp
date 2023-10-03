@@ -8,8 +8,8 @@
 #include "TxtWord.h"
 
 /**
- * Another constructor of {@link TxtDictionary} class which takes a String filename and a {@link WordComparator} as inputs.
- * And calls its super class {@link Dictionary} with given {@link WordComparator}, assigns given filename input to the
+ * Another constructor of TxtDictionary class which takes a String filename and a WordComparator as inputs.
+ * And calls its super class Dictionary with given WordComparator, assigns given filename input to the
  * filename variable. Then, it calls loadFromText method with given filename.
  *
  * @param filename   String input.
@@ -20,9 +20,9 @@ TxtDictionary::TxtDictionary(const string& filename) : Dictionary() {
 }
 
 /**
- * Another constructor of {@link TxtDictionary} class which takes a String filename, a {@link WordComparator} and
- * a misspelled word dictionary file as inputs. And calls its super class {@link Dictionary} with given
- * {@link WordComparator}, assigns given filename input to the filename variable. Then, it calls loadFromText
+ * Another constructor of TxtDictionary class which takes a String filename, a WordComparator and
+ * a misspelled word dictionary file as inputs. And calls its super class Dictionary with given
+ * WordComparator, assigns given filename input to the filename variable. Then, it calls loadFromText
  * method with given filename. It also loads the misspelling file.
  *
  * @param fileName   String input.
@@ -36,9 +36,9 @@ TxtDictionary::TxtDictionary(const string& filename, const string& misspelledFil
 }
 
 /**
- * The clone method which creates new {@link TxtDictionary} object with filename and comparator variables.
+ * The clone method which creates new TxtDictionary object with filename and comparator variables.
  *
- * @return new {@link TxtDictionary} object.
+ * @return new TxtDictionary object.
  */
 TxtDictionary TxtDictionary::clone() {
     return TxtDictionary(filename, "turkish_misspellings.txt");
@@ -54,9 +54,9 @@ void TxtDictionary::addNumber(const string& name) {
 }
 
 /**
- * The addWithFlag method takes a String name and a flag as inputs. First it creates a {@link TxtWord} word, then if
- * given name is not in words {@link vector} it creates new {@link TxtWord} with given name and assigns it to
- * the word and adds given flag to the word, it also add newly created word to the words {@link vector}'s index
+ * The addWithFlag method takes a String name and a flag as inputs. First it creates a TxtWord word, then if
+ * given name is not in words vector it creates new TxtWord with given name and assigns it to
+ * the word and adds given flag to the word, it also add newly created word to the words vector's index
  * found by performing a binary search and return true at the end. If given name is in words {@link java.util.ArrayList},
  * it adds it the given flag to the word.
  *

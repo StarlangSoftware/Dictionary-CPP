@@ -8,12 +8,12 @@
 #include "../Language/TurkishLanguage.h"
 
 /**
- * An empty constructor of {@link Word} class.
+ * An empty constructor of Word class.
  */
 Word::Word() = default;
 
 /**
- * A constructor of {@link Word} class which gets a String name as an input and assigns to the name variable.
+ * A constructor of Word class which gets a String name as an input and assigns to the name variable.
  *
  * @param _name String input.
  */
@@ -40,9 +40,9 @@ int Word::charCount() const {
 }
 
 /**
- * The clone method returns new {@link Word} as name.
+ * The clone method returns new Word as name.
  *
- * @return new {@link Word} as name.
+ * @return new Word as name.
  */
 Word Word::clone() {
     return Word(name);
@@ -71,7 +71,7 @@ bool Word::startsWith(const string &largeString, const string &smallString) {
 }
 
 /**
- * The beforeLastVowel method takes a {@link String} stem as an input. It loops through the given stem and returns
+ * The beforeLastVowel method takes a String stem as an input. It loops through the given stem and returns
  * the second last vowel.
  *
  * @param stem String input.
@@ -98,7 +98,7 @@ string Word::beforeLastVowel(const string &stem) {
 }
 
 /**
- * The lastVowel method takes a {@link String} stem as an input. It loops through the given stem and returns
+ * The lastVowel method takes a String stem as an input. It loops through the given stem and returns
  * the last vowel.
  *
  * @param stem String input.
@@ -126,7 +126,7 @@ string Word::lastVowel(const string &stem) {
 }
 
 /**
- * The lastPhoneme method takes a {@link String} stem as an input. It then returns the last phoneme of the given stem.
+ * The lastPhoneme method takes a String stem as an input. It then returns the last phoneme of the given stem.
  *
  * @param stem String input.
  * @return the last phoneme.
@@ -272,11 +272,11 @@ bool Word::isTime(const string &surfaceForm) {
 }
 
 /**
- * The toWordArray method takes a String {@link array} sourceArray as an input. First it creates
- * a {@link Word} type result array and puts items of input sourceArray to this result {@link array}.
+ * The toWordArray method takes a String array sourceArray as an input. First it creates
+ * a Word type result array and puts items of input sourceArray to this result array.
  *
- * @param sourceArray String {@link array}.
- * @return Word type {@link array}.
+ * @param sourceArray String array.
+ * @return Word type array.
  */
 Word *Word::toWordArray(string *sourceArray, int size) {
     Word *result = new Word[size];
@@ -287,10 +287,10 @@ Word *Word::toWordArray(string *sourceArray, int size) {
 }
 
 /**
- * The toCharacters method creates a {@link Word} type characters {@link vector} and adds characters of name variable
- * to newly created {@link vector}.
+ * The toCharacters method creates a Word type characters vector and adds characters of name variable
+ * to newly created vector.
  *
- * @return Word type {@link vector}.
+ * @return Word type vector.
  */
 vector<Word> Word::toCharacters() const {
     vector<Word> characters;

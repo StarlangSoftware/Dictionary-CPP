@@ -5,7 +5,7 @@
 #include "Syllable.h"
 
 /**
- * A constructor of {@link Syllable} class which takes a String as an input and initializes _syllable variable with given input.
+ * A constructor of Syllable class which takes a String as an input and initializes _syllable variable with given input.
  *
  * @param _syllable String input.
  */

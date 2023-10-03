@@ -11,16 +11,16 @@ bool compareWord(Word* wordA, Word* wordB)
 }
 
 /**
- * An empty constructor of {@link Dictionary} class.
+ * An empty constructor of Dictionary class.
  */
 Dictionary::Dictionary() = default;
 
 /**
- * The getWord method takes a String name as an input and performs binary search within words {@link vector} and assigns the result
- * to integer variable middle. If the middle is greater than 0, it returns the item at index middle of words {@link vector}, null otherwise.
+ * The getWord method takes a String name as an input and performs binary search within words vector and assigns the result
+ * to integer variable middle. If the middle is greater than 0, it returns the item at index middle of words vector, null otherwise.
  *
  * @param name String input.
- * @return the item at found index of words {@link vector}, null if cannot be found.
+ * @return the item at found index of words vector, null if cannot be found.
  */
 Word* Dictionary::getWord(const string& name){
     if (wordExists(name)){
@@ -47,11 +47,11 @@ bool Dictionary::wordExists(const string& name) const{
 }
 
 /**
- * The getWordIndex method takes a String name as an input and performs binary search within words {@link vector} and assigns the result
+ * The getWordIndex method takes a String name as an input and performs binary search within words vector and assigns the result
  * to integer variable middle. If the middle is greater than 0, it returns the index middle, -1 otherwise.
  *
  * @param name String input.
- * @return found index of words {@link vector}, -1 if cannot be found.
+ * @return found index of words vector, -1 if cannot be found.
  */
 int Dictionary::getWordIndex(const string& name){
     if (wordExists(name)){
@@ -62,26 +62,26 @@ int Dictionary::getWordIndex(const string& name){
 }
 
 /**
- * The size method returns the size of the words {@link vector}.
+ * The size method returns the size of the words vector.
  *
- * @return the size of the words {@link vector}.
+ * @return the size of the words vector.
  */
 unsigned long Dictionary::size() const{
     return words.size();
 }
 
 /**
- * The getWord method which takes an index as an input and returns the value at given index of words {@link vector}.
+ * The getWord method which takes an index as an input and returns the value at given index of words vector.
  *
  * @param index to get the value.
- * @return the value at given index of words {@link vector}.
+ * @return the value at given index of words vector.
  */
 Word* Dictionary::getWord(int index) const{
     return words.at(index);
 }
 
 /**
- * The longestWordSize method loops through the words {@link vector} and returns the item with the maximum word length.
+ * The longestWordSize method loops through the words vector and returns the item with the maximum word length.
  *
  * @return the item with the maximum word length.
  */
@@ -96,11 +96,11 @@ unsigned long Dictionary::longestWordSize() const{
 }
 
 /**
- * The getWordStartingWith method takes a String hash as an input and performs binary search within words {@link ArrayList} and assigns the result
+ * The getWordStartingWith method takes a String hash as an input and performs binary search within words ArrayList and assigns the result
  * to integer variable middle. If the middle is greater than 0, it returns the index middle, -middle-1 otherwise.
  *
  * @param hash String input.
- * @return found index of words {@link vector}, -middle-1 if cannot be found.
+ * @return found index of words vector, -middle-1 if cannot be found.
  */
 unsigned long Dictionary::getWordStartingWith(const string& hash) const{
     return binarySearch(new Word(hash));

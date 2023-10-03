@@ -5,7 +5,7 @@
 #include "TxtWord.h"
 
 /**
- * A constructor of {@link TxtWord} class which takes a String name as an input and calls its super class {@link Word}
+ * A constructor of TxtWord class which takes a String name as an input and calls its super class Word
  * with given name.
  *
  * @param name String name.
@@ -23,7 +23,7 @@ void TxtWord::addFlag(const string& flag) {
 }
 
 /**
- * Another constructor of {@link TxtWord} class which takes a String name and a flag as inputs and calls its super class {@link Word}
+ * Another constructor of TxtWord class which takes a String name and a flag as inputs and calls its super class Word
  * with given name. Then, calls addFlag method with given flag.
  *
  * @param name String input.
@@ -35,7 +35,7 @@ TxtWord::TxtWord(const string& name, const string& flag) {
 }
 
 /**
- * The clone method creates {@link TxtWord} type copy with name and add items of flags {@link unordered_set}  to the copy.
+ * The clone method creates TxtWord type copy with name and add items of flags {@link unordered_set}  to the copy.
  *
  * @return TxtWord type copy.
  */
@@ -834,7 +834,7 @@ bool TxtWord::showsSuRegularities() const {
 }
 
 /**
- * The samePos method takes {@link TxtWord} as input and returns true if;
+ * The samePos method takes TxtWord as input and returns true if;
  * <p>
  * flags {@link unordered_set} contains CL_ISIM or given word is CL_ISIM or
  * CL_ISIM: The bare-form of the word is a noun. e.g. Abla
@@ -851,7 +851,7 @@ bool TxtWord::showsSuRegularities() const {
  * flags {@link unordered_set} contains IS_ADVERB or given word is IS_ADVERB, false otherwise.
  * IS_ADVERB: The bare-form of the word is a adverb. e.g. Tekrar, açıktan, adeta
  *
- * @param word {@link TxtWord} type input.
+ * @param word TxtWord type input.
  * @return true if given word is nominal, verb, adjective, pronoun or adverb, false otherwise.
  */
 bool TxtWord::samePos(const TxtWord& word) const {

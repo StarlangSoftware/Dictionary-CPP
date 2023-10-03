@@ -5,11 +5,11 @@
 #include "VectorizedWord.h"
 
 /**
- * A constructor of  {@link VectorizedWord} class which takes a String and a {@link Vector} as inputs and calls its
- * super class {@link Word} with name and also initializes vector variable with given input.
+ * A constructor of  VectorizedWord class which takes a String and a Vector as inputs and calls its
+ * super class Word with name and also initializes vector variable with given input.
  *
  * @param name   Strin input.
- * @param vector {@link Vector} type input.
+ * @param vector Vector type input.
  */
 VectorizedWord::VectorizedWord(const string& name, const Vector& vector) : Word(name) {
     this->vector = vector;

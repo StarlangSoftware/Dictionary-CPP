@@ -5,27 +5,27 @@
 #include "Trie.h"
 
 /**
- * A constructor of {@link Trie} class which creates a new {@link TrieNode} as rootNode.
+ * A constructor of Trie class which creates a new TrieNode as rootNode.
  */
 Trie::Trie(){
     rootNode = new TrieNode();
 }
 
 /**
- * The addWord method which takes a String word and a {@link Word} root as inputs and adds given word and root to the rootNode.
+ * The addWord method which takes a String word and a Word root as inputs and adds given word and root to the rootNode.
  *
  * @param word String input.
- * @param root {@link Word} input.
+ * @param root Word input.
  */
 void Trie::addWord(const string& word, Word* root) {
     rootNode->addWord(word, root);
 }
 
 /**
- * The getWordsWithPrefix method which takes a String surfaceForm as an input. First it creates a {@link TrieNode} current and assigns
- * the rootNode to it, then it creates a new {@link HashSet} words. It loops i times where i ranges from 0 to length of surfaceForm
- * and assigns current's child that corresponds to the surfaceForm's char at index i and assigns it as {@link TrieNode} current.
- * If current is not null, it adds all words of current to the words {@link HashSet}.
+ * The getWordsWithPrefix method which takes a String surfaceForm as an input. First it creates a TrieNode current and assigns
+ * the rootNode to it, then it creates a new HashSet words. It loops i times where i ranges from 0 to length of surfaceForm
+ * and assigns current's child that corresponds to the surfaceForm's char at index i and assigns it as TrieNode current.
+ * If current is not null, it adds all words of current to the words HashSet.
  *
  * @param surfaceForm String input.
  * @return words {@link unordered_set}.
@@ -49,15 +49,15 @@ unordered_set<Word*> Trie::getWordsWithPrefix(const string& surfaceForm) const{
 }
 
 /**
- * The getCompoundWordStartingWith method takes a String hash. First it creates a {@link TrieNode} current and assigns
+ * The getCompoundWordStartingWith method takes a String hash. First it creates a TrieNode current and assigns
  * the rootNode to it. Then it loops i times where i ranges from 0 to length of given hash and assigns current's child that
  * corresponds to the hash's char at index i and assigns it as current. If current is null, it returns null.
  * <p>
- * If current is not null,  it loops through the words of current {@link TrieNode} and if it is a Portmanteau word, it
+ * If current is not null,  it loops through the words of current TrieNode and if it is a Portmanteau word, it
  * directly returns the word.
  *
  * @param hash String input.
- * @return null if {@link TrieNode} is null, otherwise portmanteau word.
+ * @return null if TrieNode is null, otherwise portmanteau word.
  */
 TxtWord *Trie::getCompoundWordStartingWith(const string& hash) const{
     TrieNode* current = rootNode;

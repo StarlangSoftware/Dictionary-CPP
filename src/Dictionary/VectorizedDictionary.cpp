@@ -9,10 +9,10 @@
 #include "VectorizedDictionary.h"
 
 /**
- * A constructor of {@link VectorizedDictionary} class which takes a {@link WordComparator} as an input and calls its
- * super class {@link Dictionary} with {@link WordComparator} input.
+ * A constructor of VectorizedDictionary class which takes a WordComparator as an input and calls its
+ * super class Dictionary with WordComparator input.
  *
- * @param comparator {@link WordComparator} type input.
+ * @param comparator WordComparator type input.
  */
 VectorizedDictionary::VectorizedDictionary() : Dictionary() {
 }
@@ -39,9 +39,9 @@ VectorizedDictionary::VectorizedDictionary(const string &fileName) : Dictionary(
 }
 
 /**
- * The addWord method takes a {@link VectorizedWord} as an input and adds it to the words {@link ArrayList}.
+ * The addWord method takes a VectorizedWord as an input and adds it to the words ArrayList.
  *
- * @param word {@link VectorizedWord} input.
+ * @param word VectorizedWord input.
  */
 void VectorizedDictionary::addWord(VectorizedWord *word) {
     words.emplace_back(word);
@@ -49,9 +49,9 @@ void VectorizedDictionary::addWord(VectorizedWord *word) {
 
 /**
  * The mostSimilarWord method takes a String name as an input, declares a maxDistance as -MAX_VALUE and creates a
- * {@link VectorizedWord} word by getting the given name from words {@link ArrayList}. Then, it loops through the
- * words {@link ArrayList} and if the current word is not equal to given input it calculates the distance between current
- * word and given word by using dot product and updates the maximum distance. It then returns the result {@link VectorizedWord}
+ * VectorizedWord word by getting the given name from words ArrayList. Then, it loops through the
+ * words ArrayList and if the current word is not equal to given input it calculates the distance between current
+ * word and given word by using dot product and updates the maximum distance. It then returns the result VectorizedWord
  * which holds the most similar word to the given word.
  *
  * @param name String input.
@@ -154,13 +154,13 @@ struct vectorizedWordComparator{
         this->comparedWord = comparedWord;
     }
     /**
-     * The compare method takes two {@link VectorizedWord}s as inputs and finds out the dot products as result1
+     * The compare method takes two VectorizedWords as inputs and finds out the dot products as result1
      * and result2, then it calls the compare method wirth result1 and result2. It returns the value {@code 0}
      * if result1 is  numerically equal to result2; a value less than {@code 0} if result1 is numerically less than
      * result2; and a value greater than {@code 0} if result1 is numerically greater than result2.
      *
-     * @param wordA {@link VectorizedWord} type input.
-     * @param wordB {@link VectorizedWord} type input.
+     * @param wordA VectorizedWord type input.
+     * @param wordB VectorizedWord type input.
      * @return the value {@code 0} if result1 is  numerically equal to result2; a value less than {@code 0} if
      * result1 is numerically less than result2; and a value greater than {@code 0} if result1 is numerically
      * greater than result2.
@@ -178,11 +178,11 @@ struct vectorizedWordComparator{
 };
 
 /**
- * The mostSimilarKWords method takes a String name and an integer k as inputs, and creates an {@link vector} resultWords
- * of type {@link VectorizedWord} and a {@link VectorizedWord} word by getting the given name from words {@link vector}.
- * Then, it loops through the words {@link vector} and adds current word to the resultWords. It then sort resultWords {@link vector}
- * and if the size of the {@link vector} is greater than given input k, it removes items from the ending. Then, it returns
- * resultWords {@link vector}.
+ * The mostSimilarKWords method takes a String name and an integer k as inputs, and creates an vector resultWords
+ * of type VectorizedWord and a VectorizedWord word by getting the given name from words vector.
+ * Then, it loops through the words vector and adds current word to the resultWords. It then sort resultWords vector
+ * and if the size of the vector is greater than given input k, it removes items from the ending. Then, it returns
+ * resultWords vector.
  *
  * @param name String input.
  * @param k Integer input.

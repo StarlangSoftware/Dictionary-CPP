@@ -5,13 +5,13 @@
 #include "ExceptionalWord.h"
 
 /**
- * A constructor of {@link ExceptionalWord} class which takes a {@link Pos} as a  part of speech and two Strings; name
- * and root as inputs. Then, calls its super class {@link Word} with given name and initialises root and pos variables
+ * A constructor of ExceptionalWord class which takes a Pos as a  part of speech and two Strings; name
+ * and root as inputs. Then, calls its super class Word with given name and initialises root and pos variables
  * with given inputs.
  *
  * @param name String input.
  * @param root String input.
- * @param pos  {@link Pos} type input.
+ * @param pos  Pos type input.
  */
 ExceptionalWord::ExceptionalWord(const string& name, const string& root, Pos pos) : Word(name) {
     this->root = root;
