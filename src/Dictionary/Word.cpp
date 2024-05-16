@@ -66,6 +66,13 @@ void Word::setName(const string &_name) {
     this->name = _name;
 }
 
+/**
+ * Checks if a given large string starts with the given small prefix string.
+ * @param largeString String for which prefix search is done.
+ * @param smallString The prefix string
+ * @return true if the character sequence smallString is a prefix of the character sequence largeString; false
+ * otherwise.
+ */
 bool Word::startsWith(const string &largeString, const string &smallString) {
     return largeString.rfind(smallString, 0) == 0;
 }
@@ -302,6 +309,12 @@ vector<Word> Word::toCharacters() const {
     return characters;
 }
 
+/**
+ * Splits a given string with respect to a given separator string and returns the split parts as a vector.
+ * @param line Given string
+ * @param separator Separator string
+ * @return Split parts as a vector
+ */
 vector<string> Word::split(const string &line, const string &separator) {
     size_t current, previous = 0;
     vector<string> tokens;
@@ -315,12 +328,24 @@ vector<string> Word::split(const string &line, const string &separator) {
     return tokens;
 }
 
+/**
+ * Splits a given string with respect to empty string and returns the split parts as a vector.
+ * @param line Given string
+ * @return Split parts as a vector
+ */
 vector<string> Word::split(const string &line) {
     std::istringstream stringStream(line);
     vector<string> tokens{istream_iterator<string>{stringStream}, istream_iterator<string>{}};
     return tokens;
 }
 
+/**
+ * Checks if a given large string ends with the given small suffix string.
+ * @param largeString String for which suffix search is done.
+ * @param smallString The suffix string
+ * @return true if the character sequence smallString is a suffix of the character sequence largeString; false
+ * otherwise.
+ */
 bool Word::endsWith(const string &largeString, const string &smallString) {
     if (largeString.size() < smallString.size()) {
         return false;
@@ -329,6 +354,11 @@ bool Word::endsWith(const string &largeString, const string &smallString) {
            largeString.size() - smallString.size();
 }
 
+/**
+ * Number of UTF8 characters in a given string.
+ * @param surfaceForm Given input string
+ * @return Number of UTF8 characters in the input string
+ */
 int Word::size(const string &surfaceForm) {
     const char *charPtr = surfaceForm.c_str();
     int count = 0;
@@ -341,6 +371,11 @@ int Word::size(const string &surfaceForm) {
     return count;
 }
 
+/**
+ * Converts a given string to its lowercase form.
+ * @param surfaceForm Given input string
+ * @return Lowercase version of the input string
+ */
 string Word::toLowerCase(const string &surfaceForm) {
     const char *charPtr = surfaceForm.c_str();
     string result;
@@ -406,6 +441,11 @@ string Word::toLowerCase(const string &surfaceForm) {
     return result;
 }
 
+/**
+ * Converts a given string to its uppercase form.
+ * @param surfaceForm Given input string
+ * @return Uppercase version of the input string
+ */
 string Word::toUpperCase(const string &surfaceForm) {
     const char *charPtr = surfaceForm.c_str();
     string result;
@@ -471,10 +511,20 @@ string Word::toUpperCase(const string &surfaceForm) {
     return result;
 }
 
+/**
+ * Converts the given string into its capital form
+ * @param surfaceForm Given string which will be converted to its capital form
+ * @return Capital form of the input string.
+ */
 string Word::toCapital(const string &surfaceForm) {
     return Word::toUpperCase(Word::substring(surfaceForm, 0, 1)) + Word::substring(surfaceForm, 1);
 }
 
+/**
+ * Returns an array of UTF8 characters of the input string.
+ * @param surfaceForm Input string
+ * @return An array of UTF8 characters.
+ */
 string *Word::allCharacters(const string &surfaceForm) {
     auto *result = new string[size(surfaceForm)];
     string ch;
@@ -492,6 +542,12 @@ string *Word::allCharacters(const string &surfaceForm) {
     return result;
 }
 
+/**
+ * Returns the UTF8 character value at the specified index of an input string
+ * @param surfaceForm Input string
+ * @param index The index of the character
+ * @return UTF8 character value at the specified index
+ */
 string Word::charAt(const string &surfaceForm, int index) {
     const char *charPtr = surfaceForm.c_str();
     string result;
@@ -513,6 +569,11 @@ string Word::charAt(const string &surfaceForm, int index) {
     return "";
 }
 
+/**
+ * Returns last UTF8 character of an input string
+ * @param surfaceForm Input string
+ * @return Last UTF8 character
+ */
 string Word::lastChar(const string &surfaceForm) {
     int size = surfaceForm.size();
     const char *charPtr = surfaceForm.c_str();
@@ -523,6 +584,14 @@ string Word::lastChar(const string &surfaceForm) {
     }
 }
 
+/**
+ * Returns a string that is a substring of this string. The substring begins at the specified index and extends
+ * length characters.
+ * @param surfaceForm Input string
+ * @param index The beginning index, inclusive.
+ * @param length Length of the substring
+ * @return Substring of this string starting from index with size length
+ */
 string Word::substring(const string &surfaceForm, int index, int length) {
     const char *charPtr = surfaceForm.c_str();
     string result;
@@ -550,6 +619,13 @@ string Word::substring(const string &surfaceForm, int index, int length) {
     return "";
 }
 
+/**
+ * Returns a string that is a substring of this string. The substring begins at the specified index and extends
+ * until the end of the input string.
+ * @param surfaceForm Input string
+ * @param index The beginning index, inclusive.
+ * @return Substring of this string starting from index
+ */
 string Word::substring(const string &surfaceForm, int index) {
     const char *charPtr = surfaceForm.c_str();
     string result;
@@ -571,6 +647,11 @@ string Word::substring(const string &surfaceForm, int index) {
     return "";
 }
 
+/**
+ * Returns copy of the input string with last character removed.
+ * @param surfaceForm Input string
+ * @return Copy of the input string with last character removed.
+ */
 string Word::substringExceptLastChar(const string &surfaceForm) {
     int size = surfaceForm.size();
     const char *charPtr = surfaceForm.c_str();
@@ -581,6 +662,11 @@ string Word::substringExceptLastChar(const string &surfaceForm) {
     }
 }
 
+/**
+ * Returns copy of the input string with last two characters removed.
+ * @param surfaceForm Input string
+ * @return Copy of the input string with last two characters removed.
+ */
 string Word::substringExceptLastTwoChars(const string &surfaceForm) {
     int size = surfaceForm.size();
     const char *charPtr = surfaceForm.c_str();
@@ -599,6 +685,13 @@ string Word::substringExceptLastTwoChars(const string &surfaceForm) {
     }
 }
 
+/**
+ * Replaces all occurrences of from with to in an input string.
+ * @param str Input string
+ * @param from Replacement string
+ * @param to Replaced string
+ * @return A copy of the input string where all occurrences of from is replaced with to.
+ */
 string Word::replaceAll(string str, const string &from, const string &to) {
     size_t start_pos = 0;
     while ((start_pos = str.find(from, start_pos)) != std::string::npos) {
@@ -608,6 +701,11 @@ string Word::replaceAll(string str, const string &from, const string &to) {
     return str;
 }
 
+/**
+ * Removes leading and trailing spaces from an input string.
+ * @param str Input string
+ * @return Returns a copy string with leading and trailing spaces removed.
+ */
 string Word::trim(const string &str) {
     int start = -1, end = -1;
     for (int i = 0; i < str.size(); i++) {

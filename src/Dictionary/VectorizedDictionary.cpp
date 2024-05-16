@@ -9,14 +9,17 @@
 #include "VectorizedDictionary.h"
 
 /**
- * A constructor of VectorizedDictionary class which takes a WordComparator as an input and calls its
- * super class Dictionary with WordComparator input.
- *
- * @param comparator WordComparator type input.
+ * A constructor of VectorizedDictionary class that calls its super class Dictionary.
  */
 VectorizedDictionary::VectorizedDictionary() : Dictionary() {
 }
 
+/**
+ * Another constructor of {@link VectorizedDictionary} class that takes an input file
+ * containing the word vectors as input. Line j contains an array of numbers that represent the word vector for
+ * that corresponding word at index j.
+ * @param fileName Name of the input file that contains the word vectors
+ */
 VectorizedDictionary::VectorizedDictionary(const string &fileName) : Dictionary() {
     ifstream inputFile;
     string line;

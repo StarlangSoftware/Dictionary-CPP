@@ -42,6 +42,11 @@ void Dictionary::removeWord(const string& name) {
     updateWordMap();
 }
 
+/**
+ * Checks if a word in the dictionary exists for a given name.
+ * @param name Input word
+ * @return True, if the word exists, false otherwise.
+ */
 bool Dictionary::wordExists(const string& name) const{
     return wordMap.contains(name);
 }
@@ -106,11 +111,20 @@ unsigned long Dictionary::getWordStartingWith(const string& hash) const{
     return binarySearch(new Word(hash));
 }
 
+/**
+ * Sorts the words array according to the comparator function.
+ */
 void Dictionary::sort() {
     std::sort(words.begin(), words.end(), compareWord);
     updateWordMap();
 }
 
+/**
+ * Checks if a given word exists in the dictionary by performing a binary search on the words array.
+ * @param word Searched word
+ * @return the index of the search word, if it is contained in the words array; otherwise, (-(insertion point) - 1). The
+ * insertion point is defined as the point at which the word would be inserted into the words array.
+ */
 int Dictionary::binarySearch(Word *word) const {
     int lo = 0;
     int hi = words.size() - 1;
@@ -128,6 +142,9 @@ int Dictionary::binarySearch(Word *word) const {
     return -(lo + 1);
 }
 
+/**
+ * Updates word map so that word index at i is in the hash map with key word and value i.
+ */
 void Dictionary::updateWordMap() {
     for (int i = 0; i < words.size(); i++){
         wordMap[words[i]->getName()] = i;

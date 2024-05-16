@@ -65,10 +65,18 @@ bool TxtWord::containsFlag(const string& flag) const {
     return flags.contains(flag);
 }
 
+/**
+ * Mutator for the inner morphology of the word.
+ * @param morphology New inner morphology of the word.
+ */
 void TxtWord::setMorphology(const string& _morphology){
     this->morphology = _morphology;
 }
 
+/**
+ * Accessor for the inner morphology of the word.
+ * @return Inner morphology of the word.
+ */
 string TxtWord::getMorphology() const{
     return this->morphology;
 }

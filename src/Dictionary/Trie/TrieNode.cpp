@@ -68,6 +68,11 @@ unordered_set<Word*> TrieNode::getWords() const{
     return words;
 }
 
+/**
+ * Checks if the given child exists for a given character for the current TrieNode in the Trie.
+ * @param ch Character for which search is done.
+ * @return True if th child exists for that character, false otherwise.
+ */
 bool TrieNode::childExists(const string& ch) const{
     return children.contains(ch);
 }

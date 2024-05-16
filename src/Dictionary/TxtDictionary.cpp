@@ -410,6 +410,12 @@ void TxtDictionary::loadMisspelledWords(const string& filename) {
     inputFile.close();
 }
 
+/**
+ * Loads the morphological lexicon of a given language. Only Turkish is currently supported. Morphological lexicon
+ * contains subwords (possibly meaningful words or metamorphemes) of each root word in the Turkish dictionary. For
+ * example, abacılık has subwords aba+CH+LHK.
+ * @param filename Name of the morphological lexicon file
+ */
 void TxtDictionary::loadMorphologicalLexicon(const string& filename) {
     string line;
     ifstream inputFile;
