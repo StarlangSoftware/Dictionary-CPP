@@ -8,7 +8,7 @@
  * A constructor of  VectorizedWord class which takes a String and a Vector as inputs and calls its
  * super class Word with name and also initializes vector variable with given input.
  *
- * @param name   Strin input.
+ * @param name   String input.
  * @param vector Vector type input.
  */
 VectorizedWord::VectorizedWord(const string& name, const Vector& vector) : Word(name) {

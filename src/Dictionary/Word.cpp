@@ -514,7 +514,7 @@ string Word::toUpperCase(const string &surfaceForm) {
 /**
  * Converts the given string into its capital form
  * @param surfaceForm Given string which will be converted to its capital form
- * @return Capital form of the input string.
+ * @return Capitalized form of the input string.
  */
 string Word::toCapital(const string &surfaceForm) {
     return Word::toUpperCase(Word::substring(surfaceForm, 0, 1)) + Word::substring(surfaceForm, 1);
