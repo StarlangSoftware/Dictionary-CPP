@@ -6,6 +6,7 @@
 #define DICTIONARY_WORD_H
 
 #include <string>
+#include <map>
 using namespace std;
 
 class Word {
@@ -32,6 +33,7 @@ public:
     static bool endsWith(const string& largeString, const string& smallString);
     static vector<string> split(const string& line, const string& separator);
     static vector<string> split(const string& line);
+    static map<string, string> readHashMap(const string& fileName);
     static string replaceAll(string str, const string& from, const string& to);
     static string trim(const string& str);
     static int size(const string& surfaceForm);

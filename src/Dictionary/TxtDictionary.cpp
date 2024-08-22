@@ -396,18 +396,7 @@ Trie* TxtDictionary::prepareTrie(){
  * @param filename File name input.
  */
 void TxtDictionary::loadMisspelledWords(const string& filename) {
-    int i;
-    string line;
-    ifstream inputFile;
-    inputFile.open(filename, ifstream :: in);
-    while (inputFile.good()) {
-        getline(inputFile, line);
-        vector<string> tokens = Word::split(line);
-        if (tokens.size() == 2) {
-            misspelledWords.emplace(tokens[0], tokens[1]);
-        }
-    }
-    inputFile.close();
+    misspelledWords = Word::readHashMap(filename);
 }
 
 /**

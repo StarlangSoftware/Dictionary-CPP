@@ -4,6 +4,7 @@
 
 #include <regex>
 #include <sstream>
+#include <fstream>
 #include "Word.h"
 #include "../Language/TurkishLanguage.h"
 
@@ -326,6 +327,22 @@ vector<string> Word::split(const string &line, const string &separator) {
     }
     tokens.push_back(line.substr(previous, current - previous));
     return tokens;
+}
+
+map<string, string> Word::readHashMap(const string& fileName){
+    string line;
+    map<string, string> result;
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    while (inputFile.good()) {
+        getline(inputFile, line);
+        vector<string> tokens = Word::split(line);
+        if (tokens.size() == 2) {
+            result.emplace(tokens[0], tokens[1]);
+        }
+    }
+    inputFile.close();
+    return result;
 }
 
 /**
