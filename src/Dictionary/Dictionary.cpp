@@ -2,7 +2,6 @@
 // Created by Olcay Taner Yıldız on 2.01.2019.
 //
 #include <locale>
-#include <map>
 #include "Dictionary.h"
 
 bool compareWord(Word* wordA, Word* wordB)

@@ -8,7 +8,7 @@ from conan.tools.files import copy
 class DictionaryConan(ConanFile):
     name = "dictionary"
     version = "1.0.0"
-    requires = "math/1.0.0"
+    requires = ["math/1.0.0", "util/1.0.0"]
     license = "GPL License"
     author = "Olcay Taner Yildiz olcay.yildiz@ozyegin.edu.tr"
     url = "https://github.com/StarlangSoftware/Dictionary-CPP"

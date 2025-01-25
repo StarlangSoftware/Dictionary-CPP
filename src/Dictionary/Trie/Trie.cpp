@@ -17,7 +17,7 @@ Trie::Trie(){
  * @param word String input.
  * @param root Word input.
  */
-void Trie::addWord(const string& word, Word* root) {
+void Trie::addWord(const string& word, Word* root) const {
     rootNode->addWord(word, root);
 }
 
@@ -28,7 +28,7 @@ void Trie::addWord(const string& word, Word* root) {
  * If current is not null, it adds all words of current to the words HashSet.
  *
  * @param surfaceForm String input.
- * @return words {@link unordered_set}.
+ * @return words {@link unordered_set} {@endlink}.
  */
 unordered_set<Word*> Trie::getWordsWithPrefix(const string& surfaceForm) const{
     TrieNode* current = rootNode;

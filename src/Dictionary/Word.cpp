@@ -3,9 +3,9 @@
 //
 
 #include <regex>
-#include <sstream>
 #include <fstream>
 #include "Word.h"
+#include "StringUtils.h"
 #include "../Language/TurkishLanguage.h"
 
 /**
@@ -45,7 +45,7 @@ int Word::charCount() const {
  *
  * @return new Word as name.
  */
-Word Word::clone() {
+Word Word::clone() const {
     return Word(name);
 }
 
@@ -65,17 +65,6 @@ string Word::getName() const {
  */
 void Word::setName(const string &_name) {
     this->name = _name;
-}
-
-/**
- * Checks if a given large string starts with the given small prefix string.
- * @param largeString String for which prefix search is done.
- * @param smallString The prefix string
- * @return true if the character sequence smallString is a prefix of the character sequence largeString; false
- * otherwise.
- */
-bool Word::startsWith(const string &largeString, const string &smallString) {
-    return largeString.rfind(smallString, 0) == 0;
 }
 
 /**
@@ -221,10 +210,10 @@ bool Word::isOrganization(const string &surfaceForm) {
 bool Word::isMoney(const string &surfaceForm) {
     string lowercase = surfaceForm;
     std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
-    return startsWith(lowercase, "dolar") || startsWith(lowercase, "sterlin") || startsWith(lowercase, "paunt") ||
-           startsWith(lowercase, "ons") || startsWith(lowercase, "ruble") || startsWith(lowercase, "mark") ||
-           startsWith(lowercase, "frank") || lowercase == "yen" || startsWith(lowercase, "sent") ||
-           startsWith(lowercase, "cent") || startsWith(lowercase, "yen'") || lowercase.find_first_of('$') != -1;
+    return StringUtils::startsWith(lowercase, "dolar") || StringUtils::startsWith(lowercase, "sterlin") || StringUtils::startsWith(lowercase, "paunt") ||
+           StringUtils::startsWith(lowercase, "ons") || StringUtils::startsWith(lowercase, "ruble") || StringUtils::startsWith(lowercase, "mark") ||
+           StringUtils::startsWith(lowercase, "frank") || lowercase == "yen" || StringUtils::startsWith(lowercase, "sent") ||
+           StringUtils::startsWith(lowercase, "cent") || StringUtils::startsWith(lowercase, "yen'") || lowercase.find_first_of('$') != -1;
 }
 
 /**
@@ -255,15 +244,15 @@ bool Word::isTime(const string &surfaceForm) {
         std::regex_search(lowercase, std::regex("(\\d\\d|\\d):(\\d\\d|\\d)"))) {
         return true;
     }
-    if (startsWith(lowercase, "ocak") || startsWith(lowercase, "şubat") || startsWith(lowercase, "mart") ||
-        startsWith(lowercase, "nisan") || startsWith(lowercase, "mayıs") || startsWith(lowercase, "haziran") ||
-        startsWith(lowercase, "temmuz") || startsWith(lowercase, "ağustos") || startsWith(lowercase, "eylül") ||
-        startsWith(lowercase, "ekim") || startsWith(lowercase, "kasım") || lowercase == "aralık") {
+    if (StringUtils::startsWith(lowercase, "ocak") || StringUtils::startsWith(lowercase, "şubat") || StringUtils::startsWith(lowercase, "mart") ||
+        StringUtils::startsWith(lowercase, "nisan") || StringUtils::startsWith(lowercase, "mayıs") || StringUtils::startsWith(lowercase, "haziran") ||
+        StringUtils::startsWith(lowercase, "temmuz") || StringUtils::startsWith(lowercase, "ağustos") || StringUtils::startsWith(lowercase, "eylül") ||
+        StringUtils::startsWith(lowercase, "ekim") || StringUtils::startsWith(lowercase, "kasım") || lowercase == "aralık") {
         return true;
     }
-    if (lowercase == "pazar" || lowercase == "salı" || startsWith(lowercase, "çarşamba") ||
-        startsWith(lowercase, "perşembe") || lowercase == "cuma" || startsWith(lowercase, "cumartesi") ||
-        startsWith(lowercase, "pazartesi")) {
+    if (lowercase == "pazar" || lowercase == "salı" || StringUtils::startsWith(lowercase, "çarşamba") ||
+        StringUtils::startsWith(lowercase, "perşembe") || lowercase == "cuma" || StringUtils::startsWith(lowercase, "cumartesi") ||
+        StringUtils::startsWith(lowercase, "pazartesi")) {
         return true;
     }
     if (lowercase.find_first_of('\'') != -1) {
@@ -308,67 +297,6 @@ vector<Word> Word::toCharacters() const {
         characters.emplace_back(Word(s));
     }
     return characters;
-}
-
-/**
- * Splits a given string with respect to a given separator string and returns the split parts as a vector.
- * @param line Given string
- * @param separator Separator string
- * @return Split parts as a vector
- */
-vector<string> Word::split(const string &line, const string &separator) {
-    size_t current, previous = 0;
-    vector<string> tokens;
-    current = line.find_first_of(separator);
-    while (current != string::npos) {
-        tokens.push_back(line.substr(previous, current - previous));
-        previous = current + 1;
-        current = line.find_first_of(separator, previous);
-    }
-    tokens.push_back(line.substr(previous, current - previous));
-    return tokens;
-}
-
-map<string, string> Word::readHashMap(const string& fileName){
-    string line;
-    map<string, string> result;
-    ifstream inputFile;
-    inputFile.open(fileName, ifstream :: in);
-    while (inputFile.good()) {
-        getline(inputFile, line);
-        vector<string> tokens = Word::split(line);
-        if (tokens.size() == 2) {
-            result.emplace(tokens[0], tokens[1]);
-        }
-    }
-    inputFile.close();
-    return result;
-}
-
-/**
- * Splits a given string with respect to empty string and returns the split parts as a vector.
- * @param line Given string
- * @return Split parts as a vector
- */
-vector<string> Word::split(const string &line) {
-    std::istringstream stringStream(line);
-    vector<string> tokens{istream_iterator<string>{stringStream}, istream_iterator<string>{}};
-    return tokens;
-}
-
-/**
- * Checks if a given large string ends with the given small suffix string.
- * @param largeString String for which suffix search is done.
- * @param smallString The suffix string
- * @return true if the character sequence smallString is a suffix of the character sequence largeString; false
- * otherwise.
- */
-bool Word::endsWith(const string &largeString, const string &smallString) {
-    if (largeString.size() < smallString.size()) {
-        return false;
-    }
-    return largeString.find(smallString, largeString.size() - smallString.size()) ==
-           largeString.size() - smallString.size();
 }
 
 /**
@@ -700,42 +628,4 @@ string Word::substringExceptLastTwoChars(const string &surfaceForm) {
             return surfaceForm.substr(0, size - 4);
         }
     }
-}
-
-/**
- * Replaces all occurrences of from with to in an input string.
- * @param str Input string
- * @param from Replacement string
- * @param to Replaced string
- * @return A copy of the input string where all occurrences of from is replaced with to.
- */
-string Word::replaceAll(string str, const string &from, const string &to) {
-    size_t start_pos = 0;
-    while ((start_pos = str.find(from, start_pos)) != std::string::npos) {
-        str.replace(start_pos, from.length(), to);
-        start_pos += to.length();
-    }
-    return str;
-}
-
-/**
- * Removes leading and trailing spaces from an input string.
- * @param str Input string
- * @return Returns a copy string with leading and trailing spaces removed.
- */
-string Word::trim(const string &str) {
-    int start = -1, end = -1;
-    for (int i = 0; i < str.size(); i++) {
-        if (str[i] != ' ') {
-            start = i;
-            break;
-        }
-    }
-    for (int i = str.size() - 1; i >= 0; i--) {
-        if (str[i] != ' ') {
-            end = i;
-            break;
-        }
-    }
-    return str.substr(start, end - start + 1);
 }

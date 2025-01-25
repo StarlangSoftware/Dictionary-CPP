@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include "TxtDictionary.h"
+#include <StringUtils.h>
 #include "TxtWord.h"
 
 /**
@@ -25,7 +26,7 @@ TxtDictionary::TxtDictionary(const string& filename) : Dictionary() {
  * WordComparator, assigns given filename input to the filename variable. Then, it calls loadFromText
  * method with given filename. It also loads the misspelling file.
  *
- * @param fileName   String input.
+ * @param filename   String input.
  * @param misspelledFileName String input.
  */
 TxtDictionary::TxtDictionary(const string& filename, const string& misspelledFileName, const string& morphologicalLexicon) : Dictionary(){
@@ -40,7 +41,7 @@ TxtDictionary::TxtDictionary(const string& filename, const string& misspelledFil
  *
  * @return new TxtDictionary object.
  */
-TxtDictionary TxtDictionary::clone() {
+TxtDictionary TxtDictionary::clone() const {
     return TxtDictionary(filename, "turkish_misspellings.txt");
 }
 
@@ -57,14 +58,28 @@ void TxtDictionary::addNumber(const string& name) {
  * The addWithFlag method takes a String name and a flag as inputs. First it creates a TxtWord word, then if
  * given name is not in words vector it creates new TxtWord with given name and assigns it to
  * the word and adds given flag to the word, it also add newly created word to the words vector's index
- * found by performing a binary search and return true at the end. If given name is in words {@link java.util.ArrayList},
+ * found by performing a binary search and return true at the end. If given name is in words vector,
  * it adds it the given flag to the word.
  *
  * @param name String input.
  * @param flag String flag.
- * @return true if given name is in words {@link java.util.ArrayList}, false otherwise.
+ * @return true if given name is in words ArrayList, false otherwise.
  */
 bool TxtDictionary::addWithFlag(const string& name, const string& flag) {
+    string lowercase = Word::toLowerCase(name);
+    auto* word = (TxtWord*) getWord(lowercase);
+    if (word == nullptr){
+        word = new TxtWord(name, flag);
+        int insert_index = -binarySearch(word) - 1;
+        if (insert_index >= 0){
+            words.insert(words.begin() + insert_index, word);
+        }
+        return true;
+    } else {
+        if (!word->containsFlag(flag)){
+            word->addFlag(flag);
+        }
+    }
     return false;
 }
 
@@ -163,7 +178,7 @@ bool TxtDictionary::addPronoun(const string& name) {
  * @param secondFilename String input.
  * @param mergedFilename String input.
  */
-void TxtDictionary::mergeDictionary(const string& secondFilename, const string& mergedFilename) {
+void TxtDictionary::mergeDictionary(const string& secondFilename, const string& mergedFilename) const {
     ifstream firstfile, secondfile;
     ofstream outfile;
     string st1, st2;
@@ -227,7 +242,7 @@ void TxtDictionary::loadFromText(const string& filename) {
     inputFile.open(filename, ifstream :: in);
     while (inputFile.good()) {
         getline(inputFile, line);
-        vector<string> tokens = Word::split(line);
+        vector<string> tokens = StringUtils::split(line);
         if (!tokens.empty()) {
             currentWord = new TxtWord(tokens[0]);
             for (i = 1; i < tokens.size(); i++) {
@@ -245,7 +260,7 @@ void TxtDictionary::loadFromText(const string& filename) {
  *
  * @param filename String input.
  */
-void TxtDictionary::saveAsTxt(const string& filename) {
+void TxtDictionary::saveAsTxt(const string& filename) const {
     ofstream outfile;
     int i;
     outfile.open(filename, ofstream :: out);
@@ -307,7 +322,6 @@ void TxtDictionary::addWordWhenRootSoften(Trie* trie, const string& last, const 
  * endingKChangesIntoG condition, if it is true then addWord method with rootWithoutLast will be used with added 'g'.
  * Ex : ahenk + i = ahengi
  *
- * @param currentDictionary the dictionary that Trie will be created.
  * @return the resulting Trie.
  */
 Trie* TxtDictionary::prepareTrie(){
@@ -396,7 +410,7 @@ Trie* TxtDictionary::prepareTrie(){
  * @param filename File name input.
  */
 void TxtDictionary::loadMisspelledWords(const string& filename) {
-    misspelledWords = Word::readHashMap(filename);
+    misspelledWords = StringUtils::readHashMap(filename);
 }
 
 /**
@@ -411,7 +425,7 @@ void TxtDictionary::loadMorphologicalLexicon(const string& filename) {
     inputFile.open(filename, ifstream :: in);
     while (inputFile.good()) {
         getline(inputFile, line);
-        vector<string> tokens = Word::split(line);
+        vector<string> tokens = StringUtils::split(line);
         if (tokens.size() == 2) {
             auto* word = (TxtWord*) getWord(tokens[0]);
             if (word != nullptr){

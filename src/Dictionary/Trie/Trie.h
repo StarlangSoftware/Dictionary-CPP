@@ -18,7 +18,7 @@ public:
         TrieNode* current = rootNode;
         delete current;
     }
-    void addWord(const string& word, Word* root);
+    void addWord(const string& word, Word* root) const;
     unordered_set<Word*> getWordsWithPrefix(const string& surfaceForm) const;
     TxtWord* getCompoundWordStartingWith(const string& hash) const;
 };

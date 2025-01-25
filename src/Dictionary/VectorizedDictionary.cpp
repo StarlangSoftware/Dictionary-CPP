@@ -7,6 +7,7 @@
 #include <fstream>
 #include "VectorSizeMismatch.h"
 #include "VectorizedDictionary.h"
+#include <StringUtils.h>
 
 /**
  * A constructor of VectorizedDictionary class that calls its super class Dictionary.
@@ -26,7 +27,7 @@ VectorizedDictionary::VectorizedDictionary(const string &fileName) : Dictionary(
     inputFile.open(fileName, ifstream :: in);
     while (inputFile.good()) {
         getline(inputFile, line);
-        vector<string> tokens = Word::split(line);
+        vector<string> tokens = StringUtils::split(line);
         if (!tokens.empty()) {
             VectorizedWord* currentWord;
             Vector vector = Vector((long) 0, 0);
@@ -168,7 +169,7 @@ struct vectorizedWordComparator{
      * result1 is numerically less than result2; and a value greater than {@code 0} if result1 is numerically
      * greater than result2.
      */
-    bool operator() (VectorizedWord* wordA, VectorizedWord* wordB){
+    bool operator() (VectorizedWord* wordA, VectorizedWord* wordB) const {
         Vector v = comparedWord->getVector(), vA = wordA->getVector(), vB = wordB->getVector();
         double result1 = 0, result2 = 0;
         try {

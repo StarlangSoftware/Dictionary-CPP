@@ -18,7 +18,7 @@ private:
 public:
     explicit TxtDictionary(const string& filename);
     explicit TxtDictionary(const string& filename = "turkish_dictionary.txt", const string& misspelledFileName = "turkish_misspellings.txt", const string& morphologicalLexicon = "turkish_morphological_lexicon.txt");
-    TxtDictionary clone();
+    TxtDictionary clone() const;
     bool addWithFlag(const string& name, const string& flag);
     void addNumber(const string& name);
     void addRealNumber(const string& name);
@@ -30,8 +30,8 @@ public:
     bool addAdjective(const string& name);
     bool addAdverb(const string& name);
     bool addPronoun(const string& name);
-    void mergeDictionary(const string& secondFilename, const string& mergedFilename);
-    void saveAsTxt(const string& filename);
+    void mergeDictionary(const string& secondFilename, const string& mergedFilename) const;
+    void saveAsTxt(const string& filename) const;
     string getCorrectForm(const string& misspelledWord) const;
     Trie* prepareTrie();
 };

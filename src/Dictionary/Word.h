@@ -18,7 +18,7 @@ public:
     explicit Word(const string& name);
     string to_string();
     int charCount() const;
-    Word clone();
+    Word clone() const;
     string getName() const;
     void setName(const string& name);
     static string beforeLastVowel(const string& stem);
@@ -29,13 +29,6 @@ public:
     static bool isHonorific(const string& surfaceForm);
     static bool isOrganization(const string& surfaceForm);
     static bool isMoney(const string& surfaceForm);
-    static bool startsWith(const string& largeString, const string& smallString);
-    static bool endsWith(const string& largeString, const string& smallString);
-    static vector<string> split(const string& line, const string& separator);
-    static vector<string> split(const string& line);
-    static map<string, string> readHashMap(const string& fileName);
-    static string replaceAll(string str, const string& from, const string& to);
-    static string trim(const string& str);
     static int size(const string& surfaceForm);
     static string toLowerCase(const string& surfaceForm);
     static string toUpperCase(const string& surfaceForm);
