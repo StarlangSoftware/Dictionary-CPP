@@ -4,6 +4,8 @@
 #include <locale>
 #include "Dictionary.h"
 
+#include <algorithm>
+
 bool compareWord(Word* wordA, Word* wordB)
 {
     return wordA->getName() < wordB->getName();

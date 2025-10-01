@@ -11,20 +11,20 @@ using namespace std;
 
 bool areSetsNotEqual(unordered_set<Word*> set1, unordered_set<Word*> set2){
     if (set1.size() != set2.size()){
-        return TRUE;
+        return true;
     }
     for (Word* item1 : set1){
-        bool found = FALSE;
+        bool found = false;
         for (Word* item2 : set2){
             if (*item1 == *item2){
-                found = TRUE;
+                found = true;
             }
         }
         if (!found){
-            return TRUE;
+            return true;
         }
     }
-    return FALSE;
+    return false;
 }
 
 TEST_CASE("TrieTest-getWordsWithPrefixSimple") {

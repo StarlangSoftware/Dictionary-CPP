@@ -7,6 +7,8 @@
 #include <fstream>
 #include "VectorSizeMismatch.h"
 #include "VectorizedDictionary.h"
+
+#include <algorithm>
 #include <StringUtils.h>
 
 /**
@@ -30,7 +32,7 @@ VectorizedDictionary::VectorizedDictionary(const string &fileName) : Dictionary(
         vector<string> tokens = StringUtils::split(line);
         if (!tokens.empty()) {
             VectorizedWord* currentWord;
-            Vector vector = Vector((long) 0, 0);
+            Vector vector = Vector((unsigned long) 0, 0);
             for (int i = 1; i < tokens.size(); i++){
                 vector.add(stof(tokens[i]));
             }
