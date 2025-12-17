@@ -53,7 +53,7 @@ const inline string TurkishLanguage::LETTERS = "abcçdefgğhıijklmnoöprsştuü
 /**
  * The isVowel method takes a character as an input and returns true if given character is a vowel.
  *
- * @param ch {@link char} input to check.
+ * @param s {@link string} input to check.
  * @return true if given character is a vowel.
  */
 inline bool TurkishLanguage::isVowel(const string &s) {
@@ -63,7 +63,7 @@ inline bool TurkishLanguage::isVowel(const string &s) {
 /**
  * The isBackVowel method takes a character as an input and returns true if given character is a back vowel.
  *
- * @param ch {@link char} input to check.
+ * @param s {@link char} input to check.
  * @return true if given character is a back vowel.
  */
 inline bool TurkishLanguage::isBackVowel(const string &s){
@@ -73,7 +73,7 @@ inline bool TurkishLanguage::isBackVowel(const string &s){
 /**
  * The isFrontVowel method takes a character as an input and returns true if given character is a front vowel.
  *
- * @param ch {@link char} input to check.
+ * @param s {@link char} input to check.
  * @return true if given character is a front vowel.
  */
 inline bool TurkishLanguage::isFrontVowel(const string &s) {
@@ -83,7 +83,7 @@ inline bool TurkishLanguage::isFrontVowel(const string &s) {
 /**
  * The isBackRoundedVowel method takes a character as an input and returns true if given character is a back rounded vowel.
  *
- * @param ch {@link char} input to check.
+ * @param s {@link char} input to check.
  * @return true if given character is a back rounded vowel.
  */
 inline bool TurkishLanguage::isBackRoundedVowel(const string &s) {
@@ -93,7 +93,7 @@ inline bool TurkishLanguage::isBackRoundedVowel(const string &s) {
 /**
  * The isFrontRoundedVowel method takes a character as an input and returns true if given character is a front rounded vowel.
  *
- * @param ch {@link char} input to check.
+ * @param s {@link char} input to check.
  * @return true if given character is a front rounded vowel.
  */
 inline bool TurkishLanguage::isFrontRoundedVowel(const string &s) {
@@ -103,7 +103,7 @@ inline bool TurkishLanguage::isFrontRoundedVowel(const string &s) {
 /**
  * The isBackUnroundedVowel method takes a character as an input and returns true if given character is a back unrounded vowel.
  *
- * @param ch {@link char} input to check.
+ * @param s {@link char} input to check.
  * @return true if given character is a back unrounded vowel.
  */
 inline bool TurkishLanguage::isBackUnroundedVowel(const string &s) {
@@ -113,7 +113,7 @@ inline bool TurkishLanguage::isBackUnroundedVowel(const string &s) {
 /**
  * The isFrontUnroundedVowel method takes a character as an input and returns true if given character is a front unrounded vowel.
  *
- * @param ch {@link char} input to check.
+ * @param s {@link char} input to check.
  * @return true if given character is a front unrounded vowel.
  */
 inline bool TurkishLanguage::isFrontUnroundedVowel(const string &s) {
@@ -123,7 +123,7 @@ inline bool TurkishLanguage::isFrontUnroundedVowel(const string &s) {
 /**
  * The isConsonantDrop method takes a character as an input and returns true if given character is a dropping consonant.
  *
- * @param ch {@link char} input to check.
+ * @param s {@link char} input to check.
  * @return true if given character is a dropping consonant.
  */
 inline bool TurkishLanguage::isConsonantDrop(const string &s) {
@@ -133,7 +133,7 @@ inline bool TurkishLanguage::isConsonantDrop(const string &s) {
 /**
  * The isConsonant method takes a character as an input and returns true if given character is a consonant.
  *
- * @param ch {@link char} input to check.
+ * @param s {@link char} input to check.
  * @return true if given character is a consonant.
  */
 inline bool TurkishLanguage::isConsonant(const string &s) {
@@ -143,7 +143,7 @@ inline bool TurkishLanguage::isConsonant(const string &s) {
 /**
  * The isUppercase method takes a character as an input and returns true if given character is uppercase.
  *
- * @param ch {@link char} input to check.
+ * @param s {@link char} input to check.
  * @return true if given character is uppercase.
  */
 inline bool TurkishLanguage::isUppercase(const string &s) {
@@ -153,7 +153,7 @@ inline bool TurkishLanguage::isUppercase(const string &s) {
 /**
  * The isSertSessiz method takes a character as an input and returns true if given character is a sert sessiz.
  *
- * @param ch {@link char} input to check.
+ * @param s {@link char} input to check.
  * @return true if given character is a sert sessiz.
  */
 inline bool TurkishLanguage::isSertSessiz(const string &s) {

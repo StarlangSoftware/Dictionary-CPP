@@ -23,9 +23,9 @@ public:
         }
     }
     void addWord(const string& word, Word* root);
-    TrieNode* getChild(const string& ch) const;
-    bool childExists(const string& ch) const;
-    unordered_set<Word*> getWords() const;
+    [[nodiscard]] TrieNode* getChild(const string& ch) const;
+    [[nodiscard]] bool childExists(const string& ch) const;
+    [[nodiscard]] unordered_set<Word*> getWords() const;
 };
 
 

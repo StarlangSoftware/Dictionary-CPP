@@ -17,9 +17,9 @@ public:
     virtual ~Word() = default;
     explicit Word(const string& name);
     string to_string();
-    int charCount() const;
-    Word clone() const;
-    string getName() const;
+    [[nodiscard]] int charCount() const;
+    [[nodiscard]] Word clone() const;
+    [[nodiscard]] string getName() const;
     void setName(const string& name);
     static string beforeLastVowel(const string& stem);
     static string lastVowel(const string& stem);
@@ -40,10 +40,10 @@ public:
     static string substring(const string& surfaceForm, int index);
     static string substringExceptLastChar(const string& surfaceForm);
     static string substringExceptLastTwoChars(const string& surfaceForm);
-    bool isPunctuation() const;
+    [[nodiscard]] bool isPunctuation() const;
     static bool isTime(const string& surfaceForm);
-    static Word* toWordArray(string* sourceArray, int size);
-    vector<Word> toCharacters() const;
+    static Word* toWordArray(const string* sourceArray, int size);
+    [[nodiscard]] vector<Word> toCharacters() const;
     friend istream& operator>> (istream& is, Word& word){
         is >> word.name;
         return is;

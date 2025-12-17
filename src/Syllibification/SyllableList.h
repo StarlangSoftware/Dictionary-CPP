@@ -13,7 +13,7 @@ private:
     vector<Syllable> syllables;
 public:
     explicit SyllableList(const string& word);
-    vector<string> getSyllables() const;
+    [[nodiscard]] vector<string> getSyllables() const;
 };
 
 

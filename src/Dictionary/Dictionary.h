@@ -5,12 +5,8 @@
 #ifndef DICTIONARY_DICTIONARY_H
 #define DICTIONARY_DICTIONARY_H
 
-#include <utility>
 #include<vector>
-#include<map>
-#include <locale>
 #include "Word.h"
-#include <iostream>
 #include <unordered_map>
 
 using namespace std;
@@ -25,13 +21,13 @@ public:
     Dictionary();
     Word* getWord(const string& name);
     void removeWord(const string& name);
-    int binarySearch(Word* word) const;
+    int binarySearch(const Word* word) const;
     int getWordIndex(const string& name);
-    bool wordExists(const string& name) const;
-    unsigned long size() const;
-    Word* getWord(int index) const;
-    unsigned long longestWordSize() const;
-    unsigned long getWordStartingWith(const string& hash) const;
+    [[nodiscard]] bool wordExists(const string& name) const;
+    [[nodiscard]] unsigned long size() const;
+    [[nodiscard]] Word* getWord(int index) const;
+    [[nodiscard]] unsigned long longestWordSize() const;
+    [[nodiscard]] unsigned long getWordStartingWith(const string& hash) const;
     void sort();
     void updateWordMap();
 };

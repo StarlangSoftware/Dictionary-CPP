@@ -78,7 +78,7 @@ string Word::beforeLastVowel(const string &stem) {
     int before = 1;
     string ch, last = "0";
     string *stemChars = Word::allCharacters(stem);
-    for (int i = Word::size(stem) - 1; i >= 0; i--) {
+    for (int i = size(stem) - 1; i >= 0; i--) {
         ch = stemChars[i];
         if (TurkishLanguage::isVowel(ch)) {
             if (before == 1) {
@@ -133,9 +133,9 @@ string Word::lastPhoneme(const string &stem) {
         return " ";
     }
     if (Word::lastChar(stem) != "'") {
-        return Word::lastChar(stem);
+        return lastChar(stem);
     } else {
-        return Word::charAt(stem, Word::size(stem) - 2);
+        return charAt(stem, size(stem) - 2);
     }
 }
 
@@ -183,7 +183,7 @@ bool Word::isPunctuation(const string &surfaceForm) {
  */
 bool Word::isHonorific(const string &surfaceForm) {
     string lowercase = surfaceForm;
-    std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
+    ranges::transform(lowercase, lowercase.begin(), ::tolower);
     return lowercase == "bay" || lowercase == "bayan";
 }
 
@@ -196,7 +196,7 @@ bool Word::isHonorific(const string &surfaceForm) {
  */
 bool Word::isOrganization(const string &surfaceForm) {
     string lowercase = surfaceForm;
-    std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
+    ranges::transform(lowercase, lowercase.begin(), ::tolower);
     return lowercase == "corp" || lowercase == "inc." || lowercase == "co.";
 }
 
@@ -209,7 +209,7 @@ bool Word::isOrganization(const string &surfaceForm) {
  */
 bool Word::isMoney(const string &surfaceForm) {
     string lowercase = surfaceForm;
-    std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
+    ranges::transform(lowercase, lowercase.begin(), ::tolower);
     return StringUtils::startsWith(lowercase, "dolar") || StringUtils::startsWith(lowercase, "sterlin") || StringUtils::startsWith(lowercase, "paunt") ||
            StringUtils::startsWith(lowercase, "ons") || StringUtils::startsWith(lowercase, "ruble") || StringUtils::startsWith(lowercase, "mark") ||
            StringUtils::startsWith(lowercase, "frank") || lowercase == "yen" || StringUtils::startsWith(lowercase, "sent") ||
@@ -273,10 +273,11 @@ bool Word::isTime(const string &surfaceForm) {
  * a Word type result array and puts items of input sourceArray to this result array.
  *
  * @param sourceArray String array.
+ * @param size Size of the sourceArray
  * @return Word type array.
  */
-Word *Word::toWordArray(string *sourceArray, int size) {
-    Word *result = new Word[size];
+Word *Word::toWordArray(const string *sourceArray, int size) {
+    auto result = new Word[size];
     for (int i = 0; i < size; i++) {
         result[i] = Word(sourceArray[i]);
     }
@@ -293,8 +294,8 @@ vector<Word> Word::toCharacters() const {
     vector<Word> characters;
     for (int i = 0; i < Word::size(name); i++) {
         string s;
-        s += Word::charAt(name, i);
-        characters.emplace_back(Word(s));
+        s += charAt(name, i);
+        characters.emplace_back(s);
     }
     return characters;
 }
@@ -462,7 +463,7 @@ string Word::toUpperCase(const string &surfaceForm) {
  * @return Capitalized form of the input string.
  */
 string Word::toCapital(const string &surfaceForm) {
-    return Word::toUpperCase(Word::substring(surfaceForm, 0, 1)) + Word::substring(surfaceForm, 1);
+    return toUpperCase(Word::substring(surfaceForm, 0, 1)) + Word::substring(surfaceForm, 1);
 }
 
 /**
@@ -520,7 +521,7 @@ string Word::charAt(const string &surfaceForm, int index) {
  * @return Last UTF8 character
  */
 string Word::lastChar(const string &surfaceForm) {
-    int size = surfaceForm.size();
+    const int size = surfaceForm.size();
     const char *charPtr = surfaceForm.c_str();
     if ((*(charPtr + size - 1) & 0xC0) != 0x80) {
         return string(1, *(charPtr + size - 1));
@@ -598,7 +599,7 @@ string Word::substring(const string &surfaceForm, int index) {
  * @return Copy of the input string with last character removed.
  */
 string Word::substringExceptLastChar(const string &surfaceForm) {
-    int size = surfaceForm.size();
+    const int size = surfaceForm.size();
     const char *charPtr = surfaceForm.c_str();
     if ((*(charPtr + size - 1) & 0xC0) != 0x80) {
         return surfaceForm.substr(0, size - 1);
@@ -613,7 +614,7 @@ string Word::substringExceptLastChar(const string &surfaceForm) {
  * @return Copy of the input string with last two characters removed.
  */
 string Word::substringExceptLastTwoChars(const string &surfaceForm) {
-    int size = surfaceForm.size();
+    const int size = surfaceForm.size();
     const char *charPtr = surfaceForm.c_str();
     if ((*(charPtr + size - 1) & 0xC0) != 0x80) {
         if (((*(charPtr + size - 2) & 0xC0) != 0x80)) {

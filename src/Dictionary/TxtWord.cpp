@@ -39,7 +39,7 @@ TxtWord::TxtWord(const string& name, const string& flag) {
  *
  * @return TxtWord type copy.
  */
-TxtWord* TxtWord::clone() {
+TxtWord* TxtWord::clone() const {
     auto* copy = new TxtWord(name);
     for (const string &flag : flags) {
         copy->addFlag(flag);
@@ -67,7 +67,7 @@ bool TxtWord::containsFlag(const string& flag) const {
 
 /**
  * Mutator for the inner morphology of the word.
- * @param morphology New inner morphology of the word.
+ * @param _morphology New inner morphology of the word.
  */
 void TxtWord::setMorphology(const string& _morphology){
     this->morphology = _morphology;

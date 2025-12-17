@@ -3,7 +3,6 @@
 //
 
 #include <cfloat>
-#include <cmath>
 #include <fstream>
 #include "VectorSizeMismatch.h"
 #include "VectorizedDictionary.h"
@@ -32,7 +31,7 @@ VectorizedDictionary::VectorizedDictionary(const string &fileName) : Dictionary(
         vector<string> tokens = StringUtils::split(line);
         if (!tokens.empty()) {
             VectorizedWord* currentWord;
-            Vector vector = Vector((unsigned long) 0, 0);
+            Vector vector = Vector(static_cast<unsigned long>(0), 0);
             for (int i = 1; i < tokens.size(); i++){
                 vector.add(stof(tokens[i]));
             }
@@ -66,12 +65,12 @@ void VectorizedDictionary::addWord(VectorizedWord *word) {
 VectorizedWord* VectorizedDictionary::mostSimilarWord(const string& name){
     double maxDistance = -DBL_MAX;
     VectorizedWord* result = nullptr;
-    auto* word = (VectorizedWord*) getWord(name);
+    auto* word = dynamic_cast<VectorizedWord *>(getWord(name));
     if (word == nullptr) {
         return nullptr;
     }
     for (Word* currentWord : words) {
-        auto* current = (VectorizedWord*) currentWord;
+        auto* current = dynamic_cast<VectorizedWord *>(currentWord);
         if (current->getName() != word->getName()) {
             double distance = 0;
             try {
@@ -98,15 +97,16 @@ VectorizedWord* VectorizedDictionary::mostSimilarWord(const string& name){
 vector<Word*>*VectorizedDictionary::kMeansClustering(int iteration, int k) const{
     auto* result = new vector<Word*>[k];
     vector<Vector> means;
-    int vectorSize = ((VectorizedWord*) words.at(0))->getVector().getSize();
+    int vectorSize = dynamic_cast<VectorizedWord *>(words.at(0))->getVector().getSize();
+    means.reserve(k);
     for (int i = 0; i < k; i++) {
         means.emplace_back(vectorSize, 0);
     }
     for (int i = 0; i < words.size(); i++) {
         result[i % k].emplace_back(words.at(i));
         try {
-            means[i % k].add(((VectorizedWord*) words.at(i))->getVector());
-        } catch (VectorSizeMismatch vectorSizeMismatch) {
+            means[i % k].add(dynamic_cast<VectorizedWord *>(words.at(i))->getVector());
+        } catch (VectorSizeMismatch& vectorSizeMismatch) {
         }
     }
     for (int i = 0; i < k; i++) {
@@ -118,18 +118,18 @@ vector<Word*>*VectorizedDictionary::kMeansClustering(int iteration, int k) const
             result[j].clear();
         }
         for (Word* word : words) {
-            auto* vectorizedWord = (VectorizedWord*) word;
+            auto* vectorizedWord = dynamic_cast<VectorizedWord *>(word);
             double maxClusterDistance = 0;
             try {
                 maxClusterDistance = means[0].dotProduct(vectorizedWord->getVector());
-            } catch (VectorSizeMismatch vectorSizeMismatch) {
+            } catch (VectorSizeMismatch& vectorSizeMismatch) {
             }
             int maxClusterIndex = 0;
             for (int j = 1; j < k; j++) {
                 double clusterDistance = 0;
                 try {
                     clusterDistance = means[j].dotProduct(vectorizedWord->getVector());
-                } catch (VectorSizeMismatch& vectorSizeMismatch) {
+                } catch ([[maybe_unused]] VectorSizeMismatch& vectorSizeMismatch) {
                 }
                 if (clusterDistance > maxClusterDistance) {
                     maxClusterDistance = clusterDistance;
@@ -142,7 +142,7 @@ vector<Word*>*VectorizedDictionary::kMeansClustering(int iteration, int k) const
             means[j].clear();
             for (Word* word : result[j]) {
                 try {
-                    means[j].add(((VectorizedWord*) (word))->getVector());
+                    means[j].add(dynamic_cast<VectorizedWord *>(word)->getVector());
                 } catch (VectorSizeMismatch& vectorSizeMismatch) {
                 }
             }
@@ -156,7 +156,7 @@ vector<Word*>*VectorizedDictionary::kMeansClustering(int iteration, int k) const
 struct vectorizedWordComparator{
     VectorizedWord* comparedWord = nullptr;
 
-    vectorizedWordComparator(VectorizedWord* comparedWord){
+    explicit vectorizedWordComparator(VectorizedWord* comparedWord){
         this->comparedWord = comparedWord;
     }
     /**
@@ -171,7 +171,7 @@ struct vectorizedWordComparator{
      * result1 is numerically less than result2; and a value greater than {@code 0} if result1 is numerically
      * greater than result2.
      */
-    bool operator() (VectorizedWord* wordA, VectorizedWord* wordB) const {
+    bool operator() (const VectorizedWord* wordA, const VectorizedWord* wordB) const {
         Vector v = comparedWord->getVector(), vA = wordA->getVector(), vB = wordB->getVector();
         double result1 = 0, result2 = 0;
         try {
@@ -196,14 +196,14 @@ struct vectorizedWordComparator{
  */
 vector<VectorizedWord *> VectorizedDictionary::mostSimilarKWords(const string& name, int k){
     vector<VectorizedWord*> resultWords;
-    auto* word = (VectorizedWord*) getWord(name);
+    auto* word = dynamic_cast<VectorizedWord *>(getWord(name));
     if (word == nullptr) {
         return resultWords;
     }
     for (Word* currentWord : words) {
-        resultWords.emplace_back((VectorizedWord*) currentWord);
+        resultWords.emplace_back(dynamic_cast<VectorizedWord *>(currentWord));
     }
-    stable_sort(resultWords.begin(), resultWords.end(), vectorizedWordComparator(word));
+    ranges::stable_sort(resultWords, vectorizedWordComparator(word));
     resultWords.resize(k);
     return resultWords;
 }

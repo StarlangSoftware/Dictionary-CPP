@@ -23,7 +23,7 @@ void Trie::addWord(const string& word, Word* root) const {
 
 /**
  * The getWordsWithPrefix method which takes a String surfaceForm as an input. First it creates a TrieNode current and assigns
- * the rootNode to it, then it creates a new HashSet words. It loops i times where i ranges from 0 to length of surfaceForm
+ * the rootNode to it, then it creates a new HashSet words. It loops i times, where i ranges from 0 to length of surfaceForm
  * and assigns current's child that corresponds to the surfaceForm's char at index i and assigns it as TrieNode current.
  * If current is not null, it adds all words of current to the words HashSet.
  *
@@ -70,8 +70,8 @@ TxtWord *Trie::getCompoundWordStartingWith(const string& hash) const{
     }
     if (!current->getWords().empty()) {
         for (Word* word : current->getWords()) {
-            if (((TxtWord*) word)->isPortmanteau()) {
-                return (TxtWord*) word;
+            if (dynamic_cast<TxtWord *>(word)->isPortmanteau()) {
+                return dynamic_cast<TxtWord *>(word);
             }
         }
     }

@@ -19,8 +19,8 @@ public:
         delete current;
     }
     void addWord(const string& word, Word* root) const;
-    unordered_set<Word*> getWordsWithPrefix(const string& surfaceForm) const;
-    TxtWord* getCompoundWordStartingWith(const string& hash) const;
+    [[nodiscard]] unordered_set<Word*> getWordsWithPrefix(const string& surfaceForm) const;
+    [[nodiscard]] TxtWord* getCompoundWordStartingWith(const string& hash) const;
 };
 
 

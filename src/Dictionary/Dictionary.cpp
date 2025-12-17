@@ -6,7 +6,7 @@
 
 #include <algorithm>
 
-bool compareWord(Word* wordA, Word* wordB)
+bool compareWord(const Word* wordA, const Word* wordB)
 {
     return wordA->getName() < wordB->getName();
 }
@@ -116,7 +116,7 @@ unsigned long Dictionary::getWordStartingWith(const string& hash) const{
  * Sorts the words array according to the comparator function.
  */
 void Dictionary::sort() {
-    std::sort(words.begin(), words.end(), compareWord);
+    ranges::sort(words, compareWord);
     updateWordMap();
 }
 
@@ -126,7 +126,7 @@ void Dictionary::sort() {
  * @return the index of the search word, if it is contained in the words array; otherwise, (-(insertion point) - 1). The
  * insertion point is defined as the point at which the word would be inserted into the words array.
  */
-int Dictionary::binarySearch(Word *word) const {
+int Dictionary::binarySearch(const Word *word) const {
     int lo = 0;
     int hi = words.size() - 1;
     while (lo <= hi){

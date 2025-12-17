@@ -28,6 +28,7 @@ TxtDictionary::TxtDictionary(const string& filename) : Dictionary() {
  *
  * @param filename   String input.
  * @param misspelledFileName String input.
+ * @param morphologicalLexicon Morphological lexicon to process
  */
 TxtDictionary::TxtDictionary(const string& filename, const string& misspelledFileName, const string& morphologicalLexicon) : Dictionary(){
     loadFromText(filename);
@@ -67,7 +68,7 @@ void TxtDictionary::addNumber(const string& name) {
  */
 bool TxtDictionary::addWithFlag(const string& name, const string& flag) {
     string lowercase = Word::toLowerCase(name);
-    auto* word = (TxtWord*) getWord(lowercase);
+    auto* word = dynamic_cast<TxtWord *>(getWord(lowercase));
     if (word == nullptr){
         word = new TxtWord(name, flag);
         int insert_index = -binarySearch(word) - 1;
@@ -285,7 +286,7 @@ void TxtDictionary::saveAsTxt(const string& filename) const {
  * @param root the substring of the word whose last one or two chars are omitted from the word to bo softed.
  * @param word the original word.
  */
-void TxtDictionary::addWordWhenRootSoften(Trie* trie, const string& last, const string& root, TxtWord *word) {
+void TxtDictionary::addWordWhenRootSoften(const Trie* trie, const string& last, const string& root, TxtWord *word) {
     if (last == "p"){
         trie->addWord(root + 'b', word);
     } else {
@@ -329,7 +330,7 @@ Trie* TxtDictionary::prepareTrie(){
     string root, rootWithoutLast, rootWithoutLastTwo;
     string last, lastBefore = " ";
     for (int i = 0; i < size(); i++) {
-        auto* word = (TxtWord*) getWord(i);
+        auto* word = dynamic_cast<TxtWord *>(getWord(i));
         root = word->getName();
         if (root == "ben") {
             result->addWord("bana", word);
@@ -427,7 +428,7 @@ void TxtDictionary::loadMorphologicalLexicon(const string& filename) {
         getline(inputFile, line);
         vector<string> tokens = StringUtils::split(line);
         if (tokens.size() == 2) {
-            auto* word = (TxtWord*) getWord(tokens[0]);
+            auto* word = dynamic_cast<TxtWord *>(getWord(tokens[0]));
             if (word != nullptr){
                 word->setMorphology(tokens[1]);
             }
