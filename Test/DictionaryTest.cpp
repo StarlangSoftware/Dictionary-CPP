@@ -12,7 +12,7 @@ TEST_CASE("DictionaryTest") {
     SECTION("testSize"){
         REQUIRE(29 == lowerCaseDictionary.size());
         REQUIRE(58 == mixedCaseDictionary.size());
-        REQUIRE(62113 == dictionary.size());
+        REQUIRE(62120 == dictionary.size());
     }
     SECTION("testGetWord"){
         for (int i = 0; i < dictionary.size(); i++){

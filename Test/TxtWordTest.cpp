@@ -50,7 +50,7 @@ TEST_CASE("TxtWordTest-testIsNominal") {
             count++;
         }
     }
-    REQUIRE(30598 == count);
+    REQUIRE(30603 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsPassive") {
@@ -110,7 +110,7 @@ TEST_CASE("TxtWordTest-testIsAdjective") {
             count++;
         }
     }
-    REQUIRE(9686 == count);
+    REQUIRE(11006 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsPronoun") {
@@ -158,7 +158,7 @@ TEST_CASE("TxtWordTest-testIsPortmanteau") {
             count++;
         }
     }
-    REQUIRE(1292 == count);
+    REQUIRE(1294 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsDeterminer") {
@@ -218,7 +218,7 @@ TEST_CASE("TxtWordTest-testIsPortmanteauEndingWithSI") {
             count++;
         }
     }
-    REQUIRE(177 == count);
+    REQUIRE(178 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsPortmanteauFacedVowelEllipsis") {
@@ -242,7 +242,7 @@ TEST_CASE("TxtWordTest-testIsPortmanteauFacedSoftening") {
             count++;
         }
     }
-    REQUIRE(347 == count);
+    REQUIRE(348 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsSuffix") {
@@ -266,7 +266,7 @@ TEST_CASE("TxtWordTest-testIsProperNoun") {
             count++;
         }
     }
-    REQUIRE(19013 == count);
+    REQUIRE(19014 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsPlural") {
@@ -302,7 +302,7 @@ TEST_CASE("TxtWordTest-testNotObeysVowelHarmonyDuringAgglutination") {
             count++;
         }
     }
-    REQUIRE(315 == count);
+    REQUIRE(320 == count);
 }
 
 TEST_CASE("TxtWordTest-testObeysAndNotObeysVowelHarmonyDuringAgglutination") {
@@ -326,7 +326,7 @@ TEST_CASE("TxtWordTest-testRootSoftenDuringSuffixation") {
             count++;
         }
     }
-    REQUIRE(5530 == count);
+    REQUIRE(6939 == count);
 }
 
 TEST_CASE("TxtWordTest-testRootSoftenAndNotSoftenDuringSuffixation") {
@@ -338,7 +338,7 @@ TEST_CASE("TxtWordTest-testRootSoftenAndNotSoftenDuringSuffixation") {
             count++;
         }
     }
-    REQUIRE(14 == count);
+    REQUIRE(15 == count);
 }
 
 TEST_CASE("TxtWordTest-testVerbSoftenDuringSuffixation") {
@@ -362,7 +362,7 @@ TEST_CASE("TxtWordTest-testNounSoftenDuringSuffixation") {
             count++;
         }
     }
-    REQUIRE(5444 == count);
+    REQUIRE(6853 == count);
 }
 
 TEST_CASE("TxtWordTest-testEndingKChangesIntoG") {
