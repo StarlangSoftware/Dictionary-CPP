@@ -50,7 +50,7 @@ TEST_CASE("TxtWordTest-testIsNominal") {
             count++;
         }
     }
-    REQUIRE(30603 == count);
+    REQUIRE(30625 == count);
 }
 
 TEST_CASE("TxtWordTest-testIsPassive") {
